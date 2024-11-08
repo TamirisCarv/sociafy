@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+<div>
+    <h1>Login</h1>
+    <form th:action="@{/login}" method="post">
+        <div th:if="${param.error}" style="color: red;">
+            Credenciais inválidas. Tente novamente.
+        </div>
+        <input type="text" placeholder="Nome de Usuário" name="email" required>
+        <input type="password" placeholder="Senha" name="password" required>
+        <button type="submit">Entrar</button>
+    </form>
+    <a href="/cadastro">Não tem uma conta? Cadastre-se</a>
+</div>
+</body>
+</html>

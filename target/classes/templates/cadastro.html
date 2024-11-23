@@ -1,105 +1,161 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="UTF-8">
-        <title>Cadastro</title>
-        <!-- <link rel="stylesheet" href=""> -->
+  <head>
+    <meta charset="UTF-8" />
+    <title>Cadastro</title>
 
-    <h1>Testando o git</h1>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- <link rel="stylesheet" href=""> -->
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-        }
+      * {
+        margin: 0;
+        border: 0;
+        /* font-family: "Outfit", sans-serif; */
+        /* font-family: "Syne", sans-serif; */
+      }
 
-        .cadastro-container {
-            display: flex;
-            height: 100vh;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+      }
 
-        .cadastro-form {
-            width: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            background-color: #f4f4f4;
-        }
+      .cadastro-container {
+        display: flex;
+        height: 100vh;
+        background: #E5E3E5;
+      }
 
-        .cadastro-form h1 {
-            color: #e91e63;
-        }
+      .cadastro-form {
+        width: 70%;
+        max-width: 70%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        background-color: #f4f4f4;
+      }
 
-        .cadastro-form input {
-            width: 80%;
-            padding: 10px;
-            margin: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
+      .cadastro-form h1 {
+        color: #e91e63;
+      }
 
-        .cadastro-form button {
-            width: 80%;
-            padding: 10px;
-            background-color: #e91e63;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+      .cadastro-form input {
+        width: 80%;
+        padding: 10px;
+        margin: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
 
-        .cadastro-form button:hover {
-            background-color: #d81b60;
-        }
+      .cadastro-form button {
+        width: 80%;
+        padding: 10px;
+        background-color: #e91e63;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
 
-        .cadastro-info {
-            width: 50%;
-            background-color: #e91e63;
-            color: #fff;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
+      .cadastro-form button:hover {
+        background-color: #d81b60;
+      }
 
-        .cadastro-info h2 {
-            font-size: 24px;
-        }
+      .cadastro-info {
+        width: 30%;
+        max-width: 30%;
+        padding: 3rem;
+        background-color: #E839A2;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        /* align-items: center; */
+        justify-content: center;
+      }
 
-        .cadastro-info button {
-            background-color: #fff;
-            color: #e91e63;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+      .cadastro-info h2 {
+        font-size: 2.2rem;
+        font-family: "Syne", sans-serif;
+      }
 
-        .cadastro-info button:hover {
-            background-color: #f8bbd0;
-        }
+      .cadastro-info p {
+        font-size: 1.2rem;
+        font-weight: 300;
+        font-family: "Outfit", sans-serif;
+      }
 
+      .cadastro-info button {
+        background-color: #fff;
+        color: #e91e63;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .cadastro-info button:hover {
+        background-color: #f8bbd0;
+      }
     </style>
-</head>
-<body>
-<div class="cadastro-container">
-    <div class="cadastro-info">
+  </head>
+  <body>
+    <div class="cadastro-container">
+      <div class="cadastro-info">
+        <img src="./static/assets/mockup-cadastro.png" alt="">
+         
         <h2>Você já tem um cadastro?</h2>
-        <p>Clique no botão abaixo para fazer seu login:</p>
+        <p>Clique no botão abaixo para fazer <br> seu login:</p>
         <a href="/login"><button>Fazer login</button></a>
-    </div>
-    <div class="cadastro-form">
+      </div>
+      <div class="cadastro-form">
         <h1>Faça seu cadastro</h1>
         <form th:action="@{/cadastro}" th:object="${usuario}" method="post">
-            <input type="text" placeholder="Nome de Usuário" th:field="*{username}" required>
-            <input type="text" placeholder="Nome Completo" th:field="*{nomeCompleto}" required>
-            <input type="text" placeholder="CPF" th:field="*{cpf}" required>
-            <input type="email" placeholder="E-mail" th:field="*{email}" required>
-            <input type="password" placeholder="Senha" th:field="*{senha}" required>
-            <input type="text" placeholder="Celular" th:field="*{celular}" required>
-            <button type="submit">Cadastrar</button>
+          <input
+            type="text"
+            placeholder="Nome de Usuário"
+            th:field="*{username}"
+            required
+          />
+          <input
+            type="text"
+            placeholder="Nome Completo"
+            th:field="*{nomeCompleto}"
+            required
+          />
+          <input type="text" placeholder="CPF" th:field="*{cpf}" required />
+          <input
+            type="email"
+            placeholder="E-mail"
+            th:field="*{email}"
+            required
+          />
+          <input
+            type="password"
+            placeholder="Senha"
+            th:field="*{senha}"
+            required
+          />
+          <input
+            type="text"
+            placeholder="Celular"
+            th:field="*{celular}"
+            required
+          />
+          <button type="submit">Cadastrar</button>
         </form>
+      </div>
     </div>
-</div>
-</body>
+  </body>
 </html>

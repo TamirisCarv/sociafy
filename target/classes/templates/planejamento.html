@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Novo Planejamento</title>
+    <title>Formulário de Planejamento</title>
     <style>
         /* Estilos gerais */
         body {
@@ -12,7 +12,7 @@
             margin: 0;
             background-color: #f3f3f3;
         }
-        
+
         /* Barra lateral */
         .sidebar {
             width: 250px;
@@ -29,6 +29,7 @@
             text-decoration: none;
             color: #fff;
             display: block;
+            cursor: pointer;
         }
 
         .sidebar a.active, .sidebar a:hover {
@@ -49,18 +50,12 @@
             color: #ff4394;
         }
 
-        .content p {
-            color: #555;
-            font-size: 18px;
-            max-width: 400px;
-            margin: 0 auto 20px;
-        }
-
         .form-group {
             margin: 15px 0;
         }
 
-        .form-group input {
+        .form-group input,
+        .form-group textarea {
             padding: 10px;
             width: 300px;
             font-size: 16px;
@@ -78,54 +73,177 @@
             border-radius: 5px;
             font-size: 16px;
             cursor: pointer;
-        }
-
-        .buttons .back-btn {
             background-color: #ff4394;
             color: #fff;
-            margin-right: 10px;
         }
 
-        .buttons .next-btn {
-            background-color: #ff4394;
-            color: #fff;
+        /* Ocultar seções não ativas */
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
         }
     </style>
 </head>
 <body>
 
 <div class="sidebar">
-    <a href="#planejamento" class="active">Novo planejamento</a>
-    <a href="#informacoes_cliente">Informações do cliente</a>
-    <a href="#redes_sociais">Redes sociais</a>
-    <a href="#selecionar_canais">Selecionar canais</a>
-    <a href="#informacoes_canais">Informações dos canais</a>
-    <a href="#campanhas">Campanhas</a>
-    <a href="#referencias_concorrentes">Referências e concorrentes</a>
-    <a href="#objetivos_projeto">Objetivos do projeto</a>
-    <a href="#personas">Personas</a>
-    <a href="#descricao">Descrição</a>
-    <a href="#identidade_visual">Identidade visual</a>
-    <a href="#elementos">Elementos</a>
-    <a href="#manual_marca">Manual da marca</a>
+    <a href="#planejamento" class="active" data-section="planejamento">Novo planejamento</a>
+    <a href="#informacoes_cliente" data-section="informacoes_cliente">Informações do cliente</a>
+    <a href="#redes_sociais" data-section="redes_sociais">Redes sociais</a>
+    <a href="#selecionar_canais" data-section="selecionar_canais">Selecionar canais</a>
+    <a href="#informacoes_canais" data-section="informacoes_canais">Informações dos canais</a>
+    <a href="#campanhas" data-section="campanhas">Campanhas</a>
+    <a href="#referencias_concorrentes" data-section="referencias_concorrentes">Referências e concorrentes</a>
+    <a href="#objetivos_projeto" data-section="objetivos_projeto">Objetivos do projeto</a>
+    <a href="#personas" data-section="personas">Personas</a>
+    <a href="#descricao" data-section="descricao">Descrição</a>
+    <a href="#identidade_visual" data-section="identidade_visual">Identidade visual</a>
+    <a href="#elementos" data-section="elementos">Elementos</a>
+    <a href="#manual_marca" data-section="manual_marca">Manual da marca</a>
 </div>
 
 <div class="content">
-    <h1>Novo planejamento</h1>
-    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+    <!-- Formulário principal -->
+    <form id="formData">
+        <div id="planejamento" class="content-section active">
+            <h1>Novo Planejamento</h1>
+            <input type="text" name="planejamento" placeholder="Título do Planejamento">
+            <div class="buttons">
+                <button type="button" class="save-btn" data-next="informacoes_cliente">Salvar</button>
+            </div>
+        </div>
 
-    <div class="form-group">
-        <input type="text" placeholder="Título do planejamento">
-    </div>
-    <div class="form-group">
-        <input type="text" placeholder="Descrição (opcional)">
-    </div>
+        <div id="informacoes_cliente" class="content-section">
+            <h1>Informações do Cliente</h1>
+            <input type="text" name="cliente_nome" placeholder="Nome do Cliente">
+            <input type="text" name="cliente_setor" placeholder="Setor de Atuação">
+            <textarea name="cliente_descricao" placeholder="Descrição"></textarea>
+            <div class="buttons">
+                <button type="button" class="save-btn" data-next="redes_sociais">Salvar</button>
+            </div>
+        </div>
 
-    <div class="buttons">
-        <button class="back-btn">Voltar</button>
-        <button class="next-btn">Próximo</button>
-    </div>
+        <!-- Outras seções seguem o mesmo padrão -->
+
+        <div id="manual_marca" class="content-section">
+            <h1>Manual da Marca</h1>
+            <textarea name="manual" placeholder="Manual da Marca"></textarea>
+            <div class="buttons">
+                <button type="button" id="generate">Gerar</button>
+            </div>
+        </div>
+    </form>
 </div>
+
+<script>
+    const sidebarLinks = document.querySelectorAll('.sidebar a');
+    const sections = document.querySelectorAll('.content-section');
+    const saveButtons = document.querySelectorAll('.save-btn');
+    const generateButton = document.getElementById('generate');
+
+    // Navegar entre as seções
+    sidebarLinks.forEach(link => {
+        link.addEventListener('click', (event) => {
+            event.preventDefault();
+            navigateToSection(link.getAttribute('data-section'));
+        });
+    });
+
+    // Botões "Salvar" para avançar
+    saveButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const nextSection = button.getAttribute('data-next');
+            if (nextSection) navigateToSection(nextSection);
+        });
+    });
+
+    // Função para navegação
+    function navigateToSection(sectionId) {
+        sidebarLinks.forEach(link => link.classList.remove('active'));
+        sections.forEach(section => section.classList.remove('active'));
+
+        const targetLink = document.querySelector(`.sidebar a[data-section="${sectionId}"]`);
+        const targetSection = document.getElementById(sectionId);
+
+        if (targetLink) targetLink.classList.add('active');
+        if (targetSection) targetSection.classList.add('active');
+    }
+
+    // Botão "Gerar" exibe os dados em uma nova página estilizada
+    generateButton.addEventListener('click', () => {
+        const formData = new FormData(document.getElementById('formData'));
+        const data = {};
+        formData.forEach((value, key) => {
+            if (!data[key]) {
+                data[key] = value;
+            } else {
+                data[key] = [].concat(data[key], value); // Handle multiple values (checkboxes)
+            }
+        });
+
+        const newPage = window.open("", "_blank");
+        newPage.document.write(`
+            <!DOCTYPE html>
+            <html lang="pt-br">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Dados Cadastrados</title>
+                <style>
+                    /* Estilo geral */
+                    body {
+                        font-family: Arial, sans-serif;
+                        margin: 0;
+                        background-color: #111;
+                        color: #fff;
+                        line-height: 1.6;
+                    }
+                    header {
+                        background: #ff4394;
+                        color: #fff;
+                        padding: 20px;
+                        text-align: center;
+                    }
+                    .container {
+                        max-width: 900px;
+                        margin: 20px auto;
+                        padding: 20px;
+                        background: #1e1e1e;
+                        border-radius: 8px;
+                        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+                    }
+                    .section {
+                        margin-bottom: 20px;
+                        padding: 15px;
+                        background: #333;
+                        border-radius: 6px;
+                    }
+                    .section h2 {
+                        color: #ff4394;
+                        margin-bottom: 10px;
+                        font-size: 20px;
+                    }
+                </style>
+            </head>
+            <body>
+                <header>
+                    <h1>Dados Cadastrados</h1>
+                </header>
+                <div class="container">
+                    <div class="section">
+                        <h2>Novo Planejamento</h2>
+                        <p><strong>Título:</strong> ${data.planejamento || "Não informado"}</p>
+                    </div>
+                    <!-- Adicione outros blocos de informações aqui -->
+                </div>
+            </body>
+            </html>
+        `);
+    });
+</script>
 
 </body>
 </html>

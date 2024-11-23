@@ -1,11 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="UTF-8">
-        <title>Cadastro</title>
-        <!-- <link rel="stylesheet" href=""> -->
-
-    <h1>Testando o git</h1>
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -60,10 +57,18 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            text-align: center;
         }
 
         .cadastro-info h2 {
             font-size: 24px;
+        }
+
+        .cadastro-info img {
+            max-width: 80%;
+            height: auto;
+            margin: 20px 0;
+            border-radius: 10px;
         }
 
         .cadastro-info button {
@@ -78,7 +83,6 @@
         .cadastro-info button:hover {
             background-color: #f8bbd0;
         }
-
     </style>
 </head>
 <body>
@@ -86,6 +90,8 @@
     <div class="cadastro-info">
         <h2>Você já tem um cadastro?</h2>
         <p>Clique no botão abaixo para fazer seu login:</p>
+        <!-- Adicionando a imagem -->
+        <img src="https://i.ibb.co/YDxTjHm/mockup-Cadastro.png" alt="Imagem de Cadastro">
         <a href="/login"><button>Fazer login</button></a>
     </div>
     <div class="cadastro-form">

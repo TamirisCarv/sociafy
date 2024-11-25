@@ -1,21 +1,189 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Login</title>
-</head>
-<body>
-<div>
-    <h1>Login</h1>
-    <form th:action="@{/login}" method="post">
-        <div th:if="${param.error}" style="color: red;">
-            Credenciais inválidas. Tente novamente.
+
+    <style>
+      * {
+        margin: 0;
+        border: 0;
+        /* font-family: "Outfit", sans-serif; */
+        /* font-family: "Syne", sans-serif; */
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+      }
+
+      .login-container {
+        display: flex;
+        height: 100vh;
+        background: #e5e3e5;
+      }
+
+      .login-info {
+        width: 30%;
+        max-width: 30%;
+        padding: 3rem;
+        background-color: #e839a2;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        /* align-items: center; */
+        justify-content: space-between;
+      }
+
+      .login-info .logo-Sociafy {
+        width: 140px;
+      }
+
+      .login-info .mockup-login {
+        width: 95%;
+      }
+
+      .login-info h2 {
+        font-size: 2.1rem;
+        font-family: "Syne", sans-serif;
+      }
+
+      .login-info p {
+        font-size: 1.1rem;
+        font-weight: 300;
+        font-family: "Outfit", sans-serif;
+        margin-top: 5px;
+        font-weight: 300;
+      }
+
+      .login-info button {
+        font-family: "Outfit", sans-serif;
+        font-size: 0.9rem;
+        background-color: #ffffff25;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 7px;
+        cursor: pointer;
+
+        margin-top: 1.5rem;
+        transition: 0.3s;
+      }
+
+      .login-info button:hover {
+        background-color: #ffffff50;
+      }
+
+      .login-form {
+        width: 70%;
+        max-width: 70%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        background: #e5e3e5;
+      }
+
+      .login-form .form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+      }
+
+      .login-form .form .erro-credenciais {
+        background: #e7114615;
+        color: #e71146;
+        font-family: "Outfit", sans-serif;
+        font-size: 0.85rem;
+        font-weight: 400;
+        padding: 5px 15px;
+        border-radius: 3px;
+        margin-bottom: 5px;
+      }
+
+      .login-form .form input {
+        width: 50%;
+        font-family: "Outfit", sans-serif;
+        background: #ffffff50;
+        border: 1.55px solid #9b9b9b50;
+        color: #232123;
+        padding: 10px 15px;
+        margin: 10px;
+        border-radius: 7px;
+        font-size: 0.9rem;
+      }
+
+      .login-form .form input::placeholder {
+        color: #23212350;
+      }
+
+      .login-form h1 {
+        font-family: "Syne", sans-serif;
+        color: #e839a2;
+        font-size: 2rem;
+        margin-bottom: 35px;
+      }
+
+      .login-form .form button {
+        padding: 15px 20px;
+        margin-top: 17px;
+        font-family: "Outfit", sans-serif;
+        font-size: 0.9rem;
+        font-weight: 500;
+        background-color: #e839a2;
+        color: #fff;
+        border: none;
+        border-radius: 7px;
+        cursor: pointer;
+        width: 20%;
+        transition: 0.3s;
+      }
+
+      .login-form button:hover {
+        background-color: #d92a93;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-container">
+      <div class="login-form">
+        <h1>Faça seu login</h1>
+        <form th:action="@{/login}" method="post" class="form">
+          <div class="erro-credenciais" th:if="${param.error}">
+            Nome de usuário ou senha incorretos. Tente novamente!
+          </div>
+          <input
+            type="text"
+            placeholder="Nome de Usuário"
+            name="email"
+            required
+          />
+          <input type="password" placeholder="Senha" name="password" required />
+          <button type="submit">Entrar</button>
+        </form>
+      </div>
+
+      <div class="login-info">
+        <img
+          class="logo-Sociafy"
+          src="https://i.ibb.co/dbkgK7x/logo-Sociafy.png"
+          alt="Logo Sociafy"
+        />
+
+        <img
+          class="mockup-login"
+          src="https://i.ibb.co/QvfvrYj/mockup-login.png"
+          alt="Imagem de Login"
+        />
+        <div class="infos">
+          <h2>Você ainda não tem um login?</h2>
+          <p>Clique no botão abaixo para fazer seu cadastro:</p>
+          <!-- Adicionando a imagem -->
+          <a href="/cadastro"><button>Cadastrar</button></a>
         </div>
-        <input type="text" placeholder="Nome de Usuário" name="email" required>
-        <input type="password" placeholder="Senha" name="password" required>
-        <button type="submit">Entrar</button>
-    </form>
-    <a href="/cadastro">Não tem uma conta? Cadastre-se</a>
-</div>
-</body>
+      </div>
+    </div>
+  </body>
 </html>

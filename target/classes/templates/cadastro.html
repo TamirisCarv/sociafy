@@ -1,111 +1,210 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Cadastro</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-        }
+      * {
+        margin: 0;
+        border: 0;
+        /* font-family: "Outfit", sans-serif; */
+        /* font-family: "Syne", sans-serif; */
+      }
 
-        .cadastro-container {
-            display: flex;
-            height: 100vh;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+      }
 
-        .cadastro-form {
-            width: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            background-color: #f4f4f4;
-        }
+      .cadastro-container {
+        display: flex;
+        height: 100vh;
+        background: #e5e3e5;
+      }
 
-        .cadastro-form h1 {
-            color: #e91e63;
-        }
+      .cadastro-form {
+        width: 70%;
+        max-width: 70%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        background: #e5e3e5;
+      }
 
-        .cadastro-form input {
-            width: 80%;
-            padding: 10px;
-            margin: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
+      .cadastro-form .form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+      }
 
-        .cadastro-form button {
-            width: 80%;
-            padding: 10px;
-            background-color: #e91e63;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+      .cadastro-form .form input {
+        width: 50%;
+        font-family: "Outfit", sans-serif;
+        background: #ffffff50;
+        border: 1.55px solid #9b9b9b50;
+        color: #232123;
+        padding: 10px 15px;
+        margin: 10px;
+        border-radius: 7px;
+        font-size: 0.9rem;
+      }
 
-        .cadastro-form button:hover {
-            background-color: #d81b60;
-        }
+      .cadastro-form .form input::placeholder {
+        color: #23212350;
+      }
 
-        .cadastro-info {
-            width: 50%;
-            background-color: #e91e63;
-            color: #fff;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
+      .cadastro-form h1 {
+        font-family: "Syne", sans-serif;
+        color: #e839a2;
+        font-size: 2rem;
+        margin-bottom: 35px;
+      }
 
-        .cadastro-info h2 {
-            font-size: 24px;
-        }
+      /* .cadastro-form input {
+        width: 80%;
+        padding: 10px;
+        margin: 10px;
+        border: 1px solid #ccc;
+        border-radius: 7px;
+        } */
 
-        .cadastro-info img {
-            max-width: 80%;
-            height: auto;
-            margin: 20px 0;
-            border-radius: 10px;
-        }
+      .cadastro-form .form button {
+        padding: 15px 20px;
+        margin-top: 17px;
+        font-family: "Outfit", sans-serif;
+        font-size: 0.9rem;
+        font-weight: 500;
+        background-color: #e839a2;
+        color: #fff;
+        border: none;
+        border-radius: 7px;
+        cursor: pointer;
+        width: 20%;
+        transition: 0.3s;
+      }
 
-        .cadastro-info button {
-            background-color: #fff;
-            color: #e91e63;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+      .cadastro-form button:hover {
+        background-color: #d92a93;
+      }
 
-        .cadastro-info button:hover {
-            background-color: #f8bbd0;
-        }
+      .cadastro-info {
+        width: 30%;
+        max-width: 30%;
+        padding: 3rem;
+        background-color: #e839a2;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        /* align-items: center; */
+        justify-content: space-between;
+      }
+
+      .cadastro-info .logo-Sociafy {
+        width: 140px;
+      }
+
+      .cadastro-info .mockup-cadastro {
+        width: 100%;
+      }
+
+      .cadastro-info h2 {
+        font-size: 2.4rem;
+        font-family: "Syne", sans-serif;
+      }
+
+      .cadastro-info p {
+        font-size: 1.1rem;
+        font-weight: 300;
+        font-family: "Outfit", sans-serif;
+        margin-top: 5px;
+        font-weight: 300;
+      }
+
+      .cadastro-info button {
+        font-family: "Outfit", sans-serif;
+        font-size: 0.9rem;
+        background-color: #ffffff25;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 7px;
+        cursor: pointer;
+
+        margin-top: 1.5rem;
+        transition: 0.3s;
+      }
+
+      .cadastro-info button:hover {
+        background-color: #ffffff50;
+      }
     </style>
-</head>
-<body>
-<div class="cadastro-container">
-    <div class="cadastro-info">
-        <h2>Você já tem um cadastro?</h2>
-        <p>Clique no botão abaixo para fazer seu login:</p>
-        <!-- Adicionando a imagem -->
-        <img src="https://i.ibb.co/YDxTjHm/mockup-Cadastro.png" alt="Imagem de Cadastro">
-        <a href="/login"><button>Fazer login</button></a>
-    </div>
-    <div class="cadastro-form">
+  </head>
+  <body>
+    <div class="cadastro-container">
+      <div class="cadastro-info">
+        
+        <img class="logo-Sociafy"
+          src="https://i.ibb.co/dbkgK7x/logo-Sociafy.png"
+          alt="Logo Sociafy"
+        />
+        
+        <img class="mockup-cadastro"
+          src="https://i.ibb.co/YDxTjHm/mockup-Cadastro.png"
+          alt="Imagem de Cadastro"
+        />
+        <div class="infos">
+          <h2>Você já tem um cadastro?</h2>
+          <p>Clique no botão abaixo para fazer seu login:</p>
+          <!-- Adicionando a imagem -->
+          <a href="/login"><button>Fazer login</button></a>
+
+        </div>
+      </div>
+      <div class="cadastro-form">
         <h1>Faça seu cadastro</h1>
-        <form th:action="@{/cadastro}" th:object="${usuario}" method="post">
-            <input type="text" placeholder="Nome de Usuário" th:field="*{username}" required>
-            <input type="text" placeholder="Nome Completo" th:field="*{nomeCompleto}" required>
-            <input type="text" placeholder="CPF" th:field="*{cpf}" required>
-            <input type="email" placeholder="E-mail" th:field="*{email}" required>
-            <input type="password" placeholder="Senha" th:field="*{senha}" required>
-            <input type="text" placeholder="Celular" th:field="*{celular}" required>
-            <button type="submit">Cadastrar</button>
+        <form
+          th:action="@{/cadastro}"
+          th:object="${usuario}"
+          method="post"
+          class="form"
+        >
+          <input
+            type="text"
+            placeholder="Nome de Usuário"
+            th:field="*{username}"
+            required
+          />
+          <input
+            type="text"
+            placeholder="Nome Completo"
+            th:field="*{nomeCompleto}"
+            required
+          />
+          <input type="text" placeholder="CPF" th:field="*{cpf}" required />
+          <input
+            type="email"
+            placeholder="E-mail"
+            th:field="*{email}"
+            required
+          />
+          <input
+            type="password"
+            placeholder="Senha"
+            th:field="*{senha}"
+            required
+          />
+          <input
+            type="text"
+            placeholder="Celular"
+            th:field="*{celular}"
+            required
+          />
+          <button type="submit">Cadastrar</button>
         </form>
+      </div>
     </div>
-</div>
-</body>
+  </body>
 </html>

@@ -1,84 +1,117 @@
 <!DOCTYPE html>
 <html lang="pt">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Bem-vindo ao Sociafy</title>
     <style>
-        /* Estilos gerais */
-        body {
-            background-color: #FF00AA; /* Cor de fundo rosa */
-            color: #FFFFFF;
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            text-align: center;
-        }
+      /* Estilos gerais */
+      body {
+        background-color: #ff00aa; /* Cor de fundo rosa */
+        color: #ffffff;
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        text-align: center;
+      }
 
-        .welcome-container {
-            max-width: 600px;
-            padding: 20px;
-        }
+      .welcome-container {
+        max-width: 600px;
+        padding: 20px;
+      }
 
-        /* Título e subtítulo */
-        h1 {
-            font-size: 36px;
-            margin-bottom: 10px;
-        }
+      /* Título e subtítulo */
+      h1 {
+        font-size: 36px;
+        margin-bottom: 10px;
+      }
 
-        p {
-            font-size: 18px;
-            margin-bottom: 30px;
-        }
+      p {
+        font-size: 18px;
+        margin-bottom: 30px;
+      }
 
-        /* Botão de Novo Planejamento */
-        .new-plan-button {
-            padding: 15px 30px;
-            background-color: #FFFFFF;
-            color: #FF00AA;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            margin-top: 20px;
-        }
+      /* Botão de Novo Planejamento */
+      .new-plan-button {
+        padding: 15px 30px;
+        background-color: #ffffff;
+        color: #ff00aa;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-top: 20px;
+      }
 
-        .new-plan-button:hover {
-            background-color: #ff66c1;
-        }
+      .new-plan-button:hover {
+        background-color: #ff66c1;
+      }
 
-        /* Palavras-chave */
-        .keywords {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
+      /* Palavras-chave */
+      .keywords {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
 
-        .keyword {
-            padding: 10px 20px;
-            background-color: #FFFFFF; /* Fundo branco para palavras-chave */
-            color: #FF00AA;
-            border-radius: 8px;
-            font-size: 16px;
-        }
+      .keyword {
+        padding: 10px 20px;
+        background-color: #ffffff; /* Fundo branco para palavras-chave */
+        color: #ff00aa;
+        border-radius: 8px;
+        font-size: 16px;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="welcome-container">
+      <img
+        class="logo-Sociafy"
+        src="https://i.ibb.co/dbkgK7x/logo-Sociafy.png"
+        alt="Logo Sociafy"
+      />
+
+      <div class="infos">
         <h1>Bem-vindo(a) ao Sociafy!</h1>
-        <p>Prepare-se para criar suas estratégias de conteúdo com mais velocidade e profissionalismo.</p>
+        <p>
+          Prepare-se para criar suas estratégias de conteúdo com mais velocidade
+          e profissionalismo.
+        </p>
         <div class="keywords">
-            <div class="keyword">Palavra chave</div>
-            <div class="keyword">Palavra chave</div>
-            <div class="keyword">Palavra chave</div>
-            <div class="keyword">Palavra chave</div>
+          <div class="keyword">
+            <img
+              src="https://i.ibb.co/PxWpqZP/facilidade-icon.png"
+              alt="facilidade-icon"
+            />
+            <p>Facilidade</p>
+          </div>
+          <div class="keyword">
+            <img
+              src="https://i.ibb.co/PxWpqZP/facilidade-icon.png"
+              alt="facilidade-icon"
+            />
+            <p>Desempenho</p>
+          </div>
+          <div class="keyword">
+            <img
+              src="https://i.ibb.co/PxWpqZP/facilidade-icon.png"
+              alt="facilidade-icon"
+            />
+            <p>Precisão</p>
+          </div>
         </div>
-        <button class="new-plan-button" onclick="window.location.href='/planejamento'">Criar Novo Planejamento</button>
+      </div>
+      <button
+        class="new-plan-button"
+        onclick="window.location.href='/planejamento'"
+      >
+        Começar planejamento
+      </button>
     </div>
-</body>
+  </body>
 </html>

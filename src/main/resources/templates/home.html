@@ -4,114 +4,159 @@
     <meta charset="UTF-8" />
     <title>Bem-vindo ao Sociafy</title>
     <style>
-      /* Estilos gerais */
-      body {
-        background-color: #ff00aa; /* Cor de fundo rosa */
-        color: #ffffff;
-        font-family: Arial, sans-serif;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
+      * {
         margin: 0;
-        text-align: center;
+        border: 0;
+        /* font-family: "Outfit", sans-serif; */
+        /* font-family: "Syne", sans-serif; */
+      }
+
+      body {
+        font-family: "Outfit", sans-serif;
+        background: #e839a2;
+      }
+
+      .logo-Sociafy {
+        width: 120px;
       }
 
       .welcome-container {
-        max-width: 600px;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .container {
+        width: 40%;
+        height: 100vh;
+        padding: 4rem 0rem;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .container .infos {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* justify-content: center; */
+        text-align: center;
+      }
+
+      .container .infos h1 {
+        font-family: "Syne", sans-serif;
+        font-size: 2.1rem;
+        color: #ffff;
+      }
+
+      .container .infos p {
+        margin-top: 0.5rem;
+        font-family: "Outfit", sans-serif;
+        font-size: 1.2rem;
+        font-weight: 300;
+        color: #ffff;
+      }
+
+      .container .infos .keywords {
+        padding: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        /* gap: 3rem; */
+        width: 80%;
+      }
+
+      .container .infos .keywords .keyword {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .container .infos .keywords .keyword img {
+        width: 60px;
         padding: 20px;
+        border-radius: 50px;
+        background: #FFFFFF35;
       }
 
-      /* Título e subtítulo */
-      h1 {
-        font-size: 36px;
-        margin-bottom: 10px;
+      .container .infos .keywords .keyword span {
+        color: #fff;
+        font-weight: 300;
+        font-size: 1.1rem;
       }
 
-      p {
-        font-size: 18px;
-        margin-bottom: 30px;
-      }
-
-      /* Botão de Novo Planejamento */
       .new-plan-button {
-        padding: 15px 30px;
+        font-family: "Outfit", sans-serif;
+        font-size: 1rem;
+        font-weight: 600;
         background-color: #ffffff;
-        color: #ff00aa;
+        color: #e839a2;
+        padding: 15px 30px;
         border: none;
-        border-radius: 8px;
-        font-size: 16px;
-        font-weight: bold;
+        border-radius: 7px;
         cursor: pointer;
-        transition: background-color 0.3s ease;
-        margin-top: 20px;
-      }
+
+        /* margin-top: 1.5rem; */
+        transition: 0.3s;
+      } 
 
       .new-plan-button:hover {
-        background-color: #ff66c1;
-      }
-
-      /* Palavras-chave */
-      .keywords {
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-        flex-wrap: wrap;
-      }
-
-      .keyword {
-        padding: 10px 20px;
-        background-color: #ffffff; /* Fundo branco para palavras-chave */
-        color: #ff00aa;
-        border-radius: 8px;
-        font-size: 16px;
+        transform: scale(1.1);
       }
     </style>
   </head>
   <body>
     <div class="welcome-container">
-      <img
-        class="logo-Sociafy"
-        src="https://i.ibb.co/dbkgK7x/logo-Sociafy.png"
-        alt="Logo Sociafy"
-      />
+      <div class="container">
+        <img
+          class="logo-Sociafy"
+          src="https://i.ibb.co/dbkgK7x/logo-Sociafy.png"
+          alt="Logo Sociafy"
+        />
 
-      <div class="infos">
-        <h1>Bem-vindo(a) ao Sociafy!</h1>
-        <p>
-          Prepare-se para criar suas estratégias de conteúdo com mais velocidade
-          e profissionalismo.
-        </p>
-        <div class="keywords">
-          <div class="keyword">
-            <img
-              src="https://i.ibb.co/PxWpqZP/facilidade-icon.png"
-              alt="facilidade-icon"
-            />
-            <p>Facilidade</p>
-          </div>
-          <div class="keyword">
-            <img
-              src="https://i.ibb.co/PxWpqZP/facilidade-icon.png"
-              alt="facilidade-icon"
-            />
-            <p>Desempenho</p>
-          </div>
-          <div class="keyword">
-            <img
-              src="https://i.ibb.co/PxWpqZP/facilidade-icon.png"
-              alt="facilidade-icon"
-            />
-            <p>Precisão</p>
+        <div class="infos">
+          <h1>Bem-vindo(a) ao Sociafy!</h1>
+          <p>
+            Prepare-se para criar suas estratégias de conteúdo com mais
+            velocidade e profissionalismo.
+          </p>
+          <div class="keywords">
+            <div class="keyword">
+              <img
+                src="https://i.ibb.co/PxWpqZP/facilidade-icon.png"
+                alt="facilidade-icon"
+              />
+              <span>Facilidade</span>
+            </div>
+            <div class="keyword">
+              <img
+                src="https://i.ibb.co/C0V1grD/desempenho-icon.png"
+                alt="facilidade-icon"
+              />
+              
+              <span>Desempenho</span>
+            </div>
+            <div class="keyword">
+              <img
+                src="https://i.ibb.co/fx3RFMC/precisao-icon.png"
+                alt="facilidade-icon"
+              />
+              
+              <span>Precisão</span>
+            </div>
           </div>
         </div>
+        <button
+          class="new-plan-button"
+          onclick="window.location.href='/planejamento'"
+        >
+          Começar planejamento
+        </button>
       </div>
-      <button
-        class="new-plan-button"
-        onclick="window.location.href='/planejamento'"
-      >
-        Começar planejamento
-      </button>
     </div>
   </body>
 </html>

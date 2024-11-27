@@ -683,7 +683,7 @@ body {
             <!-- Botões de navegação -->
             <div class="buttons" style="margin-top: 20px;">
                 <button type="button" class="back-btn" data-previous="elementos_identidade_visual" style="background-color: #fff; color: #ff4394; border: 2px solid #ff4394; border-radius: 8px; padding: 10px 20px; margin-right: 10px; cursor: pointer;">Voltar</button>
-                <button type="button" class="save-btn" data-next="finalizar" style="background-color: #ff4394; color: #fff; border: none; border-radius: 8px; padding: 10px 20px; cursor: pointer;">Finalizar</button>
+                <button type="button" id="generate-manual" style="background-color: #ff4394; color: #fff; border: none; border-radius: 8px; padding: 10px 20px; cursor: pointer;">Gerar</button>
             </div>
         </div>
         
@@ -692,6 +692,9 @@ body {
             const browseFilesButtonManual = document.getElementById('browse-files-manual');
             const uploadAreaManual = document.getElementById('upload-area-manual');
             const filePreviewManual = document.getElementById('file-preview-manual');
+            const generateButtonManual = document.getElementById('generate-manual');
+        
+            let uploadedFiles = []; // Lista para armazenar os arquivos anexados
         
             // Clique no botão "Selecionar Arquivos"
             browseFilesButtonManual.addEventListener('click', () => {
@@ -721,8 +724,9 @@ body {
         
             function handleFilesManual(files) {
                 filePreviewManual.innerHTML = ''; // Limpa os arquivos anteriores
+                uploadedFiles = Array.from(files); // Atualiza a lista de arquivos anexados
         
-                Array.from(files).forEach(file => {
+                uploadedFiles.forEach(file => {
                     const fileContainer = document.createElement('div');
                     fileContainer.style.position = 'relative';
                     fileContainer.style.width = '150px';
@@ -752,8 +756,9 @@ body {
                     removeButton.style.fontSize = '14px';
         
                     removeButton.addEventListener('click', () => {
+                        uploadedFiles = uploadedFiles.filter(f => f !== file); // Remove o arquivo da lista
                         fileContainer.remove();
-                        if (!filePreviewManual.innerHTML) {
+                        if (!uploadedFiles.length) {
                             filePreviewManual.innerHTML = '<p style="font-size: 14px; color: #666;">Nenhum arquivo anexado.</p>';
                         }
                     });
@@ -783,11 +788,70 @@ body {
                     filePreviewManual.appendChild(fileContainer);
                 });
         
-                if (!filePreviewManual.innerHTML) {
+                if (!uploadedFiles.length) {
                     filePreviewManual.innerHTML = '<p style="font-size: 14px; color: #666;">Nenhum arquivo anexado.</p>';
                 }
             }
+        
+            // Botão "Gerar" para exibir os arquivos anexados em uma nova página com todas as informações
+            generateButtonManual.addEventListener('click', () => {
+                const formData = new FormData(document.getElementById('formData'));
+                const data = {};
+        
+                formData.forEach((value, key) => {
+                    if (!data[key]) {
+                        data[key] = value;
+                    } else {
+                        data[key] = [].concat(data[key], value);
+                    }
+                });
+        
+                const newPage = window.open("", "_blank");
+                newPage.document.write(`
+                    <!DOCTYPE html>
+                    <html lang="pt-br">
+                    <head>
+                        <meta charset="UTF-8">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                        <title>Resumo do Projeto</title>
+                        <style>
+                            body {
+                                font-family: Arial, sans-serif;
+                                margin: 0;
+                                padding: 20px;
+                                background-color: #f9f9f9;
+                                color: #333;
+                            }
+                            h1 {
+                                color: #ff4394;
+                            }
+                            h2 {
+                                font-size: 18px;
+                                color: #555;
+                                margin-top: 20px;
+                            }
+                            p {
+                                font-size: 14px;
+                            }
+                            .file-container {
+                                margin-bottom: 20px;
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <h1>Resumo do Projeto</h1>
+                        <h2>Novo Planejamento</h2>
+                        <p><strong>Título:</strong> ${data.planejamento || "Não informado"}</p>
+                        <p><strong>Descrição:</strong> ${data.descricao || "Não informado"}</p>
+        
+                        <h2>Arquivos Anexados</h2>
+                        ${uploadedFiles.map(file => `<div class="file-container"><span>📄 ${file.name}</span></div>`).join('')}
+                    </body>
+                    </html>
+                `);
+            });
         </script>
+        
         
         </div>
     </form>

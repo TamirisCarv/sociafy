@@ -6,85 +6,118 @@
     <title>Formulário de Planejamento</title>
     <style>
         /* Estilos gerais */
-        body {
-            display: flex;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            background-color: #f3f3f3;
-        }
+        /* Estilo geral */
+/* Estilos gerais */
+body {
+    display: flex;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f3f3f3;
+    height: 100vh; /* Altura total da viewport */
+    overflow: hidden; /* Impede scroll na janela principal */
+}
 
-        /* Barra lateral */
-        .sidebar {
-            width: 250px;
-            background-color: #222;
-            color: #fff;
-            display: flex;
-            flex-direction: column;
-            padding-top: 20px;
-            height: 100vh;
-        }
+/* Barra lateral */
+.sidebar {
+    width: 250px;
+    background-color: #222;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    height: 100vh; /* Ocupa toda a altura da viewport */
+    position: fixed; /* Fixa a barra lateral na posição */
+    top: 0;
+    left: 0;
+    overflow-y: auto; /* Adiciona rolagem apenas na barra lateral */
+    z-index: 1000; /* Mantém a barra lateral acima do conteúdo */
+}
 
-        .sidebar a {
-            padding: 15px 20px;
-            text-decoration: none;
-            color: #fff;
-            display: block;
-            cursor: pointer;
-        }
+.sidebar a {
+    padding: 15px 20px;
+    text-decoration: none;
+    color: #fff;
+    display: block;
+    cursor: pointer;
+}
 
-        .sidebar a.active, .sidebar a:hover {
-            background-color: #ff4394;
-            color: #fff;
-        }
+.sidebar a.active, 
+.sidebar a:hover {
+    background-color: #ff4394;
+    color: #fff;
+}
 
-        /* Conteúdo principal */
-        .content {
-            flex: 1;
-            padding: 50px;
-            text-align: center;
-            background-color: #e9e9e9;
-        }
+/* Conteúdo principal */
+.content {
+    margin-left: 250px; /* Desloca o conteúdo principal para o lado da barra lateral */
+    padding: 20px;
+    background-color: #e9e9e9;
+    width: calc(100% - 250px); /* Ajusta a largura considerando a barra lateral */
+    height: 100vh; /* Ocupa toda a altura da viewport */
+    overflow-y: auto; /* Permite rolagem no conteúdo principal */
+    box-sizing: border-box; /* Inclui padding e borda no cálculo da largura/altura */
+    text-align: center; /* Centraliza o texto dentro do conteúdo */
+}
 
-        .content h1 {
-            font-size: 36px;
-            color: #ff4394;
-        }
+.content h1 {
+    font-size: 36px;
+    color: #ff4394;
+}
 
-        .form-group {
-            margin: 15px 0;
-        }
+/* Seções do conteúdo */
+.content-section {
+    max-width: 800px;
+    margin: auto;
+    padding-bottom: 50px; /* Espaço extra para os botões no final */
+    display: none; /* Oculta as seções por padrão */
+}
 
-        .form-group input,
-        .form-group textarea {
-            padding: 10px;
-            width: 300px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
+.content-section.active {
+    display: block; /* Exibe apenas a seção ativa */
+}
 
-        .buttons {
-            margin-top: 20px;
-        }
+/* Estilo dos campos de formulário */
+.form-group {
+    margin: 15px 0;
+}
 
-        .buttons button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            background-color: #ff4394;
-            color: #fff;
-        }
+.form-group input,
+.form-group textarea {
+    padding: 10px;
+    width: 300px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
 
-        /* Ocultar seções não ativas */
-        .content-section {
-            display: none;
-        }
+/* Estilo dos botões */
+.buttons {
+    margin-top: 20px;
+}
 
-        .content-section.active {
-            display: block;
-        }
+.buttons button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #ff4394;
+    color: #fff;
+}
+
+/* Botão voltar */
+.buttons button.back-btn {
+    background-color: #fff;
+    color: #ff4394;
+    border: 2px solid #ff4394;
+    margin-right: 10px;
+}
+
+/* Estilo adicional para hover em botões */
+.buttons button:hover {
+    opacity: 0.9;
+}
+
     </style>
 </head>
 <body>
@@ -109,113 +142,653 @@
     <!-- Formulário principal -->
     <form id="formData">
         <div id="planejamento" class="content-section active">
+            <div class="icon">
+                <img src="https://img.icons8.com/external-flat-juicy-fish/60/external-planning-business-flat-flat-juicy-fish.png" alt="Ícone de planejamento">
+            </div>
             <h1>Novo Planejamento</h1>
-            <input type="text" name="planejamento" placeholder="Título do Planejamento">
+            <p>Adicione um título e uma descrição para iniciar o planejamento do seu projeto.</p>
+            <div class="form-group">
+                <input type="text" name="planejamento" placeholder="Título do Planejamento">
+                <input type="text" name="descricao" placeholder="Descrição (opcional)">
+            </div>
             <div class="buttons">
                 <button type="button" class="save-btn" data-next="informacoes_cliente">Salvar</button>
             </div>
         </div>
 
         <div id="informacoes_cliente" class="content-section">
-            <h1>Informações do Cliente</h1>
-            <input type="text" name="cliente_nome" placeholder="Nome do Cliente">
-            <input type="text" name="cliente_setor" placeholder="Setor de Atuação">
-            <textarea name="cliente_descricao" placeholder="Descrição"></textarea>
-            <div class="buttons">
-                <button type="button" class="save-btn" data-next="redes_sociais">Salvar</button>
+            <div class="icon">
+                <img src="https://img.icons8.com/fluency/96/user-male-circle.png" alt="Ícone Cliente">
+            </div>
+            <h1 style="font-size: 28px; color: #ff4394;">Informações do cliente</h1>
+            <p style="color: #666; font-size: 14px; margin-bottom: 20px;">Preencha os dados básicos sobre o cliente para estruturar o planejamento.</p>
+            
+            <!-- Formulário estilizado -->
+            <div style="max-width: 400px; margin: 0 auto; text-align: left;">
+                <label style="font-weight: bold; font-size: 16px; color: #ff4394; display: block; margin-bottom: 10px;">Cliente</label>
+                
+                <div style="margin-bottom: 15px;">
+                    <input type="text" name="cliente_nome" placeholder="Nome do cliente" 
+                           style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; background-color: #f9f9f9;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <input type="text" name="cliente_setor" placeholder="Setor de atuação" 
+                           style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; background-color: #f9f9f9;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <textarea name="cliente_descricao" placeholder="Descrição" 
+                              style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; background-color: #f9f9f9; resize: none;" rows="4"></textarea>
+                </div>
+            </div>
+        
+            <!-- Botões -->
+            <div class="buttons" style="margin-top: 20px;">
+                <button type="button" class="back-btn" data-previous="planejamento" 
+                        style="background-color: #fff; color: #ff4394; border: 2px solid #ff4394; border-radius: 8px; padding: 10px 20px; margin-right: 10px; cursor: pointer;">Voltar</button>
+                <button type="button" class="save-btn" data-next="redes_sociais" 
+                        style="background-color: #ff4394; color: #fff; border: none; border-radius: 8px; padding: 10px 20px; cursor: pointer;">Próximo</button>
             </div>
         </div>
         
-        <div id="redes_sociais" class="content-section">
-            <h1>Redes Sociais</h1>
-            <input type="text" name="redes_sociais_nome" placeholder="Nome da Rede Social">
-            <textarea name="redes_sociais_detalhes" placeholder="Detalhes das Redes Sociais"></textarea>
-            <div class="buttons">
-                <button type="button" class="save-btn" data-next="selecionar_canais">Salvar</button>
-            </div>
-        </div>
-        
+
+        <div id="redes_sociais" class="content-section"></div>
+            
         <div id="selecionar_canais" class="content-section">
-            <h1>Selecionar Canais</h1>
-            <textarea name="selecionar_canais" placeholder="Canais Selecionados"></textarea>
-            <div class="buttons">
-                <button type="button" class="save-btn" data-next="informacoes_canais">Salvar</button>
+            <div class="icon" style="margin-bottom: 20px;">
+                <img src="https://img.icons8.com/fluency/96/social-network.png" alt="Ícone Selecionar Canais">
+            </div>
+            <h1 style="font-size: 28px; color: #ff4394;">Selecionar canais</h1>
+            <p style="color: #666; font-size: 14px; margin-bottom: 20px;">Selecione os canais que você vai planejar!</p>
+        
+            <!-- Redes sociais como opções -->
+            <div style="display: flex; justify-content: center; gap: 15px; margin: 20px 0;">
+                <label style="text-align: center; cursor: pointer;">
+                    <input type="checkbox" name="canais" value="Instagram" style="display: none;">
+                    <div class="social-card" style="width: 100px; height: 100px; background: #fff; border: 1px solid #ddd; border-radius: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: transform 0.2s;">
+                        <img src="https://img.icons8.com/fluency/48/instagram-new.png" alt="Instagram" style="margin-bottom: 8px;">
+                        <span style="color: #333; font-size: 14px;">Instagram</span>
+                    </div>
+                </label>
+                <label style="text-align: center; cursor: pointer;">
+                    <input type="checkbox" name="canais" value="Facebook" style="display: none;">
+                    <div class="social-card" style="width: 100px; height: 100px; background: #fff; border: 1px solid #ddd; border-radius: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: transform 0.2s;">
+                        <img src="https://img.icons8.com/fluency/48/facebook-new.png" alt="Facebook" style="margin-bottom: 8px;">
+                        <span style="color: #333; font-size: 14px;">Facebook</span>
+                    </div>
+                </label>
+                <label style="text-align: center; cursor: pointer;">
+                    <input type="checkbox" name="canais" value="WhatsApp" style="display: none;">
+                    <div class="social-card" style="width: 100px; height: 100px; background: #fff; border: 1px solid #ddd; border-radius: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: transform 0.2s;">
+                        <img src="https://img.icons8.com/fluency/48/whatsapp.png" alt="WhatsApp" style="margin-bottom: 8px;">
+                        <span style="color: #333; font-size: 14px;">WhatsApp</span>
+                    </div>
+                </label>
+            </div>
+        
+            <!-- Botões -->
+            <div class="buttons" style="margin-top: 20px;">
+                <button type="button" class="back-btn" data-previous="redes_sociais" 
+                        style="background-color: #fff; color: #ff4394; border: 2px solid #ff4394; border-radius: 8px; padding: 10px 20px; margin-right: 10px; cursor: pointer;">Voltar</button>
+                <button type="button" class="save-btn" data-next="informacoes_canais" 
+                        style="background-color: #ff4394; color: #fff; border: none; border-radius: 8px; padding: 10px 20px; cursor: pointer;">Próximo</button>
             </div>
         </div>
         
-        <div id="informacoes_canais" class="content-section">
-            <h1>Informações dos Canais</h1>
-            <textarea name="informacoes_canais" placeholder="Detalhes dos Canais"></textarea>
-            <div class="buttons">
-                <button type="button" class="save-btn" data-next="campanhas">Salvar</button>
-            </div>
-        </div>
-        
-        <div id="campanhas" class="content-section">
-            <h1>Campanhas</h1>
-            <textarea name="campanhas" placeholder="Informações das Campanhas"></textarea>
-            <div class="buttons">
-                <button type="button" class="save-btn" data-next="referencias_concorrentes">Salvar</button>
-            </div>
-        </div>
-        
-        <div id="referencias_concorrentes" class="content-section">
-            <h1>Referências e Concorrentes</h1>
-            <textarea name="referencias_concorrentes" placeholder="Detalhes de Referências e Concorrentes"></textarea>
-            <div class="buttons">
-                <button type="button" class="save-btn" data-next="objetivos_projeto">Salvar</button>
-            </div>
-        </div>
-        
-        <div id="objetivos_projeto" class="content-section">
-            <h1>Objetivos do Projeto</h1>
-            <textarea name="objetivos_projeto" placeholder="Objetivos do Projeto"></textarea>
-            <div class="buttons">
-                <button type="button" class="save-btn" data-next="personas">Salvar</button>
-            </div>
-        </div>
-        
-        <div id="personas" class="content-section">
-            <h1>Personas</h1>
-            <textarea name="personas" placeholder="Detalhes das Personas"></textarea>
-            <div class="buttons">
-                <button type="button" class="save-btn" data-next="descricao">Salvar</button>
-            </div>
-        </div>
-        
-        <div id="descricao" class="content-section">
-            <h1>Descrição</h1>
-            <textarea name="descricao" placeholder="Descrição do Projeto"></textarea>
-            <div class="buttons">
-                <button type="button" class="save-btn" data-next="identidade_visual">Salvar</button>
-            </div>
-        </div>
-        
-        <div id="identidade_visual" class="content-section">
-            <h1>Identidade Visual</h1>
-            <textarea name="identidade_visual" placeholder="Detalhes da Identidade Visual"></textarea>
-            <div class="buttons">
-                <button type="button" class="save-btn" data-next="elementos">Salvar</button>
-            </div>
-        </div>
-        
-        <div id="elementos" class="content-section">
-            <h1>Elementos</h1>
-            <textarea name="elementos" placeholder="Elementos do Projeto"></textarea>
-            <div class="buttons">
-                <button type="button" class="save-btn" data-next="manual_marca">Salvar</button>
-            </div>
-        </div>
+        <script>
+            // Lógica para destacar o bloco selecionado e alternar seleção
+            const socialCards = document.querySelectorAll('.social-card');
+            socialCards.forEach(card => {
+                card.addEventListener('click', (event) => {
+                    const checkbox = card.parentElement.querySelector('input[type="checkbox"]');
+                    checkbox.checked = !checkbox.checked; // Alternar o estado do checkbox
+                    if (checkbox.checked) {
+                        card.style.borderColor = '#ff4394';
+                        card.style.transform = 'scale(1.05)';
+                        card.style.boxShadow = '0 4px 10px rgba(255, 67, 148, 0.4)';
+                    } else {
+                        card.style.borderColor = '#ddd';
+                        card.style.transform = 'scale(1)';
+                        card.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
+                    }
+                });
+            });
+        </script>
         
        
         
+        
+        
+        <div id="informacoes_canais" class="content-section">
+            <div class="icon" style="margin-bottom: 20px;">
+                <img src="https://img.icons8.com/fluency/96/info.png" alt="Ícone Informações dos Canais">
+            </div>
+            <h1 style="font-size: 28px; color: #ff4394;">Informações dos canais</h1>
+            <p style="color: #666; font-size: 14px; margin-bottom: 20px;">Preencha as informações para os canais selecionados!</p>
+        
+            <!-- Formulário para Instagram -->
+            <div style="margin-bottom: 30px;">
+                <h2 style="display: flex; align-items: center; font-size: 20px; color: #ff4394;">
+                    <img src="https://img.icons8.com/fluency/24/instagram-new.png" style="margin-right: 10px;"> Instagram
+                </h2>
+                <input type="text" name="instagram_seguidores" placeholder="Número de seguidores" 
+                       style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px;">
+                <input type="text" name="instagram_descricao" placeholder="Descrição" 
+                       style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px;">
+                <input type="url" name="instagram_link" placeholder="Link do perfil" 
+                       style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px;">
+            </div>
+        
+            <!-- Formulário para Facebook -->
+            <div style="margin-bottom: 30px;">
+                <h2 style="display: flex; align-items: center; font-size: 20px; color: #ff4394;">
+                    <img src="https://img.icons8.com/fluency/24/facebook-new.png" style="margin-right: 10px;"> Facebook
+                </h2>
+                <input type="text" name="facebook_seguidores" placeholder="Número de seguidores" 
+                       style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px;">
+                <input type="text" name="facebook_descricao" placeholder="Descrição" 
+                       style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px;">
+                <input type="url" name="facebook_link" placeholder="Link do perfil" 
+                       style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px;">
+            </div>
+        
+            <!-- Formulário para WhatsApp -->
+            <div style="margin-bottom: 30px;">
+                <h2 style="display: flex; align-items: center; font-size: 20px; color: #ff4394;">
+                    <img src="https://img.icons8.com/fluency/24/whatsapp.png" style="margin-right: 10px;"> WhatsApp
+                </h2>
+                <input type="text" name="whatsapp_descricao" placeholder="Descrição" 
+                       style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px;">
+                <input type="url" name="whatsapp_link" placeholder="Link de contato" 
+                       style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px;">
+            </div>
+        
+            <!-- Botões -->
+            <div class="buttons" style="margin-top: 20px;">
+                <button type="button" class="back-btn" data-previous="selecionar_canais" 
+                        style="background-color: #fff; color: #ff4394; border: 2px solid #ff4394; border-radius: 8px; padding: 10px 20px; margin-right: 10px; cursor: pointer;">Voltar</button>
+                <button type="button" class="save-btn" data-next="campanhas" 
+                        style="background-color: #ff4394; color: #fff; border: none; border-radius: 8px; padding: 10px 20px; cursor: pointer;">Próximo</button>
+            </div>
+        </div>
+        
+        
+        <div id="campanhas" class="content-section">
+            
+        </div>
+        
+        <div id="referencias_concorrentes" class="content-section">
+            <h1 style="font-size: 28px; color: #ff4394;">Referências e Concorrentes</h1>
+            <div id="competitor-list">
+                <!-- Modelo inicial de concorrente -->
+                <div class="competitor" data-index="1" style="margin-bottom: 30px;">
+                    <h2 style="font-size: 18px; color: #ff4394; text-align: center;">Concorrente 1</h2>
+                    <button type="button" class="remove-competitor" style="float: right; color: #ff4394; background: none; border: none; cursor: pointer; font-size: 14px;">Excluir concorrente ✖</button>
+                    <div style="clear: both;"></div>
+                    <input type="text" name="competitor_name_1" placeholder="Nome do concorrente" style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
+                    <input type="text" name="competitor_strengths_1" placeholder="Pontos positivos" style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
+                    <input type="text" name="competitor_opportunities_1" placeholder="Gaps (oportunidades)" style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
+                    <input type="text" name="competitor_insights_1" placeholder="Principais insights" style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
+                    <input type="text" name="competitor_links_1" placeholder="Links importantes" style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
+                </div>
+            </div>
+        
+            <!-- Botão de adicionar concorrente -->
+            <button type="button" id="add-competitor" style="margin: 10px 0; background-color: #ff4394; color: #fff; padding: 10px 20px; border: none; border-radius: 8px; font-size: 14px; cursor: pointer;">Adicionar concorrente ➕</button>
+        
+            <!-- Botões de navegação -->
+            <div class="buttons" style="margin-top: 20px;">
+                <button type="button" class="back-btn" data-previous="campanhas" 
+                        style="background-color: #fff; color: #ff4394; border: 2px solid #ff4394; border-radius: 8px; padding: 10px 20px; margin-right: 10px; cursor: pointer;">Voltar</button>
+                <button type="button" class="save-btn" data-next="objetivos_projeto" 
+                        style="background-color: #ff4394; color: #fff; border: none; border-radius: 8px; padding: 10px 20px; cursor: pointer;">Próximo</button>
+            </div>
+        </div>
+        
+        <script>
+            let competitorCount = 1;
+        
+            document.getElementById('add-competitor').addEventListener('click', () => {
+                competitorCount++;
+                const competitorList = document.getElementById('competitor-list');
+        
+                const competitorTemplate = `
+                    <div class="competitor" data-index="${competitorCount}" style="margin-bottom: 30px;">
+                        <h2 style="font-size: 18px; color: #ff4394; text-align: center;">Concorrente ${competitorCount}</h2>
+                        <button type="button" class="remove-competitor" style="float: right; color: #ff4394; background: none; border: none; cursor: pointer; font-size: 14px;">Excluir concorrente ✖</button>
+                        <div style="clear: both;"></div>
+                        <input type="text" name="competitor_name_${competitorCount}" placeholder="Nome do concorrente" style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
+                        <input type="text" name="competitor_strengths_${competitorCount}" placeholder="Pontos positivos" style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
+                        <input type="text" name="competitor_opportunities_${competitorCount}" placeholder="Gaps (oportunidades)" style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
+                        <input type="text" name="competitor_insights_${competitorCount}" placeholder="Principais insights" style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
+                        <input type="text" name="competitor_links_${competitorCount}" placeholder="Links importantes" style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
+                    </div>
+                `;
+        
+                competitorList.insertAdjacentHTML('beforeend', competitorTemplate);
+                attachRemoveEvent();
+            });
+        
+            function attachRemoveEvent() {
+                const removeButtons = document.querySelectorAll('.remove-competitor');
+                removeButtons.forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const competitor = e.target.closest('.competitor');
+                        competitor.remove();
+                    });
+                });
+            }
+        
+            attachRemoveEvent();
+        </script>
+        
+        <div id="objetivos_projeto" class="content-section">
+            <h1 style="font-size: 28px; color: #ff4394;">Objetivos do Projeto</h1>
+            <div id="objective-list">
+                <!-- Primeiro objetivo como modelo -->
+                <div class="objective" data-index="1" style="margin-bottom: 30px;">
+                    <h2 style="font-size: 18px; color: #ff4394; text-align: left;">Objetivo 1</h2>
+                    <button type="button" class="remove-objective" style="float: right; color: #c04dcc; background: none; border: none; cursor: pointer; font-size: 14px;">Excluir objetivo ✖</button>
+                    <div style="clear: both;"></div>
+                    <input type="text" name="objective_title_1" placeholder="Objetivo" 
+                           style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
+                    <textarea name="objective_description_1" placeholder="Descrição" 
+                              style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; resize: none;" rows="3"></textarea>
+                </div>
+            </div>
+        
+            <!-- Botão de adicionar objetivo -->
+            <button type="button" id="add-objective" 
+                    style="margin: 10px 0; background-color: #c04dcc; color: #fff; padding: 10px 20px; border: none; border-radius: 8px; font-size: 14px; cursor: pointer;">Adicionar objetivo ➕</button>
+        
+            <!-- Botões de navegação -->
+            <div class="buttons" style="margin-top: 20px;">
+                <button type="button" class="back-btn" data-previous="referencias_concorrentes" 
+                        style="background-color: #fff; color: #ff4394; border: 2px solid #ff4394; border-radius: 8px; padding: 10px 20px; margin-right: 10px; cursor: pointer;">Voltar</button>
+                <button type="button" class="save-btn" data-next="personas" 
+                        style="background-color: #ff4394; color: #fff; border: none; border-radius: 8px; padding: 10px 20px; cursor: pointer;">Próximo</button>
+            </div>
+        </div>
+        
+        <script>
+            let objectiveCount = 1;
+        
+            // Adicionar novos objetivos
+            document.getElementById('add-objective').addEventListener('click', () => {
+                objectiveCount++;
+                const objectiveList = document.getElementById('objective-list');
+        
+                const objectiveTemplate = `
+                    <div class="objective" data-index="${objectiveCount}" style="margin-bottom: 30px;">
+                        <h2 style="font-size: 18px; color: #ff4394; text-align: left;">Objetivo ${objectiveCount}</h2>
+                        <button type="button" class="remove-objective" style="float: right; color: #c04dcc; background: none; border: none; cursor: pointer; font-size: 14px;">Excluir objetivo ✖</button>
+                        <div style="clear: both;"></div>
+                        <input type="text" name="objective_title_${objectiveCount}" placeholder="Objetivo" 
+                               style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
+                        <textarea name="objective_description_${objectiveCount}" placeholder="Descrição" 
+                                  style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; resize: none;" rows="3"></textarea>
+                    </div>
+                `;
+        
+                objectiveList.insertAdjacentHTML('beforeend', objectiveTemplate);
+                attachRemoveEvent();
+            });
+        
+            // Função para remover objetivos
+            function attachRemoveEvent() {
+                const removeButtons = document.querySelectorAll('.remove-objective');
+                removeButtons.forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const objective = e.target.closest('.objective');
+                        objective.remove();
+                    });
+                });
+            }
+        
+            attachRemoveEvent();
+        </script>
+        
+        
+        <div id="personas" class="content-section">
+            
+        </div>
+        
+        <div id="descricao" class="content-section">
+            <h1 style="font-size: 28px; color: #ff4394;">Descrição de Personas</h1>
+            <div id="persona-list">
+                <!-- Primeira persona como modelo -->
+                <div class="persona" data-index="1" style="margin-bottom: 30px;">
+                    <h2 style="font-size: 18px; color: #ff4394; text-align: left;">Persona 1</h2>
+                    <button type="button" class="remove-persona" style="float: right; color: #c04dcc; background: none; border: none; cursor: pointer; font-size: 14px;">Excluir persona ✖</button>
+                    <div style="clear: both;"></div>
+        
+                    <input type="text" name="persona_name_1" placeholder="Nome da Persona" 
+                           style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
+                    <input type="number" name="persona_age_1" placeholder="Idade" 
+                           style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
+                    <input type="text" name="persona_job_1" placeholder="Ocupação/Profissão" 
+                           style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
+                    <textarea name="persona_behavior_1" placeholder="Comportamento e Hábitos" 
+                              style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; resize: none;" rows="3"></textarea>
+                    <textarea name="persona_goals_1" placeholder="Objetivos e Necessidades" 
+                              style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; resize: none;" rows="3"></textarea>
+                    <textarea name="persona_challenges_1" placeholder="Desafios e Problemas" 
+                              style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; resize: none;" rows="3"></textarea>
+                    <textarea name="persona_solutions_1" placeholder="Soluções Possíveis" 
+                              style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; resize: none;" rows="3"></textarea>
+                </div>
+            </div>
+        
+            <!-- Botão de adicionar persona -->
+            <button type="button" id="add-persona" 
+                    style="margin: 10px 0; background-color: #c04dcc; color: #fff; padding: 10px 20px; border: none; border-radius: 8px; font-size: 14px; cursor: pointer;">Adicionar Persona ➕</button>
+        
+            <!-- Botões de navegação -->
+            <div class="buttons" style="margin-top: 20px;">
+                <button type="button" class="back-btn" data-previous="objetivos_projeto" 
+                        style="background-color: #fff; color: #ff4394; border: 2px solid #ff4394; border-radius: 8px; padding: 10px 20px; margin-right: 10px; cursor: pointer;">Voltar</button>
+                <button type="button" class="save-btn" data-next="descricao" 
+                        style="background-color: #ff4394; color: #fff; border: none; border-radius: 8px; padding: 10px 20px; cursor: pointer;">Próximo</button>
+            </div>
+        </div>
+        
+        <script>
+            let personaCount = 1;
+        
+            // Adicionar novas personas
+            document.getElementById('add-persona').addEventListener('click', () => {
+                personaCount++;
+                const personaList = document.getElementById('persona-list');
+        
+                const personaTemplate = `
+                    <div class="persona" data-index="${personaCount}" style="margin-bottom: 30px;">
+                        <h2 style="font-size: 18px; color: #ff4394; text-align: left;">Persona ${personaCount}</h2>
+                        <button type="button" class="remove-persona" style="float: right; color: #c04dcc; background: none; border: none; cursor: pointer; font-size: 14px;">Excluir persona ✖</button>
+                        <div style="clear: both;"></div>
+        
+                        <input type="text" name="persona_name_${personaCount}" placeholder="Nome da Persona" 
+                               style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
+                        <input type="number" name="persona_age_${personaCount}" placeholder="Idade" 
+                               style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
+                        <input type="text" name="persona_job_${personaCount}" placeholder="Ocupação/Profissão" 
+                               style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
+                        <textarea name="persona_behavior_${personaCount}" placeholder="Comportamento e Hábitos" 
+                                  style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; resize: none;" rows="3"></textarea>
+                        <textarea name="persona_goals_${personaCount}" placeholder="Objetivos e Necessidades" 
+                                  style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; resize: none;" rows="3"></textarea>
+                        <textarea name="persona_challenges_${personaCount}" placeholder="Desafios e Problemas" 
+                                  style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; resize: none;" rows="3"></textarea>
+                        <textarea name="persona_solutions_${personaCount}" placeholder="Soluções Possíveis" 
+                                  style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; resize: none;" rows="3"></textarea>
+                    </div>
+                `;
+        
+                personaList.insertAdjacentHTML('beforeend', personaTemplate);
+                attachRemovePersonaEvent();
+            });
+        
+            // Função para remover personas
+            function attachRemovePersonaEvent() {
+                const removeButtons = document.querySelectorAll('.remove-persona');
+                removeButtons.forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const persona = e.target.closest('.persona');
+                        persona.remove();
+                    });
+                });
+            }
+        
+            attachRemovePersonaEvent();
+        </script>
+        
+        <div id="identidade_visual" class="content-section">
+            
+        </div>
+        
+        <div id="elementos" class="content-section">
+            <h1 style="font-size: 28px; color: #ff4394;">Elementos da Identidade Visual</h1>
+            <p style="color: #666; font-size: 14px; margin-bottom: 20px;">Faça o upload de arquivos relacionados à identidade visual, como logotipos, fontes, imagens ou outros elementos que representem sua marca.</p>
+            
+            <!-- Área de upload -->
+            <div id="upload-area" style="border: 2px dashed #ff4394; padding: 20px; border-radius: 10px; text-align: center; margin-bottom: 20px;">
+                <p style="font-size: 16px; color: #ff4394; margin-bottom: 10px;">Arraste e solte arquivos aqui ou clique para selecionar</p>
+                <input type="file" id="file-input" multiple accept=".png, .jpg, .jpeg, .svg, .gif" style="display: none;">
+                <button type="button" id="browse-files" style="background-color: #ff4394; color: #fff; padding: 10px 20px; border: none; border-radius: 8px; font-size: 14px; cursor: pointer;">Selecionar Arquivos</button>
+            </div>
+        
+            <!-- Galeria de visualização -->
+            <div id="file-preview" style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center;">
+                <p style="font-size: 14px; color: #666;">Nenhum arquivo anexado.</p>
+            </div>
+        
+            <!-- Botões de navegação -->
+            <div class="buttons" style="margin-top: 20px;">
+                <button type="button" class="back-btn" data-previous="descricao" style="background-color: #fff; color: #ff4394; border: 2px solid #ff4394; border-radius: 8px; padding: 10px 20px; margin-right: 10px; cursor: pointer;">Voltar</button>
+                <button type="button" class="save-btn" data-next="manual_marca" style="background-color: #ff4394; color: #fff; border: none; border-radius: 8px; padding: 10px 20px; cursor: pointer;">Próximo</button>
+            </div>
+        </div>
+        
+        <script>
+            const fileInput = document.getElementById('file-input');
+            const browseFilesButton = document.getElementById('browse-files');
+            const uploadArea = document.getElementById('upload-area');
+            const filePreview = document.getElementById('file-preview');
+        
+            // Clique no botão "Selecionar Arquivos"
+            browseFilesButton.addEventListener('click', () => {
+                fileInput.click();
+            });
+        
+            // Detectar mudança no input de arquivos
+            fileInput.addEventListener('change', (e) => {
+                handleFiles(e.target.files);
+            });
+        
+            // Arrastar e soltar arquivos
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.style.borderColor = '#c04dcc';
+            });
+        
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.style.borderColor = '#ff4394';
+            });
+        
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.style.borderColor = '#ff4394';
+                handleFiles(e.dataTransfer.files);
+            });
+        
+            function handleFiles(files) {
+                filePreview.innerHTML = ''; // Limpa os arquivos anteriores
+        
+                Array.from(files).forEach(file => {
+                    const fileContainer = document.createElement('div');
+                    fileContainer.style.position = 'relative';
+                    fileContainer.style.width = '120px';
+                    fileContainer.style.height = '120px';
+                    fileContainer.style.border = '1px solid #ddd';
+                    fileContainer.style.borderRadius = '10px';
+                    fileContainer.style.overflow = 'hidden';
+                    fileContainer.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
+                    fileContainer.style.display = 'flex';
+                    fileContainer.style.justifyContent = 'center';
+                    fileContainer.style.alignItems = 'center';
+        
+                    const removeButton = document.createElement('button');
+                    removeButton.textContent = '×';
+                    removeButton.style.position = 'absolute';
+                    removeButton.style.top = '5px';
+                    removeButton.style.right = '5px';
+                    removeButton.style.backgroundColor = '#ff4394';
+                    removeButton.style.color = '#fff';
+                    removeButton.style.border = 'none';
+                    removeButton.style.borderRadius = '50%';
+                    removeButton.style.width = '24px';
+                    removeButton.style.height = '24px';
+                    removeButton.style.cursor = 'pointer';
+                    removeButton.style.fontSize = '14px';
+        
+                    removeButton.addEventListener('click', () => {
+                        fileContainer.remove();
+                        if (!filePreview.innerHTML) {
+                            filePreview.innerHTML = '<p style="font-size: 14px; color: #666;">Nenhum arquivo anexado.</p>';
+                        }
+                    });
+        
+                    if (file.type.startsWith('image/')) {
+                        const img = document.createElement('img');
+                        img.src = URL.createObjectURL(file);
+                        img.style.maxWidth = '100%';
+                        img.style.maxHeight = '100%';
+                        img.style.objectFit = 'cover';
+                        fileContainer.appendChild(img);
+                    } else {
+                        const fileName = document.createElement('span');
+                        fileName.textContent = file.name;
+                        fileName.style.fontSize = '12px';
+                        fileName.style.color = '#333';
+                        fileName.style.textAlign = 'center';
+                        fileContainer.appendChild(fileName);
+                    }
+        
+                    fileContainer.appendChild(removeButton);
+                    filePreview.appendChild(fileContainer);
+                });
+        
+                if (!filePreview.innerHTML) {
+                    filePreview.innerHTML = '<p style="font-size: 14px; color: #666;">Nenhum arquivo anexado.</p>';
+                }
+            }
+        </script>
+        
+        
 
         <div id="manual_marca" class="content-section">
-            <h1>Manual da Marca</h1>
-            <textarea name="manual" placeholder="Manual da Marca"></textarea>
-            <div class="buttons">
-                <button type="button" id="generate">Gerar</button>
+            <h1 style="font-size: 28px; color: #ff4394;">Manual da Marca</h1>
+            <p style="color: #666; font-size: 14px; margin-bottom: 20px;">Faça o upload do manual da marca e outros documentos que representem as diretrizes da identidade visual.</p>
+            
+            <!-- Área de upload -->
+            <div id="upload-area-manual" style="border: 2px dashed #ff4394; padding: 20px; border-radius: 10px; text-align: center; margin-bottom: 20px;">
+                <p style="font-size: 16px; color: #ff4394; margin-bottom: 10px;">Arraste e solte arquivos aqui ou clique para selecionar</p>
+                <input type="file" id="file-input-manual" multiple accept=".pdf, .doc, .docx, .ppt, .pptx" style="display: none;">
+                <button type="button" id="browse-files-manual" style="background-color: #ff4394; color: #fff; padding: 10px 20px; border: none; border-radius: 8px; font-size: 14px; cursor: pointer;">Selecionar Arquivos</button>
             </div>
+        
+            <!-- Galeria de visualização -->
+            <div id="file-preview-manual" style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center;">
+                <p style="font-size: 14px; color: #666;">Nenhum arquivo anexado.</p>
+            </div>
+        
+            <!-- Botões de navegação -->
+            <div class="buttons" style="margin-top: 20px;">
+                <button type="button" class="back-btn" data-previous="elementos_identidade_visual" style="background-color: #fff; color: #ff4394; border: 2px solid #ff4394; border-radius: 8px; padding: 10px 20px; margin-right: 10px; cursor: pointer;">Voltar</button>
+                <button type="button" class="save-btn" data-next="finalizar" style="background-color: #ff4394; color: #fff; border: none; border-radius: 8px; padding: 10px 20px; cursor: pointer;">Finalizar</button>
+            </div>
+        </div>
+        
+        <script>
+            const fileInputManual = document.getElementById('file-input-manual');
+            const browseFilesButtonManual = document.getElementById('browse-files-manual');
+            const uploadAreaManual = document.getElementById('upload-area-manual');
+            const filePreviewManual = document.getElementById('file-preview-manual');
+        
+            // Clique no botão "Selecionar Arquivos"
+            browseFilesButtonManual.addEventListener('click', () => {
+                fileInputManual.click();
+            });
+        
+            // Detectar mudança no input de arquivos
+            fileInputManual.addEventListener('change', (e) => {
+                handleFilesManual(e.target.files);
+            });
+        
+            // Arrastar e soltar arquivos
+            uploadAreaManual.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadAreaManual.style.borderColor = '#c04dcc';
+            });
+        
+            uploadAreaManual.addEventListener('dragleave', () => {
+                uploadAreaManual.style.borderColor = '#ff4394';
+            });
+        
+            uploadAreaManual.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadAreaManual.style.borderColor = '#ff4394';
+                handleFilesManual(e.dataTransfer.files);
+            });
+        
+            function handleFilesManual(files) {
+                filePreviewManual.innerHTML = ''; // Limpa os arquivos anteriores
+        
+                Array.from(files).forEach(file => {
+                    const fileContainer = document.createElement('div');
+                    fileContainer.style.position = 'relative';
+                    fileContainer.style.width = '150px';
+                    fileContainer.style.height = '100px';
+                    fileContainer.style.border = '1px solid #ddd';
+                    fileContainer.style.borderRadius = '10px';
+                    fileContainer.style.overflow = 'hidden';
+                    fileContainer.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
+                    fileContainer.style.display = 'flex';
+                    fileContainer.style.justifyContent = 'center';
+                    fileContainer.style.alignItems = 'center';
+                    fileContainer.style.flexDirection = 'column';
+                    fileContainer.style.padding = '10px';
+        
+                    const removeButton = document.createElement('button');
+                    removeButton.textContent = '×';
+                    removeButton.style.position = 'absolute';
+                    removeButton.style.top = '5px';
+                    removeButton.style.right = '5px';
+                    removeButton.style.backgroundColor = '#ff4394';
+                    removeButton.style.color = '#fff';
+                    removeButton.style.border = 'none';
+                    removeButton.style.borderRadius = '50%';
+                    removeButton.style.width = '24px';
+                    removeButton.style.height = '24px';
+                    removeButton.style.cursor = 'pointer';
+                    removeButton.style.fontSize = '14px';
+        
+                    removeButton.addEventListener('click', () => {
+                        fileContainer.remove();
+                        if (!filePreviewManual.innerHTML) {
+                            filePreviewManual.innerHTML = '<p style="font-size: 14px; color: #666;">Nenhum arquivo anexado.</p>';
+                        }
+                    });
+        
+                    const fileTypeIcon = document.createElement('div');
+                    const fileName = document.createElement('span');
+        
+                    if (file.type === "application/pdf") {
+                        fileTypeIcon.innerHTML = `<img src="https://img.icons8.com/fluency/48/pdf.png" alt="PDF" style="max-width: 40px;">`;
+                    } else if (file.type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document" || file.type === "application/msword") {
+                        fileTypeIcon.innerHTML = `<img src="https://img.icons8.com/fluency/48/word.png" alt="Word" style="max-width: 40px;">`;
+                    } else if (file.type === "application/vnd.openxmlformats-officedocument.presentationml.presentation" || file.type === "application/vnd.ms-powerpoint") {
+                        fileTypeIcon.innerHTML = `<img src="https://img.icons8.com/fluency/48/powerpoint.png" alt="PowerPoint" style="max-width: 40px;">`;
+                    } else {
+                        fileTypeIcon.innerHTML = `<img src="https://img.icons8.com/fluency/48/file.png" alt="File" style="max-width: 40px;">`;
+                    }
+        
+                    fileName.textContent = file.name;
+                    fileName.style.fontSize = '12px';
+                    fileName.style.color = '#333';
+                    fileName.style.textAlign = 'center';
+                    fileName.style.marginTop = '10px';
+        
+                    fileContainer.appendChild(fileTypeIcon);
+                    fileContainer.appendChild(fileName);
+                    fileContainer.appendChild(removeButton);
+                    filePreviewManual.appendChild(fileContainer);
+                });
+        
+                if (!filePreviewManual.innerHTML) {
+                    filePreviewManual.innerHTML = '<p style="font-size: 14px; color: #666;">Nenhum arquivo anexado.</p>';
+                }
+            }
+        </script>
+        
         </div>
     </form>
 </div>

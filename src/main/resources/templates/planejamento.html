@@ -1,1233 +1,2298 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Formulário de Planejamento</title>
     <style>
-        * {
+      /* CSS GERAL */
+      * {
         margin: 0;
         border: 0;
         /* font-family: "Outfit", sans-serif; */
         /* font-family: "Syne", sans-serif; */
       }
-/* Estilos gerais */
-body {
-    display: flex;
-    font-family: "Outfit", sans-serif;
-    margin: 0;
-    background-color: #f3f3f3;
-    height: 100vh; /* Altura total da viewport */
-    overflow: hidden; /* Impede scroll na janela principal */
-}
 
-/* Barra lateral */
-.sidebar {
-    width: 250px;
-    background-color: #222;
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    padding-top: 20px;
-    padding-left: 20px;
-    height: 100vh; /* Ocupa toda a altura da viewport */
-    position: fixed; /* Fixa a barra lateral na posição */
-    top: 0;
-    left: 0;
-    overflow-y: auto; /* Adiciona rolagem apenas na barra lateral */
-    z-index: 1000; /* Mantém a barra lateral acima do conteúdo */
-}
+      body {
+        /* display: flex; */
+        font-family: "Outfit", sans-serif;
+        height: 100vh;
+        width: 100%;
+        margin: 0;
+        background-color: #e5e3e5;
+        /* overflow: hidden; */
+      }
 
-/* .sidebar a {
-    padding: 15px 20px;
-    text-decoration: none;
-    color: #fff;
-    display: block;
-    cursor: pointer;
-} */
+      .content-body {
+        display: flex;
+        height: 100%;
+      }
 
-/* .sidebar a.active, 
-.sidebar a:hover {
-    background-color: #E839A2;
-    color: #fff;
-} */
+      #formData {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
 
-/* Conteúdo principal */
-.content {
-    margin-left: 250px; /* Desloca o conteúdo principal para o lado da barra lateral */
-    padding: 20px;
-    background-color: #e9e9e9;
-    width: calc(100% - 250px); /* Ajusta a largura considerando a barra lateral */
-    height: 100vh; /* Ocupa toda a altura da viewport */
-    overflow-y: auto; /* Permite rolagem no conteúdo principal */
-    box-sizing: border-box; /* Inclui padding e borda no cálculo da largura/altura */
-    text-align: center; /* Centraliza o texto dentro do conteúdo */
-}
+      /* MENU LATERAL */
 
-.content h1 {
-    font-size: 36px;
-    color: #E839A2;
-}
+      .sidebar {
+        width: 17%;
+        background-color: #1e1e1e;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        padding-top: 20px;
+        padding-left: 20px;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        overflow-y: auto;
+        z-index: 1000;
+      }
 
-/* Seções do conteúdo */
-.content-section {
-    max-width: 800px;
-    margin: auto;
-    padding-bottom: 50px; /* Espaço extra para os botões no final */
-    display: none; /* Oculta as seções por padrão */
-}
+      /* CONTEÚDO */
 
-.content-section.active {
-    display: block; /* Exibe apenas a seção ativa */
-}
+      .content {
+        width: 83%;
+        /* margin-left: 250px; */
+        /* padding: 20px; */
+        background-color: #e5e3e5;
+        height: 100vh;
+        /* overflow-y: auto; */
+        box-sizing: border-box;
+        text-align: center;
+        margin-left: calc(100% - 83%);
+      }
 
-/* Estilo dos campos de formulário */
-.form-group {
-    margin: 15px 0;
-}
+      .content-section {
+        /* max-width: 800px; */
+        margin: auto;
+        /* padding-bottom: 50px; */
+        display: none;
+      }
 
-.form-group input,
-.form-group textarea {
-    padding: 10px;
-    width: 300px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
+      .content-section.active {
+        display: block;
+      }
 
-/* Estilo dos botões */
-.buttons {
-    margin-top: 20px;
-}
+      /* TIMELINE */
 
-.buttons button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    background-color: #E839A2;
-    color: #fff;
-}
+      .timeline {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
 
-/* Botão voltar */
-.buttons button.back-btn {
-    background-color: #fff;
-    color: #E839A2;
-    border: 2px solid #E839A2;
-    margin-right: 10px;
-}
+      .timeline .timeline-marker {
+        position: relative;
+        width: 20px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+      }
 
-/* Estilo adicional para hover em botões */
-.buttons button:hover {
-    opacity: 0.9;
+      .timeline .timeline-marker .line {
+        width: 1px;
+        background-color: #fff;
+      }
 
-}
+      .timeline .timeline-marker .ball {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 12px;
+        height: 12px;
+        background-color: #1e1e1e;
+        border: 1px solid white;
+        border-radius: 50%;
+        z-index: 1;
+      }
 
-/* TIMELINE */
+      .active .timeline-marker .ball {
+        background-color: white;
+      }
 
-.timeline {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    /* padding-left: 10px; */
-}
+      .timeline a {
+        text-decoration: none;
+        color: #fff;
+        font-size: 0.85rem;
+      }
 
-.timeline .timeline-marker {
-    position: relative;
-  width: 20px; /* Largura total do contêiner */
-  height: 50px; /* Altura do contêiner */
-  display: flex;
-  justify-content: center; /* Centraliza a linha horizontalmente */
-}
+      .topico {
+        font-size: 0.85rem;
+        background: #e839a2;
+        padding: 5px 15px;
+        border-radius: 5px 5px 5px 0px;
+      }
 
-.timeline .timeline-marker .line {
-    
-  width: 1px; /* Largura da linha */
-  /* height: 100px;  Altura da linha */
-  background-color: #fff; /* Cor da linha */
-}
+      /* PÁGINA NOVO PLANEJAMENTO */
 
-.timeline .timeline-marker .ball {
-    
-    position: absolute;
-  top: 50%; /* Posiciona no centro vertical */
-  left: 50%; /* Centraliza horizontalmente em relação ao contêiner */
-  transform: translate(-50%, -50%); /* Ajusta o centro da bolinha */
-  width: 12px; /* Diâmetro da bolinha */
-  height: 12px; /* Diâmetro da bolinha */
-  background-color: #1E1E1E; /* Cor de fundo da bolinha */
-  border: 1px solid white; /* Borda da bolinha */
-  border-radius: 50%; /* Torna a bolinha circular */
-  z-index: 1; /* Garante que a bolinha fique acima da linha */
-}
+      #planejamento {
+        width: 100%;
+        height: 100%;
+        /* overflow: hidden; */
+      }
 
-.active .timeline-marker .ball {
-  background-color: white; /* Fundo branco quando ativo */
-}
+      .novo-planejamento {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
 
-.timeline a {
-    text-decoration: none;
-    color: #fff;
-    font-size: 0.85rem;
-}
+      .navbar {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        padding: 20px 0px;
+      }
 
-.topico {
-    font-size: 0.85rem;
-    background: #E839A2;
-    padding: 5px 15px;
-    border-radius: 5px 5px 5px 0px;
-}
+      .navbar .sair-button {
+        text-decoration: none;
+        color: #232123;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        padding: 10px 20px;
+        margin-right: 20px;
+        border-radius: 10px;
 
+        position: fixed;
+        right: 0;
+        top: 15px;
+      }
+
+      .navbar .sair-button:hover {
+        background: #1e1e1e0b;
+      }
+
+      .navbar .sair-button img {
+        width: 20px;
+      }
+
+      .content-planejamento {
+        /* padding: 30px 0px; */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 50%;
+      }
+
+      .content-planejamento .icon {
+        /* width: 110px;
+        height: 110px; */
+        background: #c352ff25;
+        border-radius: 100px;
+        /* display: flex;
+        justify-content: center;
+        align-items: center; */
+      }
+
+      .content-planejamento .icon img {
+        /* background: #C352FF25; */
+        padding: 25px;
+        width: 60px;
+      }
+
+      .content-planejamento .forms {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .content-planejamento .forms h1 {
+        font-family: "Syne", sans-serif;
+        color: #e839a2;
+        font-size: 2.3rem;
+        margin-top: 2.5rem;
+      }
+
+      .content-planejamento .forms p {
+        width: 80%;
+        color: #1e1e1e;
+        font-size: 1.2rem;
+        margin-top: 0.6rem;
+        font-weight: 300;
+      }
+
+      .content-planejamento .form-group {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+
+        margin-top: 3.5rem;
+        width: 100%;
+      }
+
+      .form-group input {
+        width: 70%;
+        font-family: "Outfit", sans-serif;
+        background: #ffffff50;
+        border: 1.55px solid #9b9b9b50;
+        color: #232123;
+        padding: 10px 15px;
+        border-radius: 7px;
+        font-size: 0.9rem;
+      }
+
+      .form-group textarea {
+        resize: none;
+        width: 70%;
+        font-family: "Outfit", sans-serif;
+        background: #ffffff50;
+        border: 1.55px solid #9b9b9b50;
+        color: #232123;
+        padding: 10px 15px;
+        border-radius: 7px;
+        font-size: 0.9rem;
+      }
+
+      .buttons-form {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+      }
+
+      .buttons-form .save-btn {
+        padding: 10px 20px;
+        margin-top: 2rem;
+        font-family: "Outfit", sans-serif;
+        font-size: 0.9rem;
+        font-weight: 500;
+        background-color: #e839a2;
+        border: solid 2px #e839a2;
+        color: #fff;
+        border-radius: 7px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      .buttons-form .save-btn:hover {
+        background-color: #d92a93;
+        border: solid 2px #d92a93;
+      }
+      
+      /* PÁGINA INFORMAÇÕES DO CLIENTE */
+      
+      #informacoes_cliente {
+          width: 100%;
+          height: 100%;
+          /* overflow: hidden; */
+        }
+        
+        .informacoes-cliente {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .buttons-form .back-btn {
+          padding: 10px 20px;
+          margin-top: 2rem;
+          font-family: "Outfit", sans-serif;
+          font-size: 0.9rem;
+          font-weight: 500;
+          background-color: #E5E3E5;
+          color: #d92a93;
+          border: solid 2px #d92a93;
+          border-radius: 7px;
+          cursor: pointer;
+          transition: 0.3s;
+        }
+  
+        .buttons-form .back-btn:hover {
+          background-color: #d92a93;
+          color: #fff;
+        }
 
     </style>
-</head>
-<body>
-
-<div class="sidebar">
-    <!-- <a href="#planejamento" class="active" data-section="planejamento">Novo planejamento</a> -->
-    <div class="timeline active" >
-        <div class="timeline-marker">
+  </head>
+  <body>
+    <div class="content-body">
+      <!-- MENU LATERAL -->
+      <div class="sidebar">
+        <!-- <a href="#planejamento" class="active" data-section="planejamento">Novo planejamento</a> -->
+        <div class="timeline active">
+          <div class="timeline-marker">
             <div class="line"></div>
             <div class="ball"></div>
+          </div>
+          <a href="#planejamento" data-section="planejamento"
+            >Novo planejamento</a
+          >
         </div>
-        <a href="#planejamento"  data-section="planejamento">Novo planejamento</a>
-      </div>
 
-    <div class="timeline" >
-        <div class="timeline-marker">
+        <div class="timeline">
+          <div class="timeline-marker">
             <div class="line"></div>
             <div class="ball"></div>
+          </div>
+          <a href="#informacoes_cliente" data-section="informacoes_cliente"
+            >Informações do cliente</a
+          >
         </div>
-        <a href="#informacoes_cliente" data-section="informacoes_cliente">Informações do cliente</a>
-      </div>
 
-    <div class="timeline" >
-        <div class="timeline-marker">
+        <div class="timeline">
+          <div class="timeline-marker">
             <div class="line"></div>
             <!-- <div class="ball"></div> -->
+          </div>
+          <span class="topico">Redes sociais</span>
+          <!-- <a href="#redes_sociais" class="topico" data-section="redes_sociais">Redes sociais</a> -->
         </div>
-        <span class="topico">Redes sociais</span>
-        <!-- <a href="#redes_sociais" class="topico" data-section="redes_sociais">Redes sociais</a> -->
-      </div>
 
-    <div class="timeline" >
-        <div class="timeline-marker">
+        <div class="timeline">
+          <div class="timeline-marker">
             <div class="line"></div>
             <div class="ball"></div>
+          </div>
+          <a href="#selecionar_canais" data-section="selecionar_canais"
+            >Selecionar canais</a
+          >
         </div>
-        <a href="#selecionar_canais" data-section="selecionar_canais">Selecionar canais</a>
-      </div>
 
-    <div class="timeline" >
-        <div class="timeline-marker">
+        <div class="timeline">
+          <div class="timeline-marker">
             <div class="line"></div>
             <div class="ball"></div>
+          </div>
+          <a href="#informacoes_canais" data-section="informacoes_canais"
+            >Informações dos canais</a
+          >
         </div>
-        <a href="#informacoes_canais" data-section="informacoes_canais">Informações dos canais</a>
-      </div>
 
-    <div class="timeline" >
-        <div class="timeline-marker">
+        <div class="timeline">
+          <div class="timeline-marker">
             <div class="line"></div>
             <!-- <div class="ball"></div> -->
+          </div>
+          <span class="topico">Campanhas</span>
+          <!-- <a href="#campanhas" data-section="campanhas">Campanhas</a> -->
         </div>
-        <span class="topico">Campanhas</span>
-        <!-- <a href="#campanhas" data-section="campanhas">Campanhas</a> -->
-      </div>
 
-    <div class="timeline" >
-        <div class="timeline-marker">
+        <div class="timeline">
+          <div class="timeline-marker">
             <div class="line"></div>
             <div class="ball"></div>
+          </div>
+          <a
+            href="#referencias_concorrentes"
+            data-section="referencias_concorrentes"
+            >Referências e concorrentes</a
+          >
         </div>
-        <a href="#referencias_concorrentes" data-section="referencias_concorrentes">Referências e concorrentes</a>
-      </div>
 
-    <div class="timeline" >
-        <div class="timeline-marker">
+        <div class="timeline">
+          <div class="timeline-marker">
             <div class="line"></div>
             <div class="ball"></div>
+          </div>
+          <a href="#objetivos_projeto" data-section="objetivos_projeto"
+            >Objetivos do projeto</a
+          >
         </div>
-        <a href="#objetivos_projeto" data-section="objetivos_projeto">Objetivos do projeto</a>
-      </div>
 
-      <div class="timeline" >
-        <div class="timeline-marker">
+        <div class="timeline">
+          <div class="timeline-marker">
             <div class="line"></div>
             <!-- <div class="ball"></div> -->
+          </div>
+          <span class="topico">Personas</span>
+          <!-- <a href="#personas" data-section="personas">Personas</a> -->
         </div>
-        <span class="topico">Personas</span>
-        <!-- <a href="#personas" data-section="personas">Personas</a> -->
-      </div>
 
-    <div class="timeline" >
-        <div class="timeline-marker">
+        <div class="timeline">
+          <div class="timeline-marker">
             <div class="line"></div>
             <div class="ball"></div>
+          </div>
+          <a href="#descricao" data-section="descricao">Descrição</a>
         </div>
-        <a href="#descricao" data-section="descricao">Descrição</a>
-      </div>
 
-      <div class="timeline" >
-        <div class="timeline-marker">
+        <div class="timeline">
+          <div class="timeline-marker">
             <div class="line"></div>
             <!-- <div class="ball"></div> -->
+          </div>
+          <span class="topico">Identidade visual</span>
+          <!-- <a href="#identidade_visual" data-section="identidade_visual">Identidade visual</a> -->
         </div>
-        <span class="topico">Identidade visual</span>
-        <!-- <a href="#identidade_visual" data-section="identidade_visual">Identidade visual</a> -->
-      </div>
 
-    <div class="timeline" >
-        <div class="timeline-marker">
+        <div class="timeline">
+          <div class="timeline-marker">
             <div class="line"></div>
             <div class="ball"></div>
+          </div>
+          <a href="#elementos" data-section="elementos">Elementos</a>
         </div>
-        <a href="#elementos" data-section="elementos">Elementos</a>
-      </div>
-    
 
-    <div class="timeline" >
-        <div class="timeline-marker">
+        <div class="timeline">
+          <div class="timeline-marker">
             <div class="line"></div>
             <div class="ball"></div>
+          </div>
+          <a href="#manual_marca" data-section="manual_marca"
+            >Manual da marca</a
+          >
         </div>
-        <a href="#manual_marca" data-section="manual_marca">Manual da marca</a>
+
+        <!-- <a href="#informacoes_cliente" data-section="informacoes_cliente">Informações do cliente</a>
+            <a href="#redes_sociais" data-section="redes_sociais">Redes sociais</a>
+            <a href="#selecionar_canais" data-section="selecionar_canais">Selecionar canais</a>
+            <a href="#informacoes_canais" data-section="informacoes_canais">Informações dos canais</a>
+            <a href="#campanhas" data-section="campanhas">Campanhas</a>
+            <a href="#referencias_concorrentes" data-section="referencias_concorrentes">Referências e concorrentes</a>
+            <a href="#objetivos_projeto" data-section="objetivos_projeto">Objetivos do projeto</a>
+            <a href="#personas" data-section="personas">Personas</a>
+            <a href="#descricao" data-section="descricao">Descrição</a>
+            <a href="#identidade_visual" data-section="identidade_visual">Identidade visual</a>
+            <a href="#elementos" data-section="elementos">Elementos</a>
+            <a href="#manual_marca" data-section="manual_marca">Manual da marca</a> -->
       </div>
-    
-    <!-- <a href="#informacoes_cliente" data-section="informacoes_cliente">Informações do cliente</a>
-    <a href="#redes_sociais" data-section="redes_sociais">Redes sociais</a>
-    <a href="#selecionar_canais" data-section="selecionar_canais">Selecionar canais</a>
-    <a href="#informacoes_canais" data-section="informacoes_canais">Informações dos canais</a>
-    <a href="#campanhas" data-section="campanhas">Campanhas</a>
-    <a href="#referencias_concorrentes" data-section="referencias_concorrentes">Referências e concorrentes</a>
-    <a href="#objetivos_projeto" data-section="objetivos_projeto">Objetivos do projeto</a>
-    <a href="#personas" data-section="personas">Personas</a>
-    <a href="#descricao" data-section="descricao">Descrição</a>
-    <a href="#identidade_visual" data-section="identidade_visual">Identidade visual</a>
-    <a href="#elementos" data-section="elementos">Elementos</a>
-    <a href="#manual_marca" data-section="manual_marca">Manual da marca</a> -->
-</div>
 
-<div class="content">
-    <!-- Formulário principal -->
-    <form id="formData">
-        <div id="planejamento" class="content-section active">
-            <div class="icon">
-                <img src="https://img.icons8.com/external-flat-juicy-fish/60/external-planning-business-flat-flat-juicy-fish.png" alt="Ícone de planejamento">
-            </div>
-            <h1>Novo Planejamento</h1>
-            <p>Adicione um título e uma descrição para iniciar o planejamento do seu projeto.</p>
-            <div class="form-group">
-                <input type="text" name="planejamento" placeholder="Título do Planejamento">
-                <input type="text" name="descricao" placeholder="Descrição (opcional)">
-                
-        <input type="url" id="imagem_link" name="imagem_link" placeholder="Link da Imagem para capa">
-            </div>
-            <div class="buttons">
-                <button type="button" class="save-btn" data-next="informacoes_cliente">Salvar</button>
-            </div>
-        </div>
+      <div class="content">
+        <!-- FORMULÁRIO GERAL -->
+        <form id="formData">
+          <!-- PÁGINA NOVO PLANEJAMENTO -->
+          <div id="planejamento" class="content-section active">
+            <section class="novo-planejamento">
+              <div class="navbar">
+                <a class="sair-button" href="#">
+                  <p>Sair</p>
+                  <img src="https://i.ibb.co/dMBfkB8/arrow-right-alt.png" />
+                </a>
+              </div>
 
-        <div id="informacoes_cliente" class="content-section">
-            <div class="icon">
-                <img src="https://img.icons8.com/fluency/96/user-male-circle.png" alt="Ícone Cliente">
-            </div>
-            <h1 style="font-size: 28px; color: #E839A2;">Informações do cliente</h1>
-            <p style="color: #666; font-size: 14px; margin-bottom: 20px;">Preencha os dados básicos sobre o cliente para estruturar o planejamento.</p>
-            
+              <div class="content-planejamento">
+                <div class="icon">
+                  <img src="https://i.ibb.co/7jnwbYw/assignment-add.png" />
+                </div>
+
+                <div class="forms">
+                  <h1>Novo planejamento</h1>
+                  <p>
+                    Adicione um título e uma descrição para iniciar o
+                    planejamento do seu projeto.
+                  </p>
+
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      name="planejamento"
+                      placeholder="Título do planejamento"
+                    />
+
+                    <textarea
+                      type="text"
+                      name="descricao"
+                      placeholder="Descrição (opcional)"
+                      rows="4"
+                    ></textarea>
+
+                    <!-- <input
+                            type="text"
+                            name="descricao"
+                            placeholder="Descrição (opcional)"
+                            /> -->
+
+                    <input
+                      type="url"
+                      id="imagem_link"
+                      name="imagem_link"
+                      placeholder="Link da Imagem para capa"
+                    />
+                  </div>
+
+                  <div class="buttons-form">
+                    <button
+                      type="button"
+                      class="save-btn"
+                      data-next="informacoes_cliente"
+                    >
+                      Salvar
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <!-- PÁGINA INFORMAÇÕES DO CLIENTE -->
+          <div id="informacoes_cliente" class="content-section">
+            <section class="informacoes-cliente">
+               <div class="navbar">
+                <a class="sair-button" href="#">
+                  <p>Sair</p>
+                  <img src="https://i.ibb.co/dMBfkB8/arrow-right-alt.png" />
+                </a>
+              </div>
+
+              <div class="content-planejamento">
+                <div class="icon">
+                  <img src="https://i.ibb.co/WkM5b53/person.png" />
+                </div>
+
+                <div class="forms">
+                  <h1>Informações do cliente</h1>
+                  <p>
+                    Preencha os dados básicos sobre o cliente para estruturar o
+                    planejamento.
+                  </p>
+
+                  
+                  <div class="form-group">
+                    <!-- <label>Cliente</label> -->
+                    <input
+                      type="text"
+                      name="cliente_nome"
+                      placeholder="Nome do cliente"
+                    />
+
+                    <input
+                  type="text"
+                  name="cliente_setor"
+                  placeholder="Setor de atuação"
+                />
+
+                <textarea
+                name="cliente_descricao"
+                placeholder="Descrição"
+                rows="4"
+              ></textarea>
+
+                  <div class="buttons-form">
+                    <button
+                type="button"
+                class="back-btn"
+                data-previous="planejamento"
+              >
+                Voltar
+              </button>
+
+              <button
+                type="button"
+                class="save-btn"
+                data-next="selecionar_canais"
+              >
+                Próximo
+              </button>
+                  </div>
+                </div>
+              </div>
+            </section>
+
             <!-- Formulário estilizado -->
-            <div style="max-width: 400px; margin: 0 auto; text-align: left;">
-                <label style="font-weight: bold; font-size: 16px; color: #E839A2; display: block; margin-bottom: 10px;">Cliente</label>
-                
-                <div style="margin-bottom: 15px;">
-                    <input type="text" name="cliente_nome" placeholder="Nome do cliente" 
-                           style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; background-color: #f9f9f9;">
-                </div>
-                <div style="margin-bottom: 15px;">
-                    <input type="text" name="cliente_setor" placeholder="Setor de atuação" 
-                           style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; background-color: #f9f9f9;">
-                </div>
-                <div style="margin-bottom: 15px;">
-                    <textarea name="cliente_descricao" placeholder="Descrição" 
-                              style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; background-color: #f9f9f9; resize: none;" rows="4"></textarea>
-                </div>
-            </div>
-        
-            <!-- Botões -->
-            <div class="buttons" style="margin-top: 20px;">
-                <button type="button" class="back-btn" data-previous="planejamento" 
-                        style="background-color: #fff; color: #E839A2; border: 2px solid #E839A2; border-radius: 8px; padding: 10px 20px; margin-right: 10px; cursor: pointer;">Voltar</button>
-                <button type="button" class="save-btn" data-next="selecionar_canais" 
-                        style="background-color: #E839A2; color: #fff; border: none; border-radius: 8px; padding: 10px 20px; cursor: pointer;">Próximo</button>
-            </div>
-        </div>
-        
+            <!-- <div style="max-width: 400px; margin: 0 auto; text-align: left">
+              <div style="margin-bottom: 15px">
+                <input
+                  type="text"
+                  name="cliente_nome"
+                  placeholder="Nome do cliente"
+                  style="
+                    width: 100%;
+                    padding: 12px;
+                    border: 1px solid #ddd;
+                    border-radius: 8px;
+                    font-size: 14px;
+                    background-color: #f9f9f9;
+                  "
+                />
+              </div>
+              <div style="margin-bottom: 15px">
+                <input
+                  type="text"
+                  name="cliente_setor"
+                  placeholder="Setor de atuação"
+                  style="
+                    width: 100%;
+                    padding: 12px;
+                    border: 1px solid #ddd;
+                    border-radius: 8px;
+                    font-size: 14px;
+                    background-color: #f9f9f9;
+                  "
+                />
+              </div>
+              <div style="margin-bottom: 15px">
+                <textarea
+                  name="cliente_descricao"
+                  placeholder="Descrição"
+                  style="
+                    width: 100%;
+                    padding: 12px;
+                    border: 1px solid #ddd;
+                    border-radius: 8px;
+                    font-size: 14px;
+                    background-color: #f9f9f9;
+                    resize: none;
+                  "
+                  rows="4"
+                ></textarea>
+              </div>
+            </div> -->
 
-        <!-- <div id="redes_sociais" class="content-section"></div> -->
-            
-        <div id="selecionar_canais" class="content-section">
-            <div class="icon" style="margin-bottom: 20px;">
-                <img src="https://img.icons8.com/fluency/96/social-network.png" alt="Ícone Selecionar Canais">
+            <!-- BOTÕES -->
+            <!-- <div class="buttons" style="margin-top: 20px">
+              <button
+                type="button"
+                class="back-btn"
+                data-previous="planejamento"
+                style="
+                  background-color: #fff;
+                  color: #e839a2;
+                  border: 2px solid #e839a2;
+                  border-radius: 8px;
+                  padding: 10px 20px;
+                  margin-right: 10px;
+                  cursor: pointer;
+                "
+              >
+                Voltar
+              </button>
+              <button
+                type="button"
+                class="save-btn"
+                data-next="selecionar_canais"
+                style="
+                  background-color: #e839a2;
+                  color: #fff;
+                  border: none;
+                  border-radius: 8px;
+                  padding: 10px 20px;
+                  cursor: pointer;
+                "
+              >
+                Próximo
+              </button>
+            </div> -->
+          </div>
+
+          <!-- PÁGINA SELECIONAR CANAIS -->
+          <div id="selecionar_canais" class="content-section">
+            <div class="icon" style="margin-bottom: 20px">
+              <img
+                src="https://img.icons8.com/fluency/96/social-network.png"
+                alt="Ícone Selecionar Canais"
+              />
             </div>
-            <h1 style="font-size: 28px; color: #E839A2;">Selecionar canais</h1>
-            <p style="color: #666; font-size: 14px; margin-bottom: 20px;">Selecione os canais que você vai planejar!</p>
-        
+            <h1 style="font-size: 28px; color: #e839a2">Selecionar canais</h1>
+            <p style="color: #666; font-size: 14px; margin-bottom: 20px">
+              Selecione os canais que você vai planejar!
+            </p>
+
             <!-- Redes sociais como opções -->
-            <div style="display: flex; justify-content: center; gap: 15px; margin: 20px 0;">
-                <label style="text-align: center; cursor: pointer;">
-                    <input type="checkbox" name="canais" value="Instagram" style="display: none;">
-                    <div class="social-card" style="width: 100px; height: 100px; background: #fff; border: 1px solid #ddd; border-radius: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: transform 0.2s;">
-                        <img src="https://img.icons8.com/fluency/48/instagram-new.png" alt="Instagram" style="margin-bottom: 8px;">
-                        <span style="color: #333; font-size: 14px;">Instagram</span>
-                    </div>
-                </label>
-                <label style="text-align: center; cursor: pointer;">
-                    <input type="checkbox" name="canais" value="Facebook" style="display: none;">
-                    <div class="social-card" style="width: 100px; height: 100px; background: #fff; border: 1px solid #ddd; border-radius: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: transform 0.2s;">
-                        <img src="https://img.icons8.com/fluency/48/facebook-new.png" alt="Facebook" style="margin-bottom: 8px;">
-                        <span style="color: #333; font-size: 14px;">Facebook</span>
-                    </div>
-                </label>
-                <label style="text-align: center; cursor: pointer;">
-                    <input type="checkbox" name="canais" value="WhatsApp" style="display: none;">
-                    <div class="social-card" style="width: 100px; height: 100px; background: #fff; border: 1px solid #ddd; border-radius: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: transform 0.2s;">
-                        <img src="https://img.icons8.com/fluency/48/whatsapp.png" alt="WhatsApp" style="margin-bottom: 8px;">
-                        <span style="color: #333; font-size: 14px;">WhatsApp</span>
-                    </div>
-                </label>
+            <div
+              style="
+                display: flex;
+                justify-content: center;
+                gap: 15px;
+                margin: 20px 0;
+              "
+            >
+              <label style="text-align: center; cursor: pointer">
+                <input
+                  type="checkbox"
+                  name="canais"
+                  value="Instagram"
+                  style="display: none"
+                />
+                <div
+                  class="social-card"
+                  style="
+                    width: 100px;
+                    height: 100px;
+                    background: #fff;
+                    border: 1px solid #ddd;
+                    border-radius: 10px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                    transition: transform 0.2s;
+                  "
+                >
+                  <img
+                    src="https://img.icons8.com/fluency/48/instagram-new.png"
+                    alt="Instagram"
+                    style="margin-bottom: 8px"
+                  />
+                  <span style="color: #333; font-size: 14px">Instagram</span>
+                </div>
+              </label>
+              <label style="text-align: center; cursor: pointer">
+                <input
+                  type="checkbox"
+                  name="canais"
+                  value="Facebook"
+                  style="display: none"
+                />
+                <div
+                  class="social-card"
+                  style="
+                    width: 100px;
+                    height: 100px;
+                    background: #fff;
+                    border: 1px solid #ddd;
+                    border-radius: 10px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                    transition: transform 0.2s;
+                  "
+                >
+                  <img
+                    src="https://img.icons8.com/fluency/48/facebook-new.png"
+                    alt="Facebook"
+                    style="margin-bottom: 8px"
+                  />
+                  <span style="color: #333; font-size: 14px">Facebook</span>
+                </div>
+              </label>
+              <label style="text-align: center; cursor: pointer">
+                <input
+                  type="checkbox"
+                  name="canais"
+                  value="WhatsApp"
+                  style="display: none"
+                />
+                <div
+                  class="social-card"
+                  style="
+                    width: 100px;
+                    height: 100px;
+                    background: #fff;
+                    border: 1px solid #ddd;
+                    border-radius: 10px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                    transition: transform 0.2s;
+                  "
+                >
+                  <img
+                    src="https://img.icons8.com/fluency/48/whatsapp.png"
+                    alt="WhatsApp"
+                    style="margin-bottom: 8px"
+                  />
+                  <span style="color: #333; font-size: 14px">WhatsApp</span>
+                </div>
+              </label>
             </div>
-        
+
             <!-- Botões -->
-            <div class="buttons" style="margin-top: 20px;">
-                <button type="button" class="back-btn" data-previous="redes_sociais" 
-                        style="background-color: #fff; color: #E839A2; border: 2px solid #E839A2; border-radius: 8px; padding: 10px 20px; margin-right: 10px; cursor: pointer;">Voltar</button>
-                <button type="button" class="save-btn" data-next="informacoes_canais" 
-                        style="background-color: #E839A2; color: #fff; border: none; border-radius: 8px; padding: 10px 20px; cursor: pointer;">Próximo</button>
+            <div class="buttons" style="margin-top: 20px">
+              <button
+                type="button"
+                class="back-btn"
+                data-previous="informacoes_cliente"
+                style="
+                  background-color: #fff;
+                  color: #e839a2;
+                  border: 2px solid #e839a2;
+                  border-radius: 8px;
+                  padding: 10px 20px;
+                  margin-right: 10px;
+                  cursor: pointer;
+                "
+              >
+                Voltar
+              </button>
+              <button
+                type="button"
+                class="save-btn"
+                data-next="informacoes_canais"
+                style="
+                  background-color: #e839a2;
+                  color: #fff;
+                  border: none;
+                  border-radius: 8px;
+                  padding: 10px 20px;
+                  cursor: pointer;
+                "
+              >
+                Próximo
+              </button>
             </div>
-        </div>
-        
-        <script>
-            // Lógica para destacar o bloco selecionado e alternar seleção
-            const socialCards = document.querySelectorAll('.social-card');
-            socialCards.forEach(card => {
-                card.addEventListener('click', (event) => {
-                    const checkbox = card.parentElement.querySelector('input[type="checkbox"]');
-                    checkbox.checked = !checkbox.checked; // Alternar o estado do checkbox
-                    if (checkbox.checked) {
-                        card.style.borderColor = '#E839A2';
-                        card.style.transform = 'scale(1.05)';
-                        card.style.boxShadow = '0 4px 10px rgba(255, 67, 148, 0.4)';
-                    } else {
-                        card.style.borderColor = '#ddd';
-                        card.style.transform = 'scale(1)';
-                        card.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
-                    }
-                });
+          </div>
+
+          <script>
+            // DESTACAR BLOCO SELECIONADO E ALTERNAR SELEÇÃO
+            const socialCards = document.querySelectorAll(".social-card");
+            socialCards.forEach((card) => {
+              card.addEventListener("click", (event) => {
+                const checkbox = card.parentElement.querySelector(
+                  'input[type="checkbox"]'
+                );
+                checkbox.checked = !checkbox.checked; // Alternar o estado do checkbox
+                if (checkbox.checked) {
+                  card.style.borderColor = "#E839A2";
+                  card.style.transform = "scale(1.05)";
+                  card.style.boxShadow = "0 4px 10px rgba(255, 67, 148, 0.4)";
+                } else {
+                  card.style.borderColor = "#ddd";
+                  card.style.transform = "scale(1)";
+                  card.style.boxShadow = "0 4px 6px rgba(0, 0, 0, 0.1)";
+                }
+              });
             });
-        </script>
-        
-       
-        
-        
-        
-        <div id="informacoes_canais" class="content-section">
-            <div class="icon" style="margin-bottom: 20px;">
-                <img src="https://img.icons8.com/fluency/96/info.png" alt="Ícone Informações dos Canais">
+          </script>
+
+          <!-- PÁGINA INFORMAÇÕES DOS CANAIS -->
+          <div id="informacoes_canais" class="content-section">
+            <div class="icon" style="margin-bottom: 20px">
+              <img
+                src="https://img.icons8.com/fluency/96/info.png"
+                alt="Ícone Informações dos Canais"
+              />
             </div>
-            <h1 style="font-size: 28px; color: #E839A2;">Informações dos canais</h1>
-            <p style="color: #666; font-size: 14px; margin-bottom: 20px;">Preencha as informações para os canais selecionados!</p>
-        
-            <!-- Formulário para Instagram -->
-            <div style="margin-bottom: 30px;">
-                <h2 style="display: flex; align-items: center; font-size: 20px; color: #E839A2;">
-                    <img src="https://img.icons8.com/fluency/24/instagram-new.png" style="margin-right: 10px;"> Instagram
-                </h2>
-                <input type="text" name="instagram_seguidores" placeholder="Número de seguidores" 
-                       style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px;">
-                <input type="text" name="instagram_descricao" placeholder="Descrição" 
-                       style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px;">
-                <input type="url" name="instagram_link" placeholder="Link do perfil" 
-                       style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px;">
+            <h1 style="font-size: 28px; color: #e839a2">
+              Informações dos canais
+            </h1>
+            <p style="color: #666; font-size: 14px; margin-bottom: 20px">
+              Preencha as informações para os canais selecionados!
+            </p>
+
+            <!-- FORMS INSTAGRAM -->
+            <div style="margin-bottom: 30px">
+              <h2
+                style="
+                  display: flex;
+                  align-items: center;
+                  font-size: 20px;
+                  color: #e839a2;
+                "
+              >
+                <img
+                  src="https://img.icons8.com/fluency/24/instagram-new.png"
+                  style="margin-right: 10px"
+                />
+                Instagram
+              </h2>
+              <input
+                type="text"
+                name="instagram_seguidores"
+                placeholder="Número de seguidores"
+                style="
+                  width: 100%;
+                  padding: 10px;
+                  margin: 10px 0;
+                  border: 1px solid #ddd;
+                  border-radius: 5px;
+                "
+              />
+              <input
+                type="text"
+                name="instagram_descricao"
+                placeholder="Descrição"
+                style="
+                  width: 100%;
+                  padding: 10px;
+                  margin: 10px 0;
+                  border: 1px solid #ddd;
+                  border-radius: 5px;
+                "
+              />
+              <input
+                type="url"
+                name="instagram_link"
+                placeholder="Link do perfil"
+                style="
+                  width: 100%;
+                  padding: 10px;
+                  margin: 10px 0;
+                  border: 1px solid #ddd;
+                  border-radius: 5px;
+                "
+              />
             </div>
-        
-            <!-- Formulário para Facebook -->
-            <div style="margin-bottom: 30px;">
-                <h2 style="display: flex; align-items: center; font-size: 20px; color: #E839A2;">
-                    <img src="https://img.icons8.com/fluency/24/facebook-new.png" style="margin-right: 10px;"> Facebook
-                </h2>
-                <input type="text" name="facebook_seguidores" placeholder="Número de seguidores" 
-                       style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px;">
-                <input type="text" name="facebook_descricao" placeholder="Descrição" 
-                       style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px;">
-                <input type="url" name="facebook_link" placeholder="Link do perfil" 
-                       style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px;">
+
+            <!-- FORMS FACEBOOK -->
+            <div style="margin-bottom: 30px">
+              <h2
+                style="
+                  display: flex;
+                  align-items: center;
+                  font-size: 20px;
+                  color: #e839a2;
+                "
+              >
+                <img
+                  src="https://img.icons8.com/fluency/24/facebook-new.png"
+                  style="margin-right: 10px"
+                />
+                Facebook
+              </h2>
+              <input
+                type="text"
+                name="facebook_seguidores"
+                placeholder="Número de seguidores"
+                style="
+                  width: 100%;
+                  padding: 10px;
+                  margin: 10px 0;
+                  border: 1px solid #ddd;
+                  border-radius: 5px;
+                "
+              />
+              <input
+                type="text"
+                name="facebook_descricao"
+                placeholder="Descrição"
+                style="
+                  width: 100%;
+                  padding: 10px;
+                  margin: 10px 0;
+                  border: 1px solid #ddd;
+                  border-radius: 5px;
+                "
+              />
+              <input
+                type="url"
+                name="facebook_link"
+                placeholder="Link do perfil"
+                style="
+                  width: 100%;
+                  padding: 10px;
+                  margin: 10px 0;
+                  border: 1px solid #ddd;
+                  border-radius: 5px;
+                "
+              />
             </div>
-        
-            <!-- Formulário para WhatsApp -->
-            <div style="margin-bottom: 30px;">
-                <h2 style="display: flex; align-items: center; font-size: 20px; color: #E839A2;">
-                    <img src="https://img.icons8.com/fluency/24/whatsapp.png" style="margin-right: 10px;"> WhatsApp
-                </h2>
-                <input type="text" name="whatsapp_descricao" placeholder="Descrição" 
-                       style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px;">
-                <input type="url" name="whatsapp_link" placeholder="Link de contato" 
-                       style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px;">
+
+            <!-- FORMS WHATSAPP -->
+            <div style="margin-bottom: 30px">
+              <h2
+                style="
+                  display: flex;
+                  align-items: center;
+                  font-size: 20px;
+                  color: #e839a2;
+                "
+              >
+                <img
+                  src="https://img.icons8.com/fluency/24/whatsapp.png"
+                  style="margin-right: 10px"
+                />
+                WhatsApp
+              </h2>
+              <input
+                type="text"
+                name="whatsapp_descricao"
+                placeholder="Descrição"
+                style="
+                  width: 100%;
+                  padding: 10px;
+                  margin: 10px 0;
+                  border: 1px solid #ddd;
+                  border-radius: 5px;
+                "
+              />
+              <input
+                type="url"
+                name="whatsapp_link"
+                placeholder="Link de contato"
+                style="
+                  width: 100%;
+                  padding: 10px;
+                  margin: 10px 0;
+                  border: 1px solid #ddd;
+                  border-radius: 5px;
+                "
+              />
             </div>
-        
-            <!-- Botões -->
-            <div class="buttons" style="margin-top: 20px;">
-                <button type="button" class="back-btn" data-previous="selecionar_canais" 
-                        style="background-color: #fff; color: #E839A2; border: 2px solid #E839A2; border-radius: 8px; padding: 10px 20px; margin-right: 10px; cursor: pointer;">Voltar</button>
-                <button type="button" class="save-btn" data-next="referencias_concorrentes" 
-                        style="background-color: #E839A2; color: #fff; border: none; border-radius: 8px; padding: 10px 20px; cursor: pointer;">Próximo</button>
+
+            <!-- BOTÕES -->
+            <div class="buttons" style="margin-top: 20px">
+              <button
+                type="button"
+                class="back-btn"
+                data-previous="selecionar_canais"
+                style="
+                  background-color: #fff;
+                  color: #e839a2;
+                  border: 2px solid #e839a2;
+                  border-radius: 8px;
+                  padding: 10px 20px;
+                  margin-right: 10px;
+                  cursor: pointer;
+                "
+              >
+                Voltar
+              </button>
+              <button
+                type="button"
+                class="save-btn"
+                data-next="referencias_concorrentes"
+                style="
+                  background-color: #e839a2;
+                  color: #fff;
+                  border: none;
+                  border-radius: 8px;
+                  padding: 10px 20px;
+                  cursor: pointer;
+                "
+              >
+                Próximo
+              </button>
             </div>
-        </div>
-        
-        
-        <!-- <div id="campanhas" class="content-section">
-            
-        </div> -->
-        
-        <div id="referencias_concorrentes" class="content-section">
-            <h1 style="font-size: 28px; color: #E839A2;">Referências e Concorrentes</h1>
+          </div>
+
+          <!-- PÁGINA REFERÊNCIAS E CONCORRENTES -->
+          <div id="referencias_concorrentes" class="content-section">
+            <h1 style="font-size: 28px; color: #e839a2">
+              Referências e Concorrentes
+            </h1>
             <div id="competitor-list">
-                <!-- Modelo inicial de concorrente -->
-                <div class="competitor" data-index="1" style="margin-bottom: 30px;">
-                    <h2 style="font-size: 18px; color: #E839A2; text-align: center;">Concorrente 1</h2>
-                    <button type="button" class="remove-competitor" style="float: right; color: #E839A2; background: none; border: none; cursor: pointer; font-size: 14px;">Excluir concorrente ✖</button>
-                    <div style="clear: both;"></div>
-                    <input type="text" name="competitor_name_1" placeholder="Nome do concorrente" style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
-                    <input type="text" name="competitor_strengths_1" placeholder="Pontos positivos" style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
-                    <input type="text" name="competitor_opportunities_1" placeholder="Gaps (oportunidades)" style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
-                    <input type="text" name="competitor_insights_1" placeholder="Principais insights" style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
-                    <input type="text" name="competitor_links_1" placeholder="Links importantes" style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
-                </div>
+              <!-- Modelo inicial de concorrente -->
+              <div
+                class="competitor"
+                data-index="1"
+                style="margin-bottom: 30px"
+              >
+                <h2 style="font-size: 18px; color: #e839a2; text-align: center">
+                  Concorrente 1
+                </h2>
+                <button
+                  type="button"
+                  class="remove-competitor"
+                  style="
+                    float: right;
+                    color: #e839a2;
+                    background: none;
+                    border: none;
+                    cursor: pointer;
+                    font-size: 14px;
+                  "
+                >
+                  Excluir concorrente ✖
+                </button>
+                <div style="clear: both"></div>
+                <input
+                  type="text"
+                  name="competitor_name_1"
+                  placeholder="Nome do concorrente"
+                  style="
+                    width: 100%;
+                    padding: 10px;
+                    margin: 10px 0;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                  "
+                />
+                <input
+                  type="text"
+                  name="competitor_strengths_1"
+                  placeholder="Pontos positivos"
+                  style="
+                    width: 100%;
+                    padding: 10px;
+                    margin: 10px 0;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                  "
+                />
+                <input
+                  type="text"
+                  name="competitor_opportunities_1"
+                  placeholder="Gaps (oportunidades)"
+                  style="
+                    width: 100%;
+                    padding: 10px;
+                    margin: 10px 0;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                  "
+                />
+                <input
+                  type="text"
+                  name="competitor_insights_1"
+                  placeholder="Principais insights"
+                  style="
+                    width: 100%;
+                    padding: 10px;
+                    margin: 10px 0;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                  "
+                />
+                <input
+                  type="text"
+                  name="competitor_links_1"
+                  placeholder="Links importantes"
+                  style="
+                    width: 100%;
+                    padding: 10px;
+                    margin: 10px 0;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                  "
+                />
+              </div>
             </div>
-        
+
             <!-- Botão de adicionar concorrente -->
-            <button type="button" id="add-competitor" style="margin: 10px 0; background-color: #E839A2; color: #fff; padding: 10px 20px; border: none; border-radius: 8px; font-size: 14px; cursor: pointer;">Adicionar concorrente ➕</button>
-        
+            <button
+              type="button"
+              id="add-competitor"
+              style="
+                margin: 10px 0;
+                background-color: #e839a2;
+                color: #fff;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 8px;
+                font-size: 14px;
+                cursor: pointer;
+              "
+            >
+              Adicionar concorrente ➕
+            </button>
+
             <!-- Botões de navegação -->
-            <div class="buttons" style="margin-top: 20px;">
-                <button type="button" class="back-btn" data-previous="campanhas" 
-                        style="background-color: #fff; color: #E839A2; border: 2px solid #E839A2; border-radius: 8px; padding: 10px 20px; margin-right: 10px; cursor: pointer;">Voltar</button>
-                <button type="button" class="save-btn" data-next="objetivos_projeto" 
-                        style="background-color: #E839A2; color: #fff; border: none; border-radius: 8px; padding: 10px 20px; cursor: pointer;">Próximo</button>
+            <div class="buttons" style="margin-top: 20px">
+              <button
+                type="button"
+                class="back-btn"
+                data-previous="informacoes_canais"
+                style="
+                  background-color: #fff;
+                  color: #e839a2;
+                  border: 2px solid #e839a2;
+                  border-radius: 8px;
+                  padding: 10px 20px;
+                  margin-right: 10px;
+                  cursor: pointer;
+                "
+              >
+                Voltar
+              </button>
+              <button
+                type="button"
+                class="save-btn"
+                data-next="objetivos_projeto"
+                style="
+                  background-color: #e839a2;
+                  color: #fff;
+                  border: none;
+                  border-radius: 8px;
+                  padding: 10px 20px;
+                  cursor: pointer;
+                "
+              >
+                Próximo
+              </button>
             </div>
-        </div>
-        
-        <script>
+          </div>
+
+          <script>
             let competitorCount = 1;
-        
-            document.getElementById('add-competitor').addEventListener('click', () => {
+
+            document
+              .getElementById("add-competitor")
+              .addEventListener("click", () => {
                 competitorCount++;
-                const competitorList = document.getElementById('competitor-list');
-        
+                const competitorList =
+                  document.getElementById("competitor-list");
+
                 const competitorTemplate = `
-                    <div class="competitor" data-index="${competitorCount}" style="margin-bottom: 30px;">
-                        <h2 style="font-size: 18px; color: #E839A2; text-align: center;">Concorrente ${competitorCount}</h2>
-                        <button type="button" class="remove-competitor" style="float: right; color: #E839A2; background: none; border: none; cursor: pointer; font-size: 14px;">Excluir concorrente ✖</button>
-                        <div style="clear: both;"></div>
-                        <input type="text" name="competitor_name_${competitorCount}" placeholder="Nome do concorrente" style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
-                        <input type="text" name="competitor_strengths_${competitorCount}" placeholder="Pontos positivos" style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
-                        <input type="text" name="competitor_opportunities_${competitorCount}" placeholder="Gaps (oportunidades)" style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
-                        <input type="text" name="competitor_insights_${competitorCount}" placeholder="Principais insights" style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
-                        <input type="text" name="competitor_links_${competitorCount}" placeholder="Links importantes" style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
-                    </div>
-                `;
-        
-                competitorList.insertAdjacentHTML('beforeend', competitorTemplate);
+                            <div class="competitor" data-index="${competitorCount}" style="margin-bottom: 30px;">
+                                <h2 style="font-size: 18px; color: #E839A2; text-align: center;">Concorrente ${competitorCount}</h2>
+                                <button type="button" class="remove-competitor" style="float: right; color: #E839A2; background: none; border: none; cursor: pointer; font-size: 14px;">Excluir concorrente ✖</button>
+                                <div style="clear: both;"></div>
+                                <input type="text" name="competitor_name_${competitorCount}" placeholder="Nome do concorrente" style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
+                                <input type="text" name="competitor_strengths_${competitorCount}" placeholder="Pontos positivos" style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
+                                <input type="text" name="competitor_opportunities_${competitorCount}" placeholder="Gaps (oportunidades)" style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
+                                <input type="text" name="competitor_insights_${competitorCount}" placeholder="Principais insights" style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
+                                <input type="text" name="competitor_links_${competitorCount}" placeholder="Links importantes" style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
+                            </div>
+                        `;
+
+                competitorList.insertAdjacentHTML(
+                  "beforeend",
+                  competitorTemplate
+                );
                 attachRemoveEvent();
-            });
-        
+              });
+
             function attachRemoveEvent() {
-                const removeButtons = document.querySelectorAll('.remove-competitor');
-                removeButtons.forEach(button => {
-                    button.addEventListener('click', (e) => {
-                        const competitor = e.target.closest('.competitor');
-                        competitor.remove();
-                    });
+              const removeButtons =
+                document.querySelectorAll(".remove-competitor");
+              removeButtons.forEach((button) => {
+                button.addEventListener("click", (e) => {
+                  const competitor = e.target.closest(".competitor");
+                  competitor.remove();
                 });
+              });
             }
-        
+
             attachRemoveEvent();
-        </script>
-        
-        <div id="objetivos_projeto" class="content-section">
-            <h1 style="font-size: 28px; color: #E839A2;">Objetivos do Projeto</h1>
+          </script>
+
+          <!-- PÁGINA OBJETIVOS DO PROJETO -->
+          <div id="objetivos_projeto" class="content-section">
+            <h1 style="font-size: 28px; color: #e839a2">
+              Objetivos do Projeto
+            </h1>
             <div id="objective-list">
-                <!-- Primeiro objetivo como modelo -->
-                <div class="objective" data-index="1" style="margin-bottom: 30px;">
-                    <h2 style="font-size: 18px; color: #E839A2; text-align: left;">Objetivo 1</h2>
-                    <button type="button" class="remove-objective" style="float: right; color: #c04dcc; background: none; border: none; cursor: pointer; font-size: 14px;">Excluir objetivo ✖</button>
-                    <div style="clear: both;"></div>
-                    <input type="text" name="objective_title_1" placeholder="Objetivo" 
-                           style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
-                    <textarea name="objective_description_1" placeholder="Descrição" 
-                              style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; resize: none;" rows="3"></textarea>
-                </div>
+              <!-- Primeiro objetivo como modelo -->
+              <div class="objective" data-index="1" style="margin-bottom: 30px">
+                <h2 style="font-size: 18px; color: #e839a2; text-align: left">
+                  Objetivo 1
+                </h2>
+                <button
+                  type="button"
+                  class="remove-objective"
+                  style="
+                    float: right;
+                    color: #c04dcc;
+                    background: none;
+                    border: none;
+                    cursor: pointer;
+                    font-size: 14px;
+                  "
+                >
+                  Excluir objetivo ✖
+                </button>
+                <div style="clear: both"></div>
+                <input
+                  type="text"
+                  name="objective_title_1"
+                  placeholder="Objetivo"
+                  style="
+                    width: 100%;
+                    padding: 10px;
+                    margin: 10px 0;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                  "
+                />
+                <textarea
+                  name="objective_description_1"
+                  placeholder="Descrição"
+                  style="
+                    width: 100%;
+                    padding: 10px;
+                    margin: 10px 0;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                    resize: none;
+                  "
+                  rows="3"
+                ></textarea>
+              </div>
             </div>
-        
+
             <!-- Botão de adicionar objetivo -->
-            <button type="button" id="add-objective" 
-                    style="margin: 10px 0; background-color: #c04dcc; color: #fff; padding: 10px 20px; border: none; border-radius: 8px; font-size: 14px; cursor: pointer;">Adicionar objetivo ➕</button>
-        
+            <button
+              type="button"
+              id="add-objective"
+              style="
+                margin: 10px 0;
+                background-color: #c04dcc;
+                color: #fff;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 8px;
+                font-size: 14px;
+                cursor: pointer;
+              "
+            >
+              Adicionar objetivo ➕
+            </button>
+
             <!-- Botões de navegação -->
-            <div class="buttons" style="margin-top: 20px;">
-                <button type="button" class="back-btn" data-previous="referencias_concorrentes" 
-                        style="background-color: #fff; color: #E839A2; border: 2px solid #E839A2; border-radius: 8px; padding: 10px 20px; margin-right: 10px; cursor: pointer;">Voltar</button>
-                <button type="button" class="save-btn" data-next="descricao" 
-                        style="background-color: #E839A2; color: #fff; border: none; border-radius: 8px; padding: 10px 20px; cursor: pointer;">Próximo</button>
+            <div class="buttons" style="margin-top: 20px">
+              <button
+                type="button"
+                class="back-btn"
+                data-previous="referencias_concorrentes"
+                style="
+                  background-color: #fff;
+                  color: #e839a2;
+                  border: 2px solid #e839a2;
+                  border-radius: 8px;
+                  padding: 10px 20px;
+                  margin-right: 10px;
+                  cursor: pointer;
+                "
+              >
+                Voltar
+              </button>
+              <button
+                type="button"
+                class="save-btn"
+                data-next="descricao"
+                style="
+                  background-color: #e839a2;
+                  color: #fff;
+                  border: none;
+                  border-radius: 8px;
+                  padding: 10px 20px;
+                  cursor: pointer;
+                "
+              >
+                Próximo
+              </button>
             </div>
-        </div>
-        
-        <script>
+          </div>
+
+          <script>
             let objectiveCount = 1;
-        
+
             // Adicionar novos objetivos
-            document.getElementById('add-objective').addEventListener('click', () => {
+            document
+              .getElementById("add-objective")
+              .addEventListener("click", () => {
                 objectiveCount++;
-                const objectiveList = document.getElementById('objective-list');
-        
+                const objectiveList = document.getElementById("objective-list");
+
                 const objectiveTemplate = `
-                    <div class="objective" data-index="${objectiveCount}" style="margin-bottom: 30px;">
-                        <h2 style="font-size: 18px; color: #E839A2; text-align: left;">Objetivo ${objectiveCount}</h2>
-                        <button type="button" class="remove-objective" style="float: right; color: #c04dcc; background: none; border: none; cursor: pointer; font-size: 14px;">Excluir objetivo ✖</button>
-                        <div style="clear: both;"></div>
-                        <input type="text" name="objective_title_${objectiveCount}" placeholder="Objetivo" 
-                               style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
-                        <textarea name="objective_description_${objectiveCount}" placeholder="Descrição" 
-                                  style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; resize: none;" rows="3"></textarea>
-                    </div>
-                `;
-        
-                objectiveList.insertAdjacentHTML('beforeend', objectiveTemplate);
+                            <div class="objective" data-index="${objectiveCount}" style="margin-bottom: 30px;">
+                                <h2 style="font-size: 18px; color: #E839A2; text-align: left;">Objetivo ${objectiveCount}</h2>
+                                <button type="button" class="remove-objective" style="float: right; color: #c04dcc; background: none; border: none; cursor: pointer; font-size: 14px;">Excluir objetivo ✖</button>
+                                <div style="clear: both;"></div>
+                                <input type="text" name="objective_title_${objectiveCount}" placeholder="Objetivo" 
+                                    style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
+                                <textarea name="objective_description_${objectiveCount}" placeholder="Descrição" 
+                                        style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; resize: none;" rows="3"></textarea>
+                            </div>
+                        `;
+
+                objectiveList.insertAdjacentHTML(
+                  "beforeend",
+                  objectiveTemplate
+                );
                 attachRemoveEvent();
-            });
-        
+              });
+
             // Função para remover objetivos
             function attachRemoveEvent() {
-                const removeButtons = document.querySelectorAll('.remove-objective');
-                removeButtons.forEach(button => {
-                    button.addEventListener('click', (e) => {
-                        const objective = e.target.closest('.objective');
-                        objective.remove();
-                    });
+              const removeButtons =
+                document.querySelectorAll(".remove-objective");
+              removeButtons.forEach((button) => {
+                button.addEventListener("click", (e) => {
+                  const objective = e.target.closest(".objective");
+                  objective.remove();
                 });
+              });
             }
-        
+
             attachRemoveEvent();
-        </script>
-        
-        
-        <!-- <div id="personas" class="content-section">
-            
-        </div> -->
-        
-        <div id="descricao" class="content-section">
-            <h1 style="font-size: 28px; color: #E839A2;">Descrição de Personas</h1>
+          </script>
+
+          <!-- PÁGINA DESCRIÇÃO DE PERSONAS -->
+          <div id="descricao" class="content-section">
+            <h1 style="font-size: 28px; color: #e839a2">
+              Descrição de Personas
+            </h1>
             <div id="persona-list">
-                <!-- Primeira persona como modelo -->
-                <div class="persona" data-index="1" style="margin-bottom: 30px;">
-                    <h2 style="font-size: 18px; color: #E839A2; text-align: left;">Persona 1</h2>
-                    <button type="button" class="remove-persona" style="float: right; color: #c04dcc; background: none; border: none; cursor: pointer; font-size: 14px;">Excluir persona ✖</button>
-                    <div style="clear: both;"></div>
-        
-                    <input type="text" name="persona_name_1" placeholder="Nome da Persona" 
-                           style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
-                    <input type="number" name="persona_age_1" placeholder="Idade" 
-                           style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
-                    <input type="text" name="persona_job_1" placeholder="Ocupação/Profissão" 
-                           style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
-                    <textarea name="persona_behavior_1" placeholder="Comportamento e Hábitos" 
-                              style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; resize: none;" rows="3"></textarea>
-                    <textarea name="persona_goals_1" placeholder="Objetivos e Necessidades" 
-                              style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; resize: none;" rows="3"></textarea>
-                    <textarea name="persona_challenges_1" placeholder="Desafios e Problemas" 
-                              style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; resize: none;" rows="3"></textarea>
-                    <textarea name="persona_solutions_1" placeholder="Soluções Possíveis" 
-                              style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; resize: none;" rows="3"></textarea>
+              <!-- Primeira persona como modelo -->
+              <div class="persona" data-index="1" style="margin-bottom: 30px">
+                <h2 style="font-size: 18px; color: #e839a2; text-align: left">
+                  Persona 1
+                </h2>
+                <button
+                  type="button"
+                  class="remove-persona"
+                  style="
+                    float: right;
+                    color: #c04dcc;
+                    background: none;
+                    border: none;
+                    cursor: pointer;
+                    font-size: 14px;
+                  "
+                >
+                  Excluir persona ✖
+                </button>
+                <div style="clear: both"></div>
+
+                <input
+                  type="text"
+                  name="persona_name_1"
+                  placeholder="Nome da Persona"
+                  style="
+                    width: 100%;
+                    padding: 10px;
+                    margin: 10px 0;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                  "
+                />
+                <input
+                  type="number"
+                  name="persona_age_1"
+                  placeholder="Idade"
+                  style="
+                    width: 100%;
+                    padding: 10px;
+                    margin: 10px 0;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                  "
+                />
+                <input
+                  type="text"
+                  name="persona_job_1"
+                  placeholder="Ocupação/Profissão"
+                  style="
+                    width: 100%;
+                    padding: 10px;
+                    margin: 10px 0;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                  "
+                />
+                <textarea
+                  name="persona_behavior_1"
+                  placeholder="Comportamento e Hábitos"
+                  style="
+                    width: 100%;
+                    padding: 10px;
+                    margin: 10px 0;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                    resize: none;
+                  "
+                  rows="3"
+                ></textarea>
+                <textarea
+                  name="persona_goals_1"
+                  placeholder="Objetivos e Necessidades"
+                  style="
+                    width: 100%;
+                    padding: 10px;
+                    margin: 10px 0;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                    resize: none;
+                  "
+                  rows="3"
+                ></textarea>
+                <textarea
+                  name="persona_challenges_1"
+                  placeholder="Desafios e Problemas"
+                  style="
+                    width: 100%;
+                    padding: 10px;
+                    margin: 10px 0;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                    resize: none;
+                  "
+                  rows="3"
+                ></textarea>
+                <textarea
+                  name="persona_solutions_1"
+                  placeholder="Soluções Possíveis"
+                  style="
+                    width: 100%;
+                    padding: 10px;
+                    margin: 10px 0;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                    resize: none;
+                  "
+                  rows="3"
+                ></textarea>
+              </div>
+            </div>
+
+            <!-- Botão de adicionar persona -->
+            <button
+              type="button"
+              id="add-persona"
+              style="
+                margin: 10px 0;
+                background-color: #c04dcc;
+                color: #fff;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 8px;
+                font-size: 14px;
+                cursor: pointer;
+              "
+            >
+              Adicionar Persona ➕
+            </button>
+
+            <!-- Botões de navegação -->
+            <div class="buttons" style="margin-top: 20px">
+              <button
+                type="button"
+                class="back-btn"
+                data-previous="objetivos_projeto"
+                style="
+                  background-color: #fff;
+                  color: #e839a2;
+                  border: 2px solid #e839a2;
+                  border-radius: 8px;
+                  padding: 10px 20px;
+                  margin-right: 10px;
+                  cursor: pointer;
+                "
+              >
+                Voltar
+              </button>
+              <button
+                type="button"
+                class="save-btn"
+                data-next="elementos"
+                style="
+                  background-color: #e839a2;
+                  color: #fff;
+                  border: none;
+                  border-radius: 8px;
+                  padding: 10px 20px;
+                  cursor: pointer;
+                "
+              >
+                Próximo
+              </button>
+            </div>
+          </div>
+
+          <script>
+            let personaCount = 1;
+
+            // Adicionar novas personas
+            document
+              .getElementById("add-persona")
+              .addEventListener("click", () => {
+                personaCount++;
+                const personaList = document.getElementById("persona-list");
+
+                const personaTemplate = `
+                            <div class="persona" data-index="${personaCount}" style="margin-bottom: 30px;">
+                                <h2 style="font-size: 18px; color: #E839A2; text-align: left;">Persona ${personaCount}</h2>
+                                <button type="button" class="remove-persona" style="float: right; color: #c04dcc; background: none; border: none; cursor: pointer; font-size: 14px;">Excluir persona ✖</button>
+                                <div style="clear: both;"></div>
+                
+                                <input type="text" name="persona_name_${personaCount}" placeholder="Nome da Persona" 
+                                    style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
+                                <input type="number" name="persona_age_${personaCount}" placeholder="Idade" 
+                                    style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
+                                <input type="text" name="persona_job_${personaCount}" placeholder="Ocupação/Profissão" 
+                                    style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
+                                <textarea name="persona_behavior_${personaCount}" placeholder="Comportamento e Hábitos" 
+                                        style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; resize: none;" rows="3"></textarea>
+                                <textarea name="persona_goals_${personaCount}" placeholder="Objetivos e Necessidades" 
+                                        style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; resize: none;" rows="3"></textarea>
+                                <textarea name="persona_challenges_${personaCount}" placeholder="Desafios e Problemas" 
+                                        style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; resize: none;" rows="3"></textarea>
+                                <textarea name="persona_solutions_${personaCount}" placeholder="Soluções Possíveis" 
+                                        style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; resize: none;" rows="3"></textarea>
+                            </div>
+                        `;
+
+                personaList.insertAdjacentHTML("beforeend", personaTemplate);
+                attachRemovePersonaEvent();
+              });
+
+            // Função para remover personas
+            function attachRemovePersonaEvent() {
+              const removeButtons =
+                document.querySelectorAll(".remove-persona");
+              removeButtons.forEach((button) => {
+                button.addEventListener("click", (e) => {
+                  const persona = e.target.closest(".persona");
+                  persona.remove();
+                });
+              });
+            }
+
+            attachRemovePersonaEvent();
+          </script>
+
+          <!-- PÁGINA ELEMENTOS DA IDENTIDADE VISUAL -->
+          <div id="elementos" class="content-section">
+            <h1 style="font-size: 28px; color: #e839a2">
+              Elementos da Identidade Visual
+            </h1>
+            <p style="color: #666; font-size: 14px; margin-bottom: 20px">
+              Faça o upload de arquivos relacionados à identidade visual, como
+              logotipos, fontes, imagens ou outros elementos que representem sua
+              marca.
+            </p>
+
+            <!-- Área de upload -->
+            <div
+              id="upload-area"
+              style="
+                border: 2px dashed #e839a2;
+                padding: 20px;
+                border-radius: 10px;
+                text-align: center;
+                margin-bottom: 20px;
+              "
+            >
+              <p style="font-size: 16px; color: #e839a2; margin-bottom: 10px">
+                Arraste e solte arquivos aqui ou clique para selecionar
+              </p>
+              <input
+                type="file"
+                id="file-input"
+                multiple
+                accept=".png, .jpg, .jpeg, .svg, .gif"
+                style="display: none"
+              />
+              <button
+                type="button"
+                id="browse-files"
+                style="
+                  background-color: #e839a2;
+                  color: #fff;
+                  padding: 10px 20px;
+                  border: none;
+                  border-radius: 8px;
+                  font-size: 14px;
+                  cursor: pointer;
+                "
+              >
+                Selecionar Arquivos
+              </button>
+            </div>
+
+            <!-- Galeria de visualização -->
+            <div
+              id="file-preview"
+              style="
+                display: flex;
+                flex-wrap: wrap;
+                gap: 15px;
+                justify-content: center;
+              "
+            >
+              <p style="font-size: 14px; color: #666">
+                Nenhum arquivo anexado.
+              </p>
+            </div>
+
+            <!-- Botões de navegação -->
+            <div class="buttons" style="margin-top: 20px">
+              <button
+                type="button"
+                class="back-btn"
+                data-previous="descricao"
+                style="
+                  background-color: #fff;
+                  color: #e839a2;
+                  border: 2px solid #e839a2;
+                  border-radius: 8px;
+                  padding: 10px 20px;
+                  margin-right: 10px;
+                  cursor: pointer;
+                "
+              >
+                Voltar
+              </button>
+              <button
+                type="button"
+                class="save-btn"
+                data-next="manual_marca"
+                style="
+                  background-color: #e839a2;
+                  color: #fff;
+                  border: none;
+                  border-radius: 8px;
+                  padding: 10px 20px;
+                  cursor: pointer;
+                "
+              >
+                Próximo
+              </button>
+            </div>
+          </div>
+
+          <script>
+            const fileInput = document.getElementById("file-input");
+            const browseFilesButton = document.getElementById("browse-files");
+            const uploadArea = document.getElementById("upload-area");
+            const filePreview = document.getElementById("file-preview");
+
+            // Clique no botão "Selecionar Arquivos"
+            browseFilesButton.addEventListener("click", () => {
+              fileInput.click();
+            });
+
+            // Detectar mudança no input de arquivos
+            fileInput.addEventListener("change", (e) => {
+              handleFiles(e.target.files);
+            });
+
+            // Arrastar e soltar arquivos
+            uploadArea.addEventListener("dragover", (e) => {
+              e.preventDefault();
+              uploadArea.style.borderColor = "#c04dcc";
+            });
+
+            uploadArea.addEventListener("dragleave", () => {
+              uploadArea.style.borderColor = "#E839A2";
+            });
+
+            uploadArea.addEventListener("drop", (e) => {
+              e.preventDefault();
+              uploadArea.style.borderColor = "#E839A2";
+              handleFiles(e.dataTransfer.files);
+            });
+
+            function handleFiles(files) {
+              filePreview.innerHTML = ""; // Limpa os arquivos anteriores
+
+              Array.from(files).forEach((file) => {
+                const fileContainer = document.createElement("div");
+                fileContainer.style.position = "relative";
+                fileContainer.style.width = "120px";
+                fileContainer.style.height = "120px";
+                fileContainer.style.border = "1px solid #ddd";
+                fileContainer.style.borderRadius = "10px";
+                fileContainer.style.overflow = "hidden";
+                fileContainer.style.boxShadow = "0 4px 6px rgba(0, 0, 0, 0.1)";
+                fileContainer.style.display = "flex";
+                fileContainer.style.justifyContent = "center";
+                fileContainer.style.alignItems = "center";
+
+                const removeButton = document.createElement("button");
+                removeButton.textContent = "×";
+                removeButton.style.position = "absolute";
+                removeButton.style.top = "5px";
+                removeButton.style.right = "5px";
+                removeButton.style.backgroundColor = "#E839A2";
+                removeButton.style.color = "#fff";
+                removeButton.style.border = "none";
+                removeButton.style.borderRadius = "50%";
+                removeButton.style.width = "24px";
+                removeButton.style.height = "24px";
+                removeButton.style.cursor = "pointer";
+                removeButton.style.fontSize = "14px";
+
+                removeButton.addEventListener("click", () => {
+                  fileContainer.remove();
+                  if (!filePreview.innerHTML) {
+                    filePreview.innerHTML =
+                      '<p style="font-size: 14px; color: #666;">Nenhum arquivo anexado.</p>';
+                  }
+                });
+
+                if (file.type.startsWith("image/")) {
+                  const img = document.createElement("img");
+                  img.src = URL.createObjectURL(file);
+                  img.style.maxWidth = "100%";
+                  img.style.maxHeight = "100%";
+                  img.style.objectFit = "cover";
+                  fileContainer.appendChild(img);
+                } else {
+                  const fileName = document.createElement("span");
+                  fileName.textContent = file.name;
+                  fileName.style.fontSize = "12px";
+                  fileName.style.color = "#333";
+                  fileName.style.textAlign = "center";
+                  fileContainer.appendChild(fileName);
+                }
+
+                fileContainer.appendChild(removeButton);
+                filePreview.appendChild(fileContainer);
+              });
+
+              if (!filePreview.innerHTML) {
+                filePreview.innerHTML =
+                  '<p style="font-size: 14px; color: #666;">Nenhum arquivo anexado.</p>';
+              }
+            }
+          </script>
+
+          <!-- PÁGINA MANUAL DA MARCA -->
+          <div id="manual_marca" class="content-section">
+            <h1 style="font-size: 28px; color: #e839a2">Manual da Marca</h1>
+            <p style="color: #666; font-size: 14px; margin-bottom: 20px">
+              Faça o upload do manual da marca e outros documentos que
+              representem as diretrizes da identidade visual.
+            </p>
+
+            <!-- Área de upload -->
+            <div
+              id="upload-area-manual"
+              style="
+                border: 2px dashed #e839a2;
+                padding: 20px;
+                border-radius: 10px;
+                text-align: center;
+                margin-bottom: 20px;
+              "
+            >
+              <p style="font-size: 16px; color: #e839a2; margin-bottom: 10px">
+                Arraste e solte arquivos aqui ou clique para selecionar
+              </p>
+              <input
+                type="file"
+                id="file-input-manual"
+                multiple
+                accept=".pdf, .doc, .docx, .ppt, .pptx"
+                style="display: none"
+              />
+              <button
+                type="button"
+                id="browse-files-manual"
+                style="
+                  background-color: #e839a2;
+                  color: #fff;
+                  padding: 10px 20px;
+                  border: none;
+                  border-radius: 8px;
+                  font-size: 14px;
+                  cursor: pointer;
+                "
+              >
+                Selecionar Arquivos
+              </button>
+            </div>
+
+            <!-- Galeria de visualização -->
+            <div
+              id="file-preview-manual"
+              style="
+                display: flex;
+                flex-wrap: wrap;
+                gap: 15px;
+                justify-content: center;
+              "
+            >
+              <p style="font-size: 14px; color: #666">
+                Nenhum arquivo anexado.
+              </p>
+            </div>
+
+            <!-- Botões de navegação -->
+            <div class="buttons" style="margin-top: 20px">
+              <button
+                type="button"
+                class="back-btn"
+                data-previous="elementos"
+                style="
+                  background-color: #fff;
+                  color: #e839a2;
+                  border: 2px solid #e839a2;
+                  border-radius: 8px;
+                  padding: 10px 20px;
+                  margin-right: 10px;
+                  cursor: pointer;
+                "
+              >
+                Voltar
+              </button>
+              <button
+                type="button"
+                id="generate-manual"
+                style="
+                  background-color: #e839a2;
+                  color: #fff;
+                  border: none;
+                  border-radius: 8px;
+                  padding: 10px 20px;
+                  cursor: pointer;
+                "
+              >
+                Gerar
+              </button>
+            </div>
+          </div>
+
+          <script>
+            const fileInputManual =
+              document.getElementById("file-input-manual");
+            const browseFilesButtonManual = document.getElementById(
+              "browse-files-manual"
+            );
+            const uploadAreaManual =
+              document.getElementById("upload-area-manual");
+            const filePreviewManual = document.getElementById(
+              "file-preview-manual"
+            );
+            const generateButtonManual =
+              document.getElementById("generate-manual");
+
+            let uploadedFiles = []; // Lista para armazenar os arquivos anexados
+
+            // Clique no botão "Selecionar Arquivos"
+            browseFilesButtonManual.addEventListener("click", () => {
+              fileInputManual.click();
+            });
+
+            // Detectar mudança no input de arquivos
+            fileInputManual.addEventListener("change", (e) => {
+              handleFilesManual(e.target.files);
+            });
+
+            // Arrastar e soltar arquivos
+            uploadAreaManual.addEventListener("dragover", (e) => {
+              e.preventDefault();
+              uploadAreaManual.style.borderColor = "#c04dcc";
+            });
+
+            uploadAreaManual.addEventListener("dragleave", () => {
+              uploadAreaManual.style.borderColor = "#E839A2";
+            });
+
+            uploadAreaManual.addEventListener("drop", (e) => {
+              e.preventDefault();
+              uploadAreaManual.style.borderColor = "#E839A2";
+              handleFilesManual(e.dataTransfer.files);
+            });
+
+            function handleFilesManual(files) {
+              filePreviewManual.innerHTML = ""; // Limpa os arquivos anteriores
+              uploadedFiles = Array.from(files); // Atualiza a lista de arquivos anexados
+
+              uploadedFiles.forEach((file) => {
+                const fileContainer = document.createElement("div");
+                fileContainer.style.position = "relative";
+                fileContainer.style.width = "150px";
+                fileContainer.style.height = "100px";
+                fileContainer.style.border = "1px solid #ddd";
+                fileContainer.style.borderRadius = "10px";
+                fileContainer.style.overflow = "hidden";
+                fileContainer.style.boxShadow = "0 4px 6px rgba(0, 0, 0, 0.1)";
+                fileContainer.style.display = "flex";
+                fileContainer.style.justifyContent = "center";
+                fileContainer.style.alignItems = "center";
+                fileContainer.style.flexDirection = "column";
+                fileContainer.style.padding = "10px";
+
+                const removeButton = document.createElement("button");
+                removeButton.textContent = "×";
+                removeButton.style.position = "absolute";
+                removeButton.style.top = "5px";
+                removeButton.style.right = "5px";
+                removeButton.style.backgroundColor = "#E839A2";
+                removeButton.style.color = "#fff";
+                removeButton.style.border = "none";
+                removeButton.style.borderRadius = "50%";
+                removeButton.style.width = "24px";
+                removeButton.style.height = "24px";
+                removeButton.style.cursor = "pointer";
+                removeButton.style.fontSize = "14px";
+
+                removeButton.addEventListener("click", () => {
+                  uploadedFiles = uploadedFiles.filter((f) => f !== file); // Remove o arquivo da lista
+                  fileContainer.remove();
+                  if (!uploadedFiles.length) {
+                    filePreviewManual.innerHTML =
+                      '<p style="font-size: 14px; color: #666;">Nenhum arquivo anexado.</p>';
+                  }
+                });
+
+                const fileTypeIcon = document.createElement("div");
+                const fileName = document.createElement("span");
+
+                if (file.type === "application/pdf") {
+                  fileTypeIcon.innerHTML = `<img src="https://img.icons8.com/fluency/48/pdf.png" alt="PDF" style="max-width: 40px;">`;
+                } else if (
+                  file.type ===
+                    "application/vnd.openxmlformats-officedocument.wordprocessingml.document" ||
+                  file.type === "application/msword"
+                ) {
+                  fileTypeIcon.innerHTML = `<img src="https://img.icons8.com/fluency/48/word.png" alt="Word" style="max-width: 40px;">`;
+                } else if (
+                  file.type ===
+                    "application/vnd.openxmlformats-officedocument.presentationml.presentation" ||
+                  file.type === "application/vnd.ms-powerpoint"
+                ) {
+                  fileTypeIcon.innerHTML = `<img src="https://img.icons8.com/fluency/48/powerpoint.png" alt="PowerPoint" style="max-width: 40px;">`;
+                } else {
+                  fileTypeIcon.innerHTML = `<img src="https://img.icons8.com/fluency/48/file.png" alt="File" style="max-width: 40px;">`;
+                }
+
+                fileName.textContent = file.name;
+                fileName.style.fontSize = "12px";
+                fileName.style.color = "#333";
+                fileName.style.textAlign = "center";
+                fileName.style.marginTop = "10px";
+
+                fileContainer.appendChild(fileTypeIcon);
+                fileContainer.appendChild(fileName);
+                fileContainer.appendChild(removeButton);
+                filePreviewManual.appendChild(fileContainer);
+              });
+
+              if (!uploadedFiles.length) {
+                filePreviewManual.innerHTML =
+                  '<p style="font-size: 14px; color: #666;">Nenhum arquivo anexado.</p>';
+              }
+            }
+          </script>
+        </form>
+      </div>
+
+      <script>
+        // Botão "Gerar" exibe os dados em uma nova página estilizada
+        generateButtonManual.addEventListener("click", () => {
+          const formData = new FormData(document.getElementById("formData"));
+          const data = {};
+
+          formData.forEach((value, key) => {
+            if (!data[key]) {
+              data[key] = value;
+            } else {
+              data[key] = [].concat(data[key], value); // Para lidar com múltiplos valores, como checkboxes
+            }
+          });
+
+          const newPage = window.open("", "_blank");
+          newPage.document.write(`
+                <!DOCTYPE html>
+        <html lang="pt-br">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Resumo do Projeto</title>
+            <style>
+                body {
+                    font-family: 'Arial', sans-serif;
+                    margin: 0;
+                    padding: 0;
+                    background-color: #111;
+                    color: #fff;
+                }
+
+                .header {
+                    text-align: center;
+                    padding: 40px 20px;
+                    background-color: #E839A2;
+                }
+
+                .header h1 {
+                    font-size: 36px;
+                    margin: 0;
+                }
+
+                .content {
+                    max-width: 800px;
+                    margin: 40px auto;
+                    padding: 20px;
+                    background-color: #1e1e1e;
+                    border-radius: 10px;
+                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+                }
+
+                h2 {
+                    font-size: 24px;
+                    color: #E839A2;
+                    margin-bottom: 20px;
+                }
+
+                p {
+                    font-size: 16px;
+                    line-height: 1.6;
+                }
+
+                .section {
+                    margin-bottom: 40px;
+                }
+
+                .section h3 {
+                    font-size: 20px;
+                    color: #E839A2;
+                    margin-bottom: 10px;
+                }
+
+                .section p {
+                    font-size: 16px;
+                    color: #bbb;
+                    margin: 5px 0;
+                }
+
+                .file-container {
+                    display: flex;
+                    align-items: center;
+                    margin-top: 10px;
+                }
+
+                .file-container img {
+                    width: 50px;
+                    height: 50px;
+                    object-fit: contain;
+                    margin-right: 10px;
+                }
+
+                .file-container span {
+                    font-size: 16px;
+                    color: #fff;
+                }
+
+                .social-media {
+                    display: flex;
+                    gap: 15px;
+                }
+
+                .social-media .icon {
+                    background-color: #E839A2;
+                    border-radius: 50%;
+                    width: 50px;
+                    height: 50px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                .social-media img {
+                    width: 24px;
+                    height: 24px;
+                }
+
+                /* Botão Acessar */
+                .button-link {
+                    display: inline-block;
+                    margin-top: 10px;
+                    padding: 10px 15px;
+                    background-color: #E839A2;
+                    color: #fff;
+                    text-decoration: none;
+                    border-radius: 8px;
+                    font-size: 14px;
+                    transition: background-color 0.3s;
+                }
+
+                .button-link:hover {
+                    background-color: #d02784;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="header">
+                <h1> ${
+                  data.imagem_link
+                    ? `<img src="${data.imagem_link}" alt="Imagem do Projeto">`
+                    : "<p>Nenhuma imagem vinculada.</p>"
+                }</h1>
+            </div>
+            <div class="content">
+                <!-- Novo Planejamento -->
+                <div class="section">
+                    <h2>Novo Planejamento</h2>
+                    <p><strong>Título:</strong> Não informado</p>
+                    <p><strong>Descrição:</strong> Não informado</p>
+                </div>
+
+                <!-- Informações do Cliente -->
+                <div class="section">
+                    <h2>Informações do Cliente</h2>
+                    <p><strong>Nome do Cliente:</strong> Não informado</p>
+                    <p><strong>Setor de Atuação:</strong> Não informado</p>
+                    <p><strong>Descrição:</strong> Não informado</p>
+                </div>
+
+                <!-- Redes Sociais -->
+                <div class="section">
+                    <h2>Redes Sociais</h2>
+                    <div class="social-media">
+                        <div class="icon"><img src="https://img.icons8.com/fluency/48/instagram-new.png" alt="Instagram"></div>
+                        <div class="icon"><img src="https://img.icons8.com/fluency/48/facebook-new.png" alt="Facebook"></div>
+                        <div class="icon"><img src="https://img.icons8.com/fluency/48/whatsapp.png" alt="WhatsApp"></div>
+                    </div>
+                </div>
+
+                <!-- Informações dos Canais -->
+                <div class="section">
+                    <h2>Informações dos Canais</h2>
+                    <h3>Instagram:</h3>
+                    <p>Número de Seguidores: Não informado</p>
+                    <p>Descrição: Não informado</p>
+                    <p>Link: <a class="button-link" href="#">Acessar perfil</a></p>
+                </div>
+
+                <!-- Referências e Concorrentes -->
+                <div class="section">
+                    <h2>Referências e Concorrentes</h2>
+                    <h3>Concorrente 1</h3>
+                    <p><strong>Nome:</strong> Agência Fictícia</p>
+                    <p><strong>Pontos Positivos:</strong> Não informado</p>
+                    <p><strong>Oportunidades:</strong> Não informado</p>
+                    <p><strong>Links:</strong> <a class="button-link" href="#">Visualizar</a></p>
+                </div>
+
+                
+
+                    
+                <div class="section">
+                    <h2>Arquivos Anexados</h2>
+                    <div class="file-container">
+                        <img src="https://img.icons8.com/fluency/48/file.png" alt="File Icon">
+                        <span>Documento.docx</span>
+                    </div>
                 </div>
             </div>
         
-            <!-- Botão de adicionar persona -->
-            <button type="button" id="add-persona" 
-                    style="margin: 10px 0; background-color: #c04dcc; color: #fff; padding: 10px 20px; border: none; border-radius: 8px; font-size: 14px; cursor: pointer;">Adicionar Persona ➕</button>
-        
-            <!-- Botões de navegação -->
-            <div class="buttons" style="margin-top: 20px;">
-                <button type="button" class="back-btn" data-previous="objetivos_projeto" 
-                        style="background-color: #fff; color: #E839A2; border: 2px solid #E839A2; border-radius: 8px; padding: 10px 20px; margin-right: 10px; cursor: pointer;">Voltar</button>
-                <button type="button" class="save-btn" data-next="elementos" 
-                        style="background-color: #E839A2; color: #fff; border: none; border-radius: 8px; padding: 10px 20px; cursor: pointer;">Próximo</button>
-            </div>
-        </div>
-        
-        <script>
-            let personaCount = 1;
-        
-            // Adicionar novas personas
-            document.getElementById('add-persona').addEventListener('click', () => {
-                personaCount++;
-                const personaList = document.getElementById('persona-list');
-        
-                const personaTemplate = `
-                    <div class="persona" data-index="${personaCount}" style="margin-bottom: 30px;">
-                        <h2 style="font-size: 18px; color: #E839A2; text-align: left;">Persona ${personaCount}</h2>
-                        <button type="button" class="remove-persona" style="float: right; color: #c04dcc; background: none; border: none; cursor: pointer; font-size: 14px;">Excluir persona ✖</button>
-                        <div style="clear: both;"></div>
-        
-                        <input type="text" name="persona_name_${personaCount}" placeholder="Nome da Persona" 
-                               style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
-                        <input type="number" name="persona_age_${personaCount}" placeholder="Idade" 
-                               style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
-                        <input type="text" name="persona_job_${personaCount}" placeholder="Ocupação/Profissão" 
-                               style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
-                        <textarea name="persona_behavior_${personaCount}" placeholder="Comportamento e Hábitos" 
-                                  style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; resize: none;" rows="3"></textarea>
-                        <textarea name="persona_goals_${personaCount}" placeholder="Objetivos e Necessidades" 
-                                  style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; resize: none;" rows="3"></textarea>
-                        <textarea name="persona_challenges_${personaCount}" placeholder="Desafios e Problemas" 
-                                  style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; resize: none;" rows="3"></textarea>
-                        <textarea name="persona_solutions_${personaCount}" placeholder="Soluções Possíveis" 
-                                  style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; resize: none;" rows="3"></textarea>
-                    </div>
-                `;
-        
-                personaList.insertAdjacentHTML('beforeend', personaTemplate);
-                attachRemovePersonaEvent();
-            });
-        
-            // Função para remover personas
-            function attachRemovePersonaEvent() {
-                const removeButtons = document.querySelectorAll('.remove-persona');
-                removeButtons.forEach(button => {
-                    button.addEventListener('click', (e) => {
-                        const persona = e.target.closest('.persona');
-                        persona.remove();
-                    });
-                });
-            }
-        
-            attachRemovePersonaEvent();
-        </script>
-        
-        <!-- <div id="identidade_visual" class="content-section"> -->
-            
-        </div>
-        
-        <div id="elementos" class="content-section">
-            <h1 style="font-size: 28px; color: #E839A2;">Elementos da Identidade Visual</h1>
-            <p style="color: #666; font-size: 14px; margin-bottom: 20px;">Faça o upload de arquivos relacionados à identidade visual, como logotipos, fontes, imagens ou outros elementos que representem sua marca.</p>
-            
-            <!-- Área de upload -->
-            <div id="upload-area" style="border: 2px dashed #E839A2; padding: 20px; border-radius: 10px; text-align: center; margin-bottom: 20px;">
-                <p style="font-size: 16px; color: #E839A2; margin-bottom: 10px;">Arraste e solte arquivos aqui ou clique para selecionar</p>
-                <input type="file" id="file-input" multiple accept=".png, .jpg, .jpeg, .svg, .gif" style="display: none;">
-                <button type="button" id="browse-files" style="background-color: #E839A2; color: #fff; padding: 10px 20px; border: none; border-radius: 8px; font-size: 14px; cursor: pointer;">Selecionar Arquivos</button>
-            </div>
-        
-            <!-- Galeria de visualização -->
-            <div id="file-preview" style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center;">
-                <p style="font-size: 14px; color: #666;">Nenhum arquivo anexado.</p>
-            </div>
-        
-            <!-- Botões de navegação -->
-            <div class="buttons" style="margin-top: 20px;">
-                <button type="button" class="back-btn" data-previous="descricao" style="background-color: #fff; color: #E839A2; border: 2px solid #E839A2; border-radius: 8px; padding: 10px 20px; margin-right: 10px; cursor: pointer;">Voltar</button>
-                <button type="button" class="save-btn" data-next="manual_marca" style="background-color: #E839A2; color: #fff; border: none; border-radius: 8px; padding: 10px 20px; cursor: pointer;">Próximo</button>
-            </div>
-        </div>
-        
-        <script>
-            const fileInput = document.getElementById('file-input');
-            const browseFilesButton = document.getElementById('browse-files');
-            const uploadArea = document.getElementById('upload-area');
-            const filePreview = document.getElementById('file-preview');
-        
-            // Clique no botão "Selecionar Arquivos"
-            browseFilesButton.addEventListener('click', () => {
-                fileInput.click();
-            });
-        
-            // Detectar mudança no input de arquivos
-            fileInput.addEventListener('change', (e) => {
-                handleFiles(e.target.files);
-            });
-        
-            // Arrastar e soltar arquivos
-            uploadArea.addEventListener('dragover', (e) => {
-                e.preventDefault();
-                uploadArea.style.borderColor = '#c04dcc';
-            });
-        
-            uploadArea.addEventListener('dragleave', () => {
-                uploadArea.style.borderColor = '#E839A2';
-            });
-        
-            uploadArea.addEventListener('drop', (e) => {
-                e.preventDefault();
-                uploadArea.style.borderColor = '#E839A2';
-                handleFiles(e.dataTransfer.files);
-            });
-        
-            function handleFiles(files) {
-                filePreview.innerHTML = ''; // Limpa os arquivos anteriores
-        
-                Array.from(files).forEach(file => {
-                    const fileContainer = document.createElement('div');
-                    fileContainer.style.position = 'relative';
-                    fileContainer.style.width = '120px';
-                    fileContainer.style.height = '120px';
-                    fileContainer.style.border = '1px solid #ddd';
-                    fileContainer.style.borderRadius = '10px';
-                    fileContainer.style.overflow = 'hidden';
-                    fileContainer.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
-                    fileContainer.style.display = 'flex';
-                    fileContainer.style.justifyContent = 'center';
-                    fileContainer.style.alignItems = 'center';
-        
-                    const removeButton = document.createElement('button');
-                    removeButton.textContent = '×';
-                    removeButton.style.position = 'absolute';
-                    removeButton.style.top = '5px';
-                    removeButton.style.right = '5px';
-                    removeButton.style.backgroundColor = '#E839A2';
-                    removeButton.style.color = '#fff';
-                    removeButton.style.border = 'none';
-                    removeButton.style.borderRadius = '50%';
-                    removeButton.style.width = '24px';
-                    removeButton.style.height = '24px';
-                    removeButton.style.cursor = 'pointer';
-                    removeButton.style.fontSize = '14px';
-        
-                    removeButton.addEventListener('click', () => {
-                        fileContainer.remove();
-                        if (!filePreview.innerHTML) {
-                            filePreview.innerHTML = '<p style="font-size: 14px; color: #666;">Nenhum arquivo anexado.</p>';
-                        }
-                    });
-        
-                    if (file.type.startsWith('image/')) {
-                        const img = document.createElement('img');
-                        img.src = URL.createObjectURL(file);
-                        img.style.maxWidth = '100%';
-                        img.style.maxHeight = '100%';
-                        img.style.objectFit = 'cover';
-                        fileContainer.appendChild(img);
-                    } else {
-                        const fileName = document.createElement('span');
-                        fileName.textContent = file.name;
-                        fileName.style.fontSize = '12px';
-                        fileName.style.color = '#333';
-                        fileName.style.textAlign = 'center';
-                        fileContainer.appendChild(fileName);
-                    }
-        
-                    fileContainer.appendChild(removeButton);
-                    filePreview.appendChild(fileContainer);
-                });
-        
-                if (!filePreview.innerHTML) {
-                    filePreview.innerHTML = '<p style="font-size: 14px; color: #666;">Nenhum arquivo anexado.</p>';
-                }
-            }
-        </script>
-        
-        
+                </body>
+                </html>
+            `);
+        });
+      </script>
 
-        <div id="manual_marca" class="content-section">
+      <script>
+        // Lógica para as bolinhas da timeline
+        const timelines = document.querySelectorAll(".timeline");
+        const sections = document.querySelectorAll(".content-section");
 
-            <h1 style="font-size: 28px; color: #E839A2;">Manual da Marca</h1>
-            <p style="color: #666; font-size: 14px; margin-bottom: 20px;">Faça o upload do manual da marca e outros documentos que representem as diretrizes da identidade visual.</p>
-            
-            <!-- Área de upload -->
-            <div id="upload-area-manual" style="border: 2px dashed #E839A2; padding: 20px; border-radius: 10px; text-align: center; margin-bottom: 20px;">
-                <p style="font-size: 16px; color: #E839A2; margin-bottom: 10px;">Arraste e solte arquivos aqui ou clique para selecionar</p>
-                <input type="file" id="file-input-manual" multiple accept=".pdf, .doc, .docx, .ppt, .pptx" style="display: none;">
-                <button type="button" id="browse-files-manual" style="background-color: #E839A2; color: #fff; padding: 10px 20px; border: none; border-radius: 8px; font-size: 14px; cursor: pointer;">Selecionar Arquivos</button>
-            </div>
-        
-            <!-- Galeria de visualização -->
-            <div id="file-preview-manual" style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center;">
-                <p style="font-size: 14px; color: #666;">Nenhum arquivo anexado.</p>
-            </div>
-        
-            <!-- Botões de navegação -->
-            <div class="buttons" style="margin-top: 20px;">
-                <button type="button" class="back-btn" data-previous="elementos_identidade_visual" style="background-color: #fff; color: #E839A2; border: 2px solid #E839A2; border-radius: 8px; padding: 10px 20px; margin-right: 10px; cursor: pointer;">Voltar</button>
-                <button type="button" id="generate-manual" style="background-color: #E839A2; color: #fff; border: none; border-radius: 8px; padding: 10px 20px; cursor: pointer;">Gerar</button>
-            </div>
-        </div>
-        
-        <script>
-            const fileInputManual = document.getElementById('file-input-manual');
-            const browseFilesButtonManual = document.getElementById('browse-files-manual');
-            const uploadAreaManual = document.getElementById('upload-area-manual');
-            const filePreviewManual = document.getElementById('file-preview-manual');
-            const generateButtonManual = document.getElementById('generate-manual');
-        
-            let uploadedFiles = []; // Lista para armazenar os arquivos anexados
-        
-            // Clique no botão "Selecionar Arquivos"
-            browseFilesButtonManual.addEventListener('click', () => {
-                fileInputManual.click();
-            });
-        
-            // Detectar mudança no input de arquivos
-            fileInputManual.addEventListener('change', (e) => {
-                handleFilesManual(e.target.files);
-            });
-        
-            // Arrastar e soltar arquivos
-            uploadAreaManual.addEventListener('dragover', (e) => {
-                e.preventDefault();
-                uploadAreaManual.style.borderColor = '#c04dcc';
-            });
-        
-            uploadAreaManual.addEventListener('dragleave', () => {
-                uploadAreaManual.style.borderColor = '#E839A2';
-            });
-        
-            uploadAreaManual.addEventListener('drop', (e) => {
-                e.preventDefault();
-                uploadAreaManual.style.borderColor = '#E839A2';
-                handleFilesManual(e.dataTransfer.files);
-            });
-        
-            function handleFilesManual(files) {
-                filePreviewManual.innerHTML = ''; // Limpa os arquivos anteriores
-                uploadedFiles = Array.from(files); // Atualiza a lista de arquivos anexados
-        
-                uploadedFiles.forEach(file => {
-                    const fileContainer = document.createElement('div');
-                    fileContainer.style.position = 'relative';
-                    fileContainer.style.width = '150px';
-                    fileContainer.style.height = '100px';
-                    fileContainer.style.border = '1px solid #ddd';
-                    fileContainer.style.borderRadius = '10px';
-                    fileContainer.style.overflow = 'hidden';
-                    fileContainer.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
-                    fileContainer.style.display = 'flex';
-                    fileContainer.style.justifyContent = 'center';
-                    fileContainer.style.alignItems = 'center';
-                    fileContainer.style.flexDirection = 'column';
-                    fileContainer.style.padding = '10px';
-        
-                    const removeButton = document.createElement('button');
-                    removeButton.textContent = '×';
-                    removeButton.style.position = 'absolute';
-                    removeButton.style.top = '5px';
-                    removeButton.style.right = '5px';
-                    removeButton.style.backgroundColor = '#E839A2';
-                    removeButton.style.color = '#fff';
-                    removeButton.style.border = 'none';
-                    removeButton.style.borderRadius = '50%';
-                    removeButton.style.width = '24px';
-                    removeButton.style.height = '24px';
-                    removeButton.style.cursor = 'pointer';
-                    removeButton.style.fontSize = '14px';
-        
-                    removeButton.addEventListener('click', () => {
-                        uploadedFiles = uploadedFiles.filter(f => f !== file); // Remove o arquivo da lista
-                        fileContainer.remove();
-                        if (!uploadedFiles.length) {
-                            filePreviewManual.innerHTML = '<p style="font-size: 14px; color: #666;">Nenhum arquivo anexado.</p>';
-                        }
-                    });
-        
-                    const fileTypeIcon = document.createElement('div');
-                    const fileName = document.createElement('span');
-        
-                    if (file.type === "application/pdf") {
-                        fileTypeIcon.innerHTML = `<img src="https://img.icons8.com/fluency/48/pdf.png" alt="PDF" style="max-width: 40px;">`;
-                    } else if (file.type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document" || file.type === "application/msword") {
-                        fileTypeIcon.innerHTML = `<img src="https://img.icons8.com/fluency/48/word.png" alt="Word" style="max-width: 40px;">`;
-                    } else if (file.type === "application/vnd.openxmlformats-officedocument.presentationml.presentation" || file.type === "application/vnd.ms-powerpoint") {
-                        fileTypeIcon.innerHTML = `<img src="https://img.icons8.com/fluency/48/powerpoint.png" alt="PowerPoint" style="max-width: 40px;">`;
-                    } else {
-                        fileTypeIcon.innerHTML = `<img src="https://img.icons8.com/fluency/48/file.png" alt="File" style="max-width: 40px;">`;
-                    }
-        
-                    fileName.textContent = file.name;
-                    fileName.style.fontSize = '12px';
-                    fileName.style.color = '#333';
-                    fileName.style.textAlign = 'center';
-                    fileName.style.marginTop = '10px';
-        
-                    fileContainer.appendChild(fileTypeIcon);
-                    fileContainer.appendChild(fileName);
-                    fileContainer.appendChild(removeButton);
-                    filePreviewManual.appendChild(fileContainer);
-                });
-        
-                if (!uploadedFiles.length) {
-                    filePreviewManual.innerHTML = '<p style="font-size: 14px; color: #666;">Nenhum arquivo anexado.</p>';
-                }
-            }
-        
-            
-        </script>
-        
-        
-        </div>
-    </form>
-</div>
+        // Função para alternar as seções e ativar/desativar as bolinhas
+        function navigateToSection(sectionId) {
+          timelines.forEach((timeline) => timeline.classList.remove("active"));
+          sections.forEach((section) => section.classList.remove("active"));
 
-<script>
-    
-    // Botão "Gerar" exibe os dados em uma nova página estilizada
-    generateButtonManual.addEventListener('click', () => {
-    const formData = new FormData(document.getElementById('formData'));
-    const data = {};
+          const targetTimeline = document
+            .querySelector(`.timeline a[data-section="${sectionId}"]`)
+            ?.closest(".timeline");
+          const targetSection = document.getElementById(sectionId);
 
-    formData.forEach((value, key) => {
-        if (!data[key]) {
-            data[key] = value;
-        } else {
-            data[key] = [].concat(data[key], value); // Para lidar com múltiplos valores, como checkboxes
-        }
-    });
-
-    const newPage = window.open("", "_blank");
-    newPage.document.write(`
-        <!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resumo do Projeto</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #111;
-            color: #fff;
+          if (targetTimeline) targetTimeline.classList.add("active");
+          if (targetSection) targetSection.classList.add("active");
         }
 
-        .header {
-            text-align: center;
-            padding: 40px 20px;
-            background-color: #E839A2;
-        }
+        // Eventos para os botões "Salvar" e "Voltar"
+        const saveButtons = document.querySelectorAll(".save-btn");
+        const backButtons = document.querySelectorAll(".back-btn");
 
-        .header h1 {
-            font-size: 36px;
-            margin: 0;
-        }
-
-        .content {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-            background-color: #1e1e1e;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
-        }
-
-        h2 {
-            font-size: 24px;
-            color: #E839A2;
-            margin-bottom: 20px;
-        }
-
-        p {
-            font-size: 16px;
-            line-height: 1.6;
-        }
-
-        .section {
-            margin-bottom: 40px;
-        }
-
-        .section h3 {
-            font-size: 20px;
-            color: #E839A2;
-            margin-bottom: 10px;
-        }
-
-        .section p {
-            font-size: 16px;
-            color: #bbb;
-            margin: 5px 0;
-        }
-
-        .file-container {
-            display: flex;
-            align-items: center;
-            margin-top: 10px;
-        }
-
-        .file-container img {
-            width: 50px;
-            height: 50px;
-            object-fit: contain;
-            margin-right: 10px;
-        }
-
-        .file-container span {
-            font-size: 16px;
-            color: #fff;
-        }
-
-        .social-media {
-            display: flex;
-            gap: 15px;
-        }
-
-        .social-media .icon {
-            background-color: #E839A2;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .social-media img {
-            width: 24px;
-            height: 24px;
-        }
-
-        /* Botão Acessar */
-        .button-link {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 10px 15px;
-            background-color: #E839A2;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 8px;
-            font-size: 14px;
-            transition: background-color 0.3s;
-        }
-
-        .button-link:hover {
-            background-color: #d02784;
-        }
-    </style>
-</head>
-<body>
-    <div class="header">
-        <h1> ${data.imagem_link 
-                    ? `<img src="${data.imagem_link}" alt="Imagem do Projeto">` 
-                    : "<p>Nenhuma imagem vinculada.</p>"}</h1>
-    </div>
-    <div class="content">
-        <!-- Novo Planejamento -->
-        <div class="section">
-            <h2>Novo Planejamento</h2>
-            <p><strong>Título:</strong> Não informado</p>
-            <p><strong>Descrição:</strong> Não informado</p>
-        </div>
-
-        <!-- Informações do Cliente -->
-        <div class="section">
-            <h2>Informações do Cliente</h2>
-            <p><strong>Nome do Cliente:</strong> Não informado</p>
-            <p><strong>Setor de Atuação:</strong> Não informado</p>
-            <p><strong>Descrição:</strong> Não informado</p>
-        </div>
-
-        <!-- Redes Sociais -->
-        <div class="section">
-            <h2>Redes Sociais</h2>
-            <div class="social-media">
-                <div class="icon"><img src="https://img.icons8.com/fluency/48/instagram-new.png" alt="Instagram"></div>
-                <div class="icon"><img src="https://img.icons8.com/fluency/48/facebook-new.png" alt="Facebook"></div>
-                <div class="icon"><img src="https://img.icons8.com/fluency/48/whatsapp.png" alt="WhatsApp"></div>
-            </div>
-        </div>
-
-        <!-- Informações dos Canais -->
-        <div class="section">
-            <h2>Informações dos Canais</h2>
-            <h3>Instagram:</h3>
-            <p>Número de Seguidores: Não informado</p>
-            <p>Descrição: Não informado</p>
-            <p>Link: <a class="button-link" href="#">Acessar perfil</a></p>
-        </div>
-
-        <!-- Referências e Concorrentes -->
-        <div class="section">
-            <h2>Referências e Concorrentes</h2>
-            <h3>Concorrente 1</h3>
-            <p><strong>Nome:</strong> Agência Fictícia</p>
-            <p><strong>Pontos Positivos:</strong> Não informado</p>
-            <p><strong>Oportunidades:</strong> Não informado</p>
-            <p><strong>Links:</strong> <a class="button-link" href="#">Visualizar</a></p>
-        </div>
-
-           
-
-            
-        <div class="section">
-            <h2>Arquivos Anexados</h2>
-            <div class="file-container">
-                <img src="https://img.icons8.com/fluency/48/file.png" alt="File Icon">
-                <span>Documento.docx</span>
-            </div>
-        </div>
-    </div>
- 
-        </body>
-        </html>
-    `);
-});
-
-
-</script>
-
-<script>
-    // Lógica para as bolinhas da timeline
-    const timelines = document.querySelectorAll('.timeline');
-    const sections = document.querySelectorAll('.content-section');
-
-    // Função para alternar as seções e ativar/desativar as bolinhas
-    function navigateToSection(sectionId) {
-        timelines.forEach(timeline => timeline.classList.remove('active'));
-        sections.forEach(section => section.classList.remove('active'));
-
-        const targetTimeline = document.querySelector(`.timeline a[data-section="${sectionId}"]`)?.closest('.timeline');
-        const targetSection = document.getElementById(sectionId);
-
-        if (targetTimeline) targetTimeline.classList.add('active');
-        if (targetSection) targetSection.classList.add('active');
-    }
-
-    // Eventos para os botões "Salvar" e "Voltar"
-    const saveButtons = document.querySelectorAll('.save-btn');
-    const backButtons = document.querySelectorAll('.back-btn');
-
-    saveButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const nextSection = button.getAttribute('data-next');
+        saveButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            const nextSection = button.getAttribute("data-next");
             if (nextSection) navigateToSection(nextSection);
+          });
         });
-    });
 
-    backButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const previousSection = button.getAttribute('data-previous');
+        backButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            const previousSection = button.getAttribute("data-previous");
             if (previousSection) navigateToSection(previousSection);
+          });
         });
-    });
 
-    // Inicializar comportamento para os links na sidebar
-    const sidebarLinks = document.querySelectorAll('.sidebar a');
+        // Inicializar comportamento para os links na sidebar
+        const sidebarLinks = document.querySelectorAll(".sidebar a");
 
-    sidebarLinks.forEach(link => {
-        link.addEventListener('click', (event) => {
+        sidebarLinks.forEach((link) => {
+          link.addEventListener("click", (event) => {
             event.preventDefault();
-            const sectionId = link.getAttribute('data-section');
+            const sectionId = link.getAttribute("data-section");
             navigateToSection(sectionId);
+          });
         });
-    });
-</script>
-
-</body>
+      </script>
+    </div>
+  </body>
 </html>
-

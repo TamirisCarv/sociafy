@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerar Apresentação</title>
+</head>
+<body>
+    <h1>Gerar Apresentação</h1>
+    <button id="generate-presentation">Gerar Apresentação</button>
+    <button onclick="window.location.href='visualizar_apresentacoes.html'">Ver Apresentações</button>
+
+    <script>
+        document.getElementById('generate-presentation').addEventListener('click', () => {
+            // Dados fictícios para a apresentação
+            const presentation = {
+                planejamento: "Título Exemplo",
+                descricao: "Descrição Exemplo",
+                cliente_nome: "Nome Cliente Exemplo",
+                cliente_setor: "Setor Exemplo",
+                cliente_descricao: "Descrição Cliente Exemplo",
+                data_criacao: new Date().toLocaleString()
+            };
+
+            // Salvar no localStorage
+            const savedPresentations = JSON.parse(localStorage.getItem('presentations')) || [];
+            savedPresentations.push(presentation);
+            localStorage.setItem('presentations', JSON.stringify(savedPresentations));
+
+            alert("Apresentação gerada com sucesso!");
+        });
+    </script>
+</body>
+</html>

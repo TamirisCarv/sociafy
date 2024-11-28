@@ -20,4 +20,12 @@ public class LoginController {
     public String planejamento() {
         return "planejamento"; // Nome da view home.html, página inicial pós-login
     }
+    @GetMapping("/index")
+    public String index() {
+        return "index"; // Nome da view home.html, página inicial pós-login
+    }
+    @GetMapping("/visualizar_apresentacoes")
+    public String visualizar_apresentacoes() {
+        return "visualizar_apresentacoes"; // Nome da view home.html, página inicial pós-login
+    }
 }

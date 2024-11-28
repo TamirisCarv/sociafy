@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizar Apresentações</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .presentation {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .presentation h3 {
+            margin-top: 0;
+        }
+
+        .view-button {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .view-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Apresentações Geradas</h1>
+    <div id="presentations-list"></div>
+    <button onclick="window.location.href='index.html'">Voltar</button>
+
+    <script>
+        // Carregar apresentações do localStorage
+        const presentations = JSON.parse(localStorage.getItem('presentations')) || [];
+
+        const presentationsList = document.getElementById('presentations-list');
+
+        if (presentations.length === 0) {
+            presentationsList.innerHTML = "<p>Nenhuma apresentação gerada ainda.</p>";
+        } else {
+            presentations.forEach((presentation, index) => {
+                const presentationDiv = document.createElement('div');
+                presentationDiv.classList.add('presentation');
+                presentationDiv.innerHTML = `
+                    <h3>${presentation.planejamento}</h3>
+                    <p><strong>Descrição:</strong> ${presentation.descricao}</p>
+                    <p><strong>Cliente:</strong> ${presentation.cliente_nome}</p>
+                    <p><strong>Setor:</strong> ${presentation.cliente_setor}</p>
+                    <p><strong>Data de Criação:</strong> ${presentation.data_criacao}</p>
+                    <button class="view-button" onclick="viewPresentation(${index})">Visualizar</button>
+                `;
+                presentationsList.appendChild(presentationDiv);
+            });
+        }
+
+        // Visualizar apresentação (gera uma página em nova aba)
+        function viewPresentation(index) {
+            const presentation = presentations[index];
+            const newWindow = window.open();
+            newWindow.document.write(`
+                <html>
+                <head>
+                    <title>${presentation.planejamento}</title>
+                </head>
+                <body>
+                    <h1>${presentation.planejamento}</h1>
+                    <p><strong>Descrição:</strong> ${presentation.descricao}</p>
+                    <p><strong>Cliente:</strong> ${presentation.cliente_nome}</p>
+                    <p><strong>Setor:</strong> ${presentation.cliente_setor}</p>
+                    <p><strong>Data de Criação:</strong> ${presentation.data_criacao}</p>
+                </body>
+                </html>
+            `);
+        }
+    </script>
+</body>
+</html>

@@ -2043,206 +2043,239 @@
       <script>
         // Botão "Gerar" exibe os dados em uma nova página estilizada
         generateButtonManual.addEventListener("click", () => {
-          const formData = new FormData(document.getElementById("formData"));
-          const data = {};
+  const formData = new FormData(document.getElementById("formData"));
+  const data = {};
 
-          formData.forEach((value, key) => {
-            if (!data[key]) {
-              data[key] = value;
-            } else {
-              data[key] = [].concat(data[key], value); // Para lidar com múltiplos valores, como checkboxes
+  // Captura os valores dos campos do formulário
+  formData.forEach((value, key) => {
+    if (!data[key]) {
+      data[key] = value;
+    } else {
+      data[key] = [].concat(data[key], value); // Para lidar com múltiplos valores (como checkboxes)
+    }
+  });
+
+  // Criar a nova página com os dados capturados
+  const newPage = window.open("", "_blank");
+  newPage.document.write(`
+    <!DOCTYPE html>
+    <html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Resumo do Planejamento</title>
+        <style>
+    /* Configurações gerais */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #111;
+        color: #fff;
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 32px;
+        color: #fff;
+        margin-bottom: 30px;
+    }
+
+    /* Estrutura das seções */
+    .section {
+        margin-bottom: 20px;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: #1e1e1e;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    }
+
+    .section h2 {
+        font-size: 24px;
+        color: #E839A2;
+        margin-bottom: 15px;
+        border-bottom: 1px solid #333;
+        padding-bottom: 5px;
+    }
+
+    .section p {
+        font-size: 16px;
+        line-height: 1.6;
+        margin-bottom: 10px;
+        color: #bbb;
+    }
+
+    .section img {
+        max-width: 200px;
+        border-radius: 5px;
+        margin: 10px 0;
+    }
+
+    .section a {
+        color: #E839A2;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .section a:hover {
+        text-decoration: underline;
+    }
+
+    /* Estilo das caixas de texto */
+    .section strong {
+        color: #fff;
+    }
+
+    .info-box {
+        background-color: #333;
+        border: 1px solid #444;
+        padding: 15px;
+        border-radius: 5px;
+        margin: 10px 0;
+        color: #fff;
+    }
+
+    /* Botão de Ação */
+    .button {
+        display: inline-block;
+        background-color: #E839A2;
+        color: #fff;
+        padding: 10px 15px;
+        text-align: center;
+        font-size: 14px;
+        font-weight: bold;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+    .button:hover {
+        background-color: #D72890;
+    }
+
+    /* Listas */
+    ul {
+        margin: 10px 0;
+        padding: 0 20px;
+    }
+
+    ul li {
+        margin-bottom: 10px;
+        color: #bbb;
+    }
+</style>
+
+    </head>
+    <body>
+        <h1>Resumo do Planejamento</h1>
+
+        <!-- Novo Planejamento -->
+        <div class="section">
+            <h2>Novo Planejamento</h2>
+            <p><strong>Título do Planejamento:</strong> ${data.planejamento || "Não informado"}</p>
+            <p><strong>Descrição:</strong> ${data.descricao || "Não informada"}</p>
+            <p><strong>Imagem de Capa:</strong></p>
+            ${
+              data.imagem_link
+                ? `<img src="${data.imagem_link}" alt="Imagem de Capa">`
+                : "Não vinculada"
             }
-          });
+        </div>
 
-          const newPage = window.open("", "_blank");
-          newPage.document.write(`
-                <!DOCTYPE html>
-        <html lang="pt-br">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Resumo do Projeto</title>
-            <style>
-                body {
-                    font-family: 'Arial', sans-serif;
-                    margin: 0;
-                    padding: 0;
-                    background-color: #111;
-                    color: #fff;
-                }
+        <!-- Informações do Cliente -->
+        <div class="section">
+            <h2>Informações do Cliente</h2>
+            <p><strong>Nome do Cliente:</strong> ${data.cliente_nome || "Não informado"}</p>
+            <p><strong>Setor de Atuação:</strong> ${data.cliente_setor || "Não informado"}</p>
+            <p><strong>Descrição:</strong> ${data.cliente_descricao || "Não informada"}</p>
+        </div>
 
-                .header {
-                    text-align: center;
-                    padding: 40px 20px;
-                    background-color: #E839A2;
-                }
+      
 
-                .header h1 {
-                    font-size: 36px;
-                    margin: 0;
-                }
+        <!-- Informações dos Canais -->
+        <div class="section">
+            <h2>Informações dos Canais</h2>
+            <h3>Instagram</h3>
+            <p><strong>Número de Seguidores:</strong> ${data.instagram_seguidores || "Não informado"}</p>
+            <p><strong>Descrição:</strong> ${data.instagram_descricao || "Não informada"}</p>
+            <p><strong>Link:</strong> ${
+              data.instagram_link
+                ? `<a href="${data.instagram_link}" target="_blank">Perfil</a>`
+                : "Não informado"
+            }</p>
+            <h3>Facebook</h3>
+            <p><strong>Número de Seguidores:</strong> ${data.facebook_seguidores || "Não informado"}</p>
+            <p><strong>Descrição:</strong> ${data.facebook_descricao || "Não informada"}</p>
+            <p><strong>Link:</strong> ${
+              data.facebook_link
+                ? `<a href="${data.facebook_link}" target="_blank">Perfil</a>`
+                : "Não informado"
+            }</p>
+            <h3>WhatsApp</h3>
+            <p><strong>Descrição:</strong> ${data.whatsapp_descricao || "Não informada"}</p>
+            <p><strong>Link:</strong> ${
+              data.whatsapp_link
+                ? `<a href="${data.whatsapp_link}" target="_blank">Contato</a>`
+                : "Não informado"
+            }</p>
+        </div>
 
-                .content {
-                    max-width: 800px;
-                    margin: 40px auto;
-                    padding: 20px;
-                    background-color: #1e1e1e;
-                    border-radius: 10px;
-                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
-                }
+        <!-- Referências e Concorrentes -->
+        <div class="section">
+            <h2>Referências e Concorrentes</h2>
+            ${
+              Object.keys(data)
+                .filter((key) => key.startsWith("competitor"))
+                .map(
+                  (key) =>
+                    `<p><strong>${key.replace(/_/g, " ")}:</strong> ${
+                      data[key] || "Não informado"
+                    }</p>`
+                )
+                .join("") || "Nenhuma referência ou concorrente informada."
+            }
+        </div>
 
-                h2 {
-                    font-size: 24px;
-                    color: #E839A2;
-                    margin-bottom: 20px;
-                }
+        <!-- Objetivos do Projeto -->
+        <div class="section">
+            <h2>Objetivos do Projeto</h2>
+            ${
+              Object.keys(data)
+                .filter((key) => key.startsWith("objective"))
+                .map(
+                  (key) =>
+                    `<p><strong>${key.replace(/_/g, " ")}:</strong> ${
+                      data[key] || "Não informado"
+                    }</p>`
+                )
+                .join("") || "Nenhum objetivo informado."
+            }
+        </div>
 
-                p {
-                    font-size: 16px;
-                    line-height: 1.6;
-                }
+        <!-- Personas -->
+        <div class="section">
+            <h2>Personas</h2>
+            ${
+              Object.keys(data)
+                .filter((key) => key.startsWith("persona"))
+                .map(
+                  (key) =>
+                    `<p><strong>${key.replace(/_/g, " ")}:</strong> ${
+                      data[key] || "Não informado"
+                    }</p>`
+                )
+                .join("") || "Nenhuma persona cadastrada."
+            }
+        </div>
 
-                .section {
-                    margin-bottom: 40px;
-                }
+      
 
-                .section h3 {
-                    font-size: 20px;
-                    color: #E839A2;
-                    margin-bottom: 10px;
-                }
 
-                .section p {
-                    font-size: 16px;
-                    color: #bbb;
-                    margin: 5px 0;
-                }
+    </body>
+    </html>
+  `);
+});
 
-                .file-container {
-                    display: flex;
-                    align-items: center;
-                    margin-top: 10px;
-                }
-
-                .file-container img {
-                    width: 50px;
-                    height: 50px;
-                    object-fit: contain;
-                    margin-right: 10px;
-                }
-
-                .file-container span {
-                    font-size: 16px;
-                    color: #fff;
-                }
-
-                .social-media {
-                    display: flex;
-                    gap: 15px;
-                }
-
-                .social-media .icon {
-                    background-color: #E839A2;
-                    border-radius: 50%;
-                    width: 50px;
-                    height: 50px;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                }
-
-                .social-media img {
-                    width: 24px;
-                    height: 24px;
-                }
-
-                /* Botão Acessar */
-                .button-link {
-                    display: inline-block;
-                    margin-top: 10px;
-                    padding: 10px 15px;
-                    background-color: #E839A2;
-                    color: #fff;
-                    text-decoration: none;
-                    border-radius: 8px;
-                    font-size: 14px;
-                    transition: background-color 0.3s;
-                }
-
-                .button-link:hover {
-                    background-color: #d02784;
-                }
-            </style>
-        </head>
-        <body>
-            <div class="header">
-                <h1> ${
-                  data.imagem_link
-                    ? `<img src="${data.imagem_link}" alt="Imagem do Projeto">`
-                    : "<p>Nenhuma imagem vinculada.</p>"
-                }</h1>
-            </div>
-            <div class="content">
-                <!-- Novo Planejamento -->
-                <div class="section">
-                    <h2>Novo Planejamento</h2>
-                    <p><strong>Título:</strong> Não informado</p>
-                    <p><strong>Descrição:</strong> Não informado</p>
-                </div>
-
-                <!-- Informações do Cliente -->
-                <div class="section">
-                    <h2>Informações do Cliente</h2>
-                    <p><strong>Nome do Cliente:</strong> Não informado</p>
-                    <p><strong>Setor de Atuação:</strong> Não informado</p>
-                    <p><strong>Descrição:</strong> Não informado</p>
-                </div>
-
-                <!-- Redes Sociais -->
-                <div class="section">
-                    <h2>Redes Sociais</h2>
-                    <div class="social-media">
-                        <div class="icon"><img src="https://img.icons8.com/fluency/48/instagram-new.png" alt="Instagram"></div>
-                        <div class="icon"><img src="https://img.icons8.com/fluency/48/facebook-new.png" alt="Facebook"></div>
-                        <div class="icon"><img src="https://img.icons8.com/fluency/48/whatsapp.png" alt="WhatsApp"></div>
-                    </div>
-                </div>
-
-                <!-- Informações dos Canais -->
-                <div class="section">
-                    <h2>Informações dos Canais</h2>
-                    <h3>Instagram:</h3>
-                    <p>Número de Seguidores: Não informado</p>
-                    <p>Descrição: Não informado</p>
-                    <p>Link: <a class="button-link" href="#">Acessar perfil</a></p>
-                </div>
-
-                <!-- Referências e Concorrentes -->
-                <div class="section">
-                    <h2>Referências e Concorrentes</h2>
-                    <h3>Concorrente 1</h3>
-                    <p><strong>Nome:</strong> Agência Fictícia</p>
-                    <p><strong>Pontos Positivos:</strong> Não informado</p>
-                    <p><strong>Oportunidades:</strong> Não informado</p>
-                    <p><strong>Links:</strong> <a class="button-link" href="#">Visualizar</a></p>
-                </div>
-
-                
-
-                    
-                <div class="section">
-                    <h2>Arquivos Anexados</h2>
-                    <div class="file-container">
-                        <img src="https://img.icons8.com/fluency/48/file.png" alt="File Icon">
-                        <span>Documento.docx</span>
-                    </div>
-                </div>
-            </div>
-        
-                </body>
-                </html>
-            `);
-        });
       </script>
 
       <script>

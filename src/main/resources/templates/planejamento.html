@@ -321,6 +321,8 @@ body {
             <div class="form-group">
                 <input type="text" name="planejamento" placeholder="Título do Planejamento">
                 <input type="text" name="descricao" placeholder="Descrição (opcional)">
+                
+        <input type="url" id="imagem_link" name="imagem_link" placeholder="Link da Imagem para capa">
             </div>
             <div class="buttons">
                 <button type="button" class="save-btn" data-next="informacoes_cliente">Salvar</button>
@@ -836,6 +838,7 @@ body {
         
 
         <div id="manual_marca" class="content-section">
+
             <h1 style="font-size: 28px; color: #E839A2;">Manual da Marca</h1>
             <p style="color: #666; font-size: 14px; margin-bottom: 20px;">Faça o upload do manual da marca e outros documentos que representem as diretrizes da identidade visual.</p>
             
@@ -964,63 +967,7 @@ body {
                 }
             }
         
-            // Botão "Gerar" para exibir os arquivos anexados em uma nova página com todas as informações
-            generateButtonManual.addEventListener('click', () => {
-                const formData = new FormData(document.getElementById('formData'));
-                const data = {};
-        
-                formData.forEach((value, key) => {
-                    if (!data[key]) {
-                        data[key] = value;
-                    } else {
-                        data[key] = [].concat(data[key], value);
-                    }
-                });
-        
-                const newPage = window.open("", "_blank");
-                newPage.document.write(`
-                    <!DOCTYPE html>
-                    <html lang="pt-br">
-                    <head>
-                        <meta charset="UTF-8">
-                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                        <title>Resumo do Projeto</title>
-                        <style>
-                            body {
-                                font-family: Arial, sans-serif;
-                                margin: 0;
-                                padding: 20px;
-                                background-color: #f9f9f9;
-                                color: #333;
-                            }
-                            h1 {
-                                color: #E839A2;
-                            }
-                            h2 {
-                                font-size: 18px;
-                                color: #555;
-                                margin-top: 20px;
-                            }
-                            p {
-                                font-size: 14px;
-                            }
-                            .file-container {
-                                margin-bottom: 20px;
-                            }
-                        </style>
-                    </head>
-                    <body>
-                        <h1>Resumo do Projeto</h1>
-                        <h2>Novo Planejamento</h2>
-                        <p><strong>Título:</strong> ${data.planejamento || "Não informado"}</p>
-                        <p><strong>Descrição:</strong> ${data.descricao || "Não informado"}</p>
-        
-                        <h2>Arquivos Anexados</h2>
-                        ${uploadedFiles.map(file => `<div class="file-container"><span>📄 ${file.name}</span></div>`).join('')}
-                    </body>
-                    </html>
-                `);
-            });
+            
         </script>
         
         
@@ -1029,20 +976,232 @@ body {
 </div>
 
 <script>
-    const sidebarLinks = document.querySelectorAll('.sidebar a');
-    const sections = document.querySelectorAll('.content-section');
-    const saveButtons = document.querySelectorAll('.save-btn');
-    const generateButton = document.getElementById('generate');
+    
+    // Botão "Gerar" exibe os dados em uma nova página estilizada
+    generateButtonManual.addEventListener('click', () => {
+    const formData = new FormData(document.getElementById('formData'));
+    const data = {};
 
-    // Navegar entre as seções
-    sidebarLinks.forEach(link => {
-        link.addEventListener('click', (event) => {
-            event.preventDefault();
-            navigateToSection(link.getAttribute('data-section'));
-        });
+    formData.forEach((value, key) => {
+        if (!data[key]) {
+            data[key] = value;
+        } else {
+            data[key] = [].concat(data[key], value); // Para lidar com múltiplos valores, como checkboxes
+        }
     });
 
-    // Botões "Salvar" para avançar
+    const newPage = window.open("", "_blank");
+    newPage.document.write(`
+        <!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resumo do Projeto</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #111;
+            color: #fff;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: #E839A2;
+        }
+
+        .header h1 {
+            font-size: 36px;
+            margin: 0;
+        }
+
+        .content {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #1e1e1e;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+        }
+
+        h2 {
+            font-size: 24px;
+            color: #E839A2;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h3 {
+            font-size: 20px;
+            color: #E839A2;
+            margin-bottom: 10px;
+        }
+
+        .section p {
+            font-size: 16px;
+            color: #bbb;
+            margin: 5px 0;
+        }
+
+        .file-container {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .file-container img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            margin-right: 10px;
+        }
+
+        .file-container span {
+            font-size: 16px;
+            color: #fff;
+        }
+
+        .social-media {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-media .icon {
+            background-color: #E839A2;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .social-media img {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Botão Acessar */
+        .button-link {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #E839A2;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+        .button-link:hover {
+            background-color: #d02784;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1> ${data.imagem_link 
+                    ? `<img src="${data.imagem_link}" alt="Imagem do Projeto">` 
+                    : "<p>Nenhuma imagem vinculada.</p>"}</h1>
+    </div>
+    <div class="content">
+        <!-- Novo Planejamento -->
+        <div class="section">
+            <h2>Novo Planejamento</h2>
+            <p><strong>Título:</strong> Não informado</p>
+            <p><strong>Descrição:</strong> Não informado</p>
+        </div>
+
+        <!-- Informações do Cliente -->
+        <div class="section">
+            <h2>Informações do Cliente</h2>
+            <p><strong>Nome do Cliente:</strong> Não informado</p>
+            <p><strong>Setor de Atuação:</strong> Não informado</p>
+            <p><strong>Descrição:</strong> Não informado</p>
+        </div>
+
+        <!-- Redes Sociais -->
+        <div class="section">
+            <h2>Redes Sociais</h2>
+            <div class="social-media">
+                <div class="icon"><img src="https://img.icons8.com/fluency/48/instagram-new.png" alt="Instagram"></div>
+                <div class="icon"><img src="https://img.icons8.com/fluency/48/facebook-new.png" alt="Facebook"></div>
+                <div class="icon"><img src="https://img.icons8.com/fluency/48/whatsapp.png" alt="WhatsApp"></div>
+            </div>
+        </div>
+
+        <!-- Informações dos Canais -->
+        <div class="section">
+            <h2>Informações dos Canais</h2>
+            <h3>Instagram:</h3>
+            <p>Número de Seguidores: Não informado</p>
+            <p>Descrição: Não informado</p>
+            <p>Link: <a class="button-link" href="#">Acessar perfil</a></p>
+        </div>
+
+        <!-- Referências e Concorrentes -->
+        <div class="section">
+            <h2>Referências e Concorrentes</h2>
+            <h3>Concorrente 1</h3>
+            <p><strong>Nome:</strong> Agência Fictícia</p>
+            <p><strong>Pontos Positivos:</strong> Não informado</p>
+            <p><strong>Oportunidades:</strong> Não informado</p>
+            <p><strong>Links:</strong> <a class="button-link" href="#">Visualizar</a></p>
+        </div>
+
+           
+
+            
+        <div class="section">
+            <h2>Arquivos Anexados</h2>
+            <div class="file-container">
+                <img src="https://img.icons8.com/fluency/48/file.png" alt="File Icon">
+                <span>Documento.docx</span>
+            </div>
+        </div>
+    </div>
+ 
+        </body>
+        </html>
+    `);
+});
+
+
+</script>
+
+<script>
+    // Lógica para as bolinhas da timeline
+    const timelines = document.querySelectorAll('.timeline');
+    const sections = document.querySelectorAll('.content-section');
+
+    // Função para alternar as seções e ativar/desativar as bolinhas
+    function navigateToSection(sectionId) {
+        timelines.forEach(timeline => timeline.classList.remove('active'));
+        sections.forEach(section => section.classList.remove('active'));
+
+        const targetTimeline = document.querySelector(`.timeline a[data-section="${sectionId}"]`)?.closest('.timeline');
+        const targetSection = document.getElementById(sectionId);
+
+        if (targetTimeline) targetTimeline.classList.add('active');
+        if (targetSection) targetSection.classList.add('active');
+    }
+
+    // Eventos para os botões "Salvar" e "Voltar"
+    const saveButtons = document.querySelectorAll('.save-btn');
+    const backButtons = document.querySelectorAll('.back-btn');
+
     saveButtons.forEach(button => {
         button.addEventListener('click', () => {
             const nextSection = button.getAttribute('data-next');
@@ -1050,140 +1209,25 @@ body {
         });
     });
 
-    // Função para navegação
-    function navigateToSection(sectionId) {
-        sidebarLinks.forEach(link => link.classList.remove('active'));
-        sections.forEach(section => section.classList.remove('active'));
-
-        const targetLink = document.querySelector(`.sidebar a[data-section="${sectionId}"]`);
-        const targetSection = document.getElementById(sectionId);
-
-        if (targetLink) targetLink.classList.add('active');
-        if (targetSection) targetSection.classList.add('active');
-    }
-
-    // Botão "Gerar" exibe os dados em uma nova página estilizada
-    generateButton.addEventListener('click', () => {
-        const formData = new FormData(document.getElementById('formData'));
-        const data = {};
-        formData.forEach((value, key) => {
-            if (!data[key]) {
-                data[key] = value;
-            } else {
-                data[key] = [].concat(data[key], value); // Handle multiple values (checkboxes)
-            }
+    backButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const previousSection = button.getAttribute('data-previous');
+            if (previousSection) navigateToSection(previousSection);
         });
+    });
 
-        const newPage = window.open("", "_blank");
-        newPage.document.write(`
-            <!DOCTYPE html>
-            <html lang="pt-br">
-            <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Dados Cadastrados</title>
-                <style>
-                    /* Estilo geral */
-                    body {
-                        font-family: Arial, sans-serif;
-                        margin: 0;
-                        background-color: #111;
-                        color: #fff;
-                        line-height: 1.6;
-                    }
-                    header {
-                        background: #E839A2;
-                        color: #fff;
-                        padding: 20px;
-                        text-align: center;
-                    }
-                    .container {
-                        max-width: 900px;
-                        margin: 20px auto;
-                        padding: 20px;
-                        background: #1e1e1e;
-                        border-radius: 8px;
-                        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
-                    }
-                    .section {
-                        margin-bottom: 20px;
-                        padding: 15px;
-                        background: #333;
-                        border-radius: 6px;
-                    }
-                    .section h2 {
-                        color: #E839A2;
-                        margin-bottom: 10px;
-                        font-size: 20px;
-                    }
-                </style>
-            </head>
-            <body>
-                <header>
-                    <h1>Dados Cadastrados</h1>
-                </header>
-                <div class="container">
-                    <div class="section">
-                        <h2>Novo Planejamento</h2>
-                        <p><strong>Títulos:</strong> ${data.planejamento || "Não informado"}</p>
-                    </div>
-                   <div class="section">
-    <h2>Informações do Cliente</h2>
-    <p><strong>Nome do Cliente:</strong> ${data.cliente_nome || "Não informado"}</p>
-    <p><strong>Setor de Atuação:</strong> ${data.cliente_setor || "Não informado"}</p>
-    <p><strong>Descrição:</strong> ${data.cliente_descricao || "Não informado"}</p>
-</div>
-<div class="section">
-    <h2>Redes Sociais</h2>
-    <p><strong>Detalhes:</strong> ${data.redes_sociais || "Não informado"}</p>
-</div>
-<div class="section">
-    <h2>Selecionar Canais</h2>
-    <p><strong>Detalhes:</strong> ${data.selecionar_canais || "Não informado"}</p>
-</div>
-<div class="section">
-    <h2>Informações dos Canais</h2>
-    <p><strong>Detalhes:</strong> ${data.informacoes_canais || "Não informado"}</p>
-</div>
-<div class="section">
-    <h2>Campanhas</h2>
-    <p><strong>Detalhes:</strong> ${data.campanhas || "Não informado"}</p>
-</div>
-<div class="section">
-    <h2>Referências e Concorrentes</h2>
-    <p><strong>Detalhes:</strong> ${data.referencias_concorrentes || "Não informado"}</p>
-</div>
-<div class="section">
-    <h2>Objetivos do Projeto</h2>
-    <p><strong>Detalhes:</strong> ${data.objetivos_projeto || "Não informado"}</p>
-</div>
-<div class="section">
-    <h2>Personas</h2>
-    <p><strong>Detalhes:</strong> ${data.personas || "Não informado"}</p>
-</div>
-<div class="section">
-    <h2>Descrição</h2>
-    <p><strong>Detalhes:</strong> ${data.descricao || "Não informado"}</p>
-</div>
-<div class="section">
-    <h2>Identidade Visual</h2>
-    <p><strong>Detalhes:</strong> ${data.identidade_visual || "Não informado"}</p>
-</div>
-<div class="section">
-    <h2>Elementos</h2>
-    <p><strong>Detalhes:</strong> ${data.elementos || "Não informado"}</p>
-</div>
-<div class="section">
-    <h2>Manual da Marca</h2>
-    <p><strong>Detalhes:</strong> ${data.manual || "Não informado"}</p>
-</div>
+    // Inicializar comportamento para os links na sidebar
+    const sidebarLinks = document.querySelectorAll('.sidebar a');
 
-                </div>
-            </body>
-            </html>
-        `);
+    sidebarLinks.forEach(link => {
+        link.addEventListener('click', (event) => {
+            event.preventDefault();
+            const sectionId = link.getAttribute('data-section');
+            navigateToSection(sectionId);
+        });
     });
 </script>
 
 </body>
 </html>
+

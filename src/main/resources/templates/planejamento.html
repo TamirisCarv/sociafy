@@ -448,6 +448,535 @@
           font-weight: 500
         }
 
+        /* PÁGINA REFERÊNCIAS E CONCORRENTES */
+
+        #referencias_concorrentes {
+          width: 100%;
+          height: 100%;
+          /* overflow: hidden; */
+        }
+
+        .referencias-concorrentes {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .referencias-concorrentes .content-planejamento .forms {
+          margin-bottom: 50px;
+        }
+
+        div#competitor-list {
+          width: 100%;
+        }
+
+        .competitor {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          width: 100%;
+          margin-top: 50px;
+        }
+
+        .competitor-name {
+          display: flex;
+          width: 90%;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .competitor-name h2 {
+          color: #C352FF;
+          font-size: 1.1rem;
+          font-weight: 500;
+        }
+
+        .form-group-competitor {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+
+        margin-top: 1.5rem;
+        width: 90%;
+      }
+
+      .form-group-competitor input {
+        width: 100%;
+        font-family: "Outfit", sans-serif;
+        background: #ffffff50;
+        border: 1.55px solid #9b9b9b50;
+        color: #232123;
+        padding: 10px 15px;
+        border-radius: 7px;
+        font-size: 0.9rem;
+      }
+
+      button.remove-competitor {
+        font-family: "Outfit", sans-serif;
+        background: #C352FF15;
+        padding: 7px 20px;
+        border-radius: 7px;
+        color: #C352FF;
+        font-weight: 500;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: 0.3s;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+      }
+
+      button.remove-competitor:hover {
+        background: #C352FF25;
+      }
+
+      button.remove-competitor img {
+        width: 15px;
+      }
+
+      .button-add-competitor {
+        width: 90%;
+        display: flex;
+        margin: 30px 0px;
+      }
+
+      button#add-competitor {
+        font-family: "Outfit", sans-serif;
+        background: #C352FF;
+        padding: 10px 20px;
+        border-radius: 7px;
+        color: #fff;
+        font-weight: 500;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+      }
+
+      button#add-competitor img {
+        width: 20px;
+      }
+      
+      /* PÁGINA OBJETIVOS DO PROJETO */
+
+      #objetivos_projeto {
+          width: 100%;
+          height: 100%;
+          /* overflow: hidden; */
+        }
+
+        .referencias-concorrentes {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .referencias-concorrentes .content-planejamento .forms {
+          margin-bottom: 50px;
+          width: 100%;
+        }
+
+        div#objective-list {
+          width: 100%;
+        }
+
+        .objective {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          width: 100%;
+          margin-top: 50px;
+        }
+
+        .objetivo-name {
+          display: flex;
+          width: 90%;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .objetivo-name h2 {
+          color: #C352FF;
+          font-size: 1.1rem;
+          font-weight: 500;
+        }
+
+        .form-group-objetivo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+
+        margin-top: 1.5rem;
+        width: 90%;
+      }
+
+      .form-group-objetivo input {
+        width: 100%;
+        font-family: "Outfit", sans-serif;
+        background: #ffffff50;
+        border: 1.55px solid #9b9b9b50;
+        color: #232123;
+        padding: 10px 15px;
+        border-radius: 7px;
+        font-size: 0.9rem;
+      }
+
+      button.remove-objective {
+        font-family: "Outfit", sans-serif;
+        background: #C352FF15;
+        padding: 7px 20px;
+        border-radius: 7px;
+        color: #C352FF;
+        font-weight: 500;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: 0.3s;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+      }
+
+      button.remove-objective:hover {
+        background: #C352FF25;
+      }
+
+      button.remove-objective img {
+        width: 15px;
+      }
+
+      .button-add-objective {
+        width: 90%;
+        display: flex;
+        margin: 30px 0px;
+      }
+
+      button#add-objective {
+        font-family: "Outfit", sans-serif;
+        background: #C352FF;
+        padding: 10px 20px;
+        border-radius: 7px;
+        color: #fff;
+        font-weight: 500;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+      }
+
+      button#add-objective img {
+        width: 20px;
+      }
+
+      .form-group-objetivo textarea {
+        resize: none;
+          width: 100%;
+          font-family: "Outfit", sans-serif;
+          background: #ffffff50;
+          border: 1.55px solid #9b9b9b50;
+          color: #232123;
+          padding: 10px 15px;
+          border-radius: 7px;
+          font-size: 0.9rem;
+      }
+      
+      /* PÁGINA DESCRIÇÃO DE PERSONAS */
+
+      #descricao {
+          width: 100%;
+          height: 100%;
+          /* overflow: hidden; */
+        }
+
+        .descricao {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .descricao .content-planejamento .forms {
+          margin-bottom: 50px;
+          width: 100%;
+        }
+
+        div#persona-list {
+          width: 100%;
+        }
+
+        .persona {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          width: 100%;
+          margin-top: 50px;
+        }
+
+        .persona-name {
+          display: flex;
+          width: 90%;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .persona-name h2 {
+          color: #C352FF;
+          font-size: 1.1rem;
+          font-weight: 500;
+        }
+
+        .form-group-persona {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+
+        margin-top: 1.5rem;
+        width: 90%;
+      }
+
+      .form-group-persona input {
+        width: 100%;
+        font-family: "Outfit", sans-serif;
+        background: #ffffff50;
+        border: 1.55px solid #9b9b9b50;
+        color: #232123;
+        padding: 10px 15px;
+        border-radius: 7px;
+        font-size: 0.9rem;
+      }
+
+      button.remove-persona {
+        font-family: "Outfit", sans-serif;
+        background: #C352FF15;
+        padding: 7px 20px;
+        border-radius: 7px;
+        color: #C352FF;
+        font-weight: 500;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: 0.3s;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+      }
+
+      button.remove-persona:hover {
+        background: #C352FF25;
+      }
+
+      button.remove-persona img {
+        width: 15px;
+      }
+
+      .button-add-persona {
+        width: 90%;
+        display: flex;
+        margin: 30px 0px;
+      }
+
+      button#add-persona {
+        font-family: "Outfit", sans-serif;
+        background: #C352FF;
+        padding: 10px 20px;
+        border-radius: 7px;
+        color: #fff;
+        font-weight: 500;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+      }
+
+      button#add-persona img {
+        width: 20px;
+      }
+
+      .form-group-persona textarea {
+        resize: none;
+          width: 100%;
+          font-family: "Outfit", sans-serif;
+          background: #ffffff50;
+          border: 1.55px solid #9b9b9b50;
+          color: #232123;
+          padding: 10px 15px;
+          border-radius: 7px;
+          font-size: 0.9rem;
+      }
+
+      /* PÁGINA ELEMENTOS DA IDENTIDADE VISUAL */
+
+      .content-elementos {
+        /* padding: 30px 0px; */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+      }
+
+      .content-elementos .forms {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .content-elementos .forms h1 {
+        font-family: "Syne", sans-serif;
+        color: #e839a2;
+        font-size: 2.3rem;
+      }
+
+      .content-elementos .forms p {
+        width: 55%;
+        color: #1e1e1e;
+        font-size: 1.2rem;
+        margin-top: 0.6rem;
+        font-weight: 300;
+      }
+
+      .content-elementos .forms span {
+        font-size: 0.95rem;
+        color: #1e1e1e90;
+        margin-bottom: 20px;
+        font-weight: 300;
+        width: 70%;
+      }
+
+      .upload-area {
+        border: 2px dashed #C352FF;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        margin: 50px 0px 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      button#browse-files {
+        font-family: "Outfit", sans-serif;
+        background: #C352FF;
+        padding: 10px 20px;
+        border-radius: 7px;
+        color: #fff;
+        font-weight: 500;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+      }
+
+      div#file-preview {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        justify-content: center;
+        width: 100%;
+        margin-bottom: 30px;
+      }
+
+      div#file-preview p {
+        font-size: 1rem;
+      }
+
+      /* PÁGINA MANUAL DA MARCA */
+
+      .content-elementos {
+        /* padding: 30px 0px; */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+      }
+
+      .content-elementos .forms {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .content-elementos .forms h1 {
+        font-family: "Syne", sans-serif;
+        color: #e839a2;
+        font-size: 2.3rem;
+      }
+
+      .content-elementos .forms p {
+        width: 55%;
+        color: #1e1e1e;
+        font-size: 1.2rem;
+        margin-top: 0.6rem;
+        font-weight: 300;
+      }
+
+      .content-elementos .forms span {
+        font-size: 0.95rem;
+        color: #1e1e1e90;
+        margin-bottom: 20px;
+        font-weight: 300;
+        width: 70%;
+      }
+
+      .upload-area-manual {
+        border: 2px dashed #C352FF;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        margin: 50px 0px 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      button#browse-files-manual {
+        font-family: "Outfit", sans-serif;
+        background: #C352FF;
+        padding: 10px 20px;
+        border-radius: 7px;
+        color: #fff;
+        font-weight: 500;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+      }
+
+      div#file-preview-manual {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        justify-content: center;
+        width: 100%;
+        margin-bottom: 30px;
+      }
+
+      div#file-preview-manual p {
+        font-size: 1rem;
+      }
+
     </style>
   </head>
   <body>
@@ -642,7 +1171,7 @@
                       type="url"
                       id="imagem_link"
                       name="imagem_link"
-                      placeholder="Link da Imagem para capa"
+                      placeholder="Link da imagem para capa"
                     />
                   </div>
 
@@ -1068,149 +1597,94 @@
 
           <!-- PÁGINA REFERÊNCIAS E CONCORRENTES -->
           <div id="referencias_concorrentes" class="content-section">
-            <h1 style="font-size: 28px; color: #e839a2">
-              Referências e Concorrentes
+            <section class="referencias-concorrentes">
+              <div class="navbar">
+                <a class="sair-button" href="#">
+                  <p>Sair</p>
+                  <img src="https://i.ibb.co/dMBfkB8/arrow-right-alt.png" />
+                </a>
+              </div>
+
+              <div class="content-planejamento">
+                <div class="forms">
+            <h1>
+              Referências e concorrentes
             </h1>
             <div id="competitor-list">
               <!-- Modelo inicial de concorrente -->
               <div
                 class="competitor"
-                data-index="1"
-                style="margin-bottom: 30px"
-              >
-                <h2 style="font-size: 18px; color: #e839a2; text-align: center">
-                  Concorrente 1
-                </h2>
-                <button
-                  type="button"
-                  class="remove-competitor"
-                  style="
-                    float: right;
-                    color: #e839a2;
-                    background: none;
-                    border: none;
-                    cursor: pointer;
-                    font-size: 14px;
-                  "
-                >
-                  Excluir concorrente ✖
-                </button>
+                data-index="1">
+                <div class="competitor-name">
+                  <h2>
+                    Concorrente 1
+                  </h2>
+                  <button
+                    type="button"
+                    class="remove-competitor">
+                    <span>Excluir concorrente</span>
+                    <img src="https://i.ibb.co/fH7ngPx/delete.png" alt="delete">
+                  </button>
+
+                </div>
                 <div style="clear: both"></div>
+                <div class="form-group-competitor">
                 <input
                   type="text"
                   name="competitor_name_1"
-                  placeholder="Nome do concorrente"
-                  style="
-                    width: 100%;
-                    padding: 10px;
-                    margin: 10px 0;
-                    border: 1px solid #ccc;
-                    border-radius: 5px;
-                  "
-                />
+                  placeholder="Nome do concorrente"/>
                 <input
                   type="text"
                   name="competitor_strengths_1"
-                  placeholder="Pontos positivos"
-                  style="
-                    width: 100%;
-                    padding: 10px;
-                    margin: 10px 0;
-                    border: 1px solid #ccc;
-                    border-radius: 5px;
-                  "
-                />
+                  placeholder="Pontos positivos"/>
                 <input
                   type="text"
                   name="competitor_opportunities_1"
-                  placeholder="Gaps (oportunidades)"
-                  style="
-                    width: 100%;
-                    padding: 10px;
-                    margin: 10px 0;
-                    border: 1px solid #ccc;
-                    border-radius: 5px;
-                  "
-                />
+                  placeholder="Gaps (oportunidades)"/>
                 <input
                   type="text"
                   name="competitor_insights_1"
-                  placeholder="Principais insights"
-                  style="
-                    width: 100%;
-                    padding: 10px;
-                    margin: 10px 0;
-                    border: 1px solid #ccc;
-                    border-radius: 5px;
-                  "
-                />
+                  placeholder="Principais insights"/>
                 <input
                   type="text"
                   name="competitor_links_1"
-                  placeholder="Links importantes"
-                  style="
-                    width: 100%;
-                    padding: 10px;
-                    margin: 10px 0;
-                    border: 1px solid #ccc;
-                    border-radius: 5px;
-                  "
-                />
+                  placeholder="Links importantes"/>
+                </div>
               </div>
             </div>
 
             <!-- Botão de adicionar concorrente -->
-            <button
-              type="button"
-              id="add-competitor"
-              style="
-                margin: 10px 0;
-                background-color: #e839a2;
-                color: #fff;
-                padding: 10px 20px;
-                border: none;
-                border-radius: 8px;
-                font-size: 14px;
-                cursor: pointer;
-              "
-            >
-              Adicionar concorrente ➕
-            </button>
-
-            <!-- Botões de navegação -->
-            <div class="buttons" style="margin-top: 20px">
+            
+            <div class="button-add-competitor">
               <button
                 type="button"
-                class="back-btn"
-                data-previous="informacoes_canais"
-                style="
-                  background-color: #fff;
-                  color: #e839a2;
-                  border: 2px solid #e839a2;
-                  border-radius: 8px;
-                  padding: 10px 20px;
-                  margin-right: 10px;
-                  cursor: pointer;
-                "
-              >
-                Voltar
-              </button>
-              <button
-                type="button"
-                class="save-btn"
-                data-next="objetivos_projeto"
-                style="
-                  background-color: #e839a2;
-                  color: #fff;
-                  border: none;
-                  border-radius: 8px;
-                  padding: 10px 20px;
-                  cursor: pointer;
-                "
-              >
-                Próximo
+                id="add-competitor">
+                <span>Adicionar concorrente</span>
+                <img src="https://i.ibb.co/h1jMvSK/add.png" alt="add">
               </button>
             </div>
+
+            <!-- Botões de navegação -->
+            <div class="buttons-form">
+              <button
+              type="button"
+              class="back-btn"
+              data-previous="informacoes_canais"
+        >
+          Voltar
+        </button>
+
+        <button
+        type="button"
+        class="save-btn"
+        data-next="objetivos_projeto"
+        >
+          Próximo
+        </button>
+            </div>
+          </div>
+          </div>
+          </section>
           </div>
 
           <script>
@@ -1223,18 +1697,23 @@
                 const competitorList =
                   document.getElementById("competitor-list");
 
-                const competitorTemplate = `
-                            <div class="competitor" data-index="${competitorCount}" style="margin-bottom: 30px;">
-                                <h2 style="font-size: 18px; color: #E839A2; text-align: center;">Concorrente ${competitorCount}</h2>
-                                <button type="button" class="remove-competitor" style="float: right; color: #E839A2; background: none; border: none; cursor: pointer; font-size: 14px;">Excluir concorrente ✖</button>
-                                <div style="clear: both;"></div>
-                                <input type="text" name="competitor_name_${competitorCount}" placeholder="Nome do concorrente" style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
-                                <input type="text" name="competitor_strengths_${competitorCount}" placeholder="Pontos positivos" style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
-                                <input type="text" name="competitor_opportunities_${competitorCount}" placeholder="Gaps (oportunidades)" style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
-                                <input type="text" name="competitor_insights_${competitorCount}" placeholder="Principais insights" style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
-                                <input type="text" name="competitor_links_${competitorCount}" placeholder="Links importantes" style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
-                            </div>
-                        `;
+                  const competitorTemplate = `
+                  <div class="competitor" data-index="${competitorCount}">
+                  <div class="competitor-name">
+                  <h2>Concorrente ${competitorCount}</h2>
+                  <button type="button" class="remove-competitor"><span>Excluir concorrente</span>
+                    <img src="https://i.ibb.co/fH7ngPx/delete.png" alt="delete"></button>
+                  </div>
+                  <div style="clear: both"></div>
+                  <div class="form-group-competitor">
+                  <input type="text" name="competitor_name_${competitorCount}" placeholder="Nome do concorrente" />
+                  <input type="text" name="competitor_strengths_${competitorCount}" placeholder="Pontos positivos" />
+                  <input type="text" name="competitor_opportunities_${competitorCount}" placeholder="Gaps (oportunidades)" />
+                  <input type="text" name="competitor_insights_${competitorCount}" placeholder="Principais insights" />
+                  <input type="text" name="competitor_links_${competitorCount}" placeholder="Links importantes" />
+                  </div>
+                  </div>
+                  `;
 
                 competitorList.insertAdjacentHTML(
                   "beforeend",
@@ -1259,111 +1738,86 @@
 
           <!-- PÁGINA OBJETIVOS DO PROJETO -->
           <div id="objetivos_projeto" class="content-section">
-            <h1 style="font-size: 28px; color: #e839a2">
-              Objetivos do Projeto
+            <section class="referencias-concorrentes">
+              <div class="navbar">
+                <a class="sair-button" href="#">
+                  <p>Sair</p>
+                  <img src="https://i.ibb.co/dMBfkB8/arrow-right-alt.png" />
+                </a>
+              </div>
+
+              <div class="content-planejamento">
+                <div class="forms">
+            <h1>
+              Objetivos do projeto
             </h1>
             <div id="objective-list">
               <!-- Primeiro objetivo como modelo -->
-              <div class="objective" data-index="1" style="margin-bottom: 30px">
-                <h2 style="font-size: 18px; color: #e839a2; text-align: left">
-                  Objetivo 1
-                </h2>
-                <button
-                  type="button"
-                  class="remove-objective"
-                  style="
-                    float: right;
-                    color: #c04dcc;
-                    background: none;
-                    border: none;
-                    cursor: pointer;
-                    font-size: 14px;
-                  "
-                >
-                  Excluir objetivo ✖
-                </button>
+              <div class="objective" data-index="1">
+                <div class="objetivo-name">
+                  <h2>
+                    Objetivo 1
+                  </h2>
+                  <button
+                    type="button"
+                    class="remove-objective">
+                    <span>Excluir objetivo</span>
+                    <img src="https://i.ibb.co/fH7ngPx/delete.png" alt="delete">
+                  </button>
+
+                </div>
+                
+                
                 <div style="clear: both"></div>
-                <input
-                  type="text"
-                  name="objective_title_1"
-                  placeholder="Objetivo"
-                  style="
-                    width: 100%;
-                    padding: 10px;
-                    margin: 10px 0;
-                    border: 1px solid #ccc;
-                    border-radius: 5px;
-                  "
-                />
-                <textarea
-                  name="objective_description_1"
-                  placeholder="Descrição"
-                  style="
-                    width: 100%;
-                    padding: 10px;
-                    margin: 10px 0;
-                    border: 1px solid #ccc;
-                    border-radius: 5px;
-                    resize: none;
-                  "
-                  rows="3"
-                ></textarea>
+                <div class="form-group-objetivo">
+                  <input
+                    type="text"
+                    name="objective_title_1"
+                    placeholder="Objetivo"/>
+                  <textarea
+                    name="objective_description_1"
+                    placeholder="Descrição" rows="4"></textarea>
+                  </div>
               </div>
             </div>
 
             <!-- Botão de adicionar objetivo -->
-            <button
-              type="button"
-              id="add-objective"
-              style="
-                margin: 10px 0;
-                background-color: #c04dcc;
-                color: #fff;
-                padding: 10px 20px;
-                border: none;
-                border-radius: 8px;
-                font-size: 14px;
-                cursor: pointer;
-              "
-            >
-              Adicionar objetivo ➕
-            </button>
 
-            <!-- Botões de navegação -->
-            <div class="buttons" style="margin-top: 20px">
+            <div class="button-add-objective">
               <button
                 type="button"
-                class="back-btn"
-                data-previous="referencias_concorrentes"
-                style="
-                  background-color: #fff;
-                  color: #e839a2;
-                  border: 2px solid #e839a2;
-                  border-radius: 8px;
-                  padding: 10px 20px;
-                  margin-right: 10px;
-                  cursor: pointer;
-                "
-              >
-                Voltar
-              </button>
-              <button
-                type="button"
-                class="save-btn"
-                data-next="descricao"
-                style="
-                  background-color: #e839a2;
-                  color: #fff;
-                  border: none;
-                  border-radius: 8px;
-                  padding: 10px 20px;
-                  cursor: pointer;
-                "
-              >
-                Próximo
+                id="add-objective">
+                <span>Adicionar objetivo</span>
+                <img src="https://i.ibb.co/h1jMvSK/add.png" alt="add">
               </button>
             </div>
+
+            <!-- Botões de navegação -->
+            
+
+            <div class="buttons-form">
+              <button
+              type="button"
+              class="back-btn"
+              data-previous="referencias_concorrentes"
+        >
+          Voltar
+        </button>
+
+        <button
+        type="button"
+        class="save-btn"
+        data-next="descricao"
+        >
+          Próximo
+        </button>
+            </div>
           </div>
+          </div>
+          </section>
+          
+          
+        </div>
 
           <script>
             let objectiveCount = 1;
@@ -1376,16 +1830,22 @@
                 const objectiveList = document.getElementById("objective-list");
 
                 const objectiveTemplate = `
-                            <div class="objective" data-index="${objectiveCount}" style="margin-bottom: 30px;">
-                                <h2 style="font-size: 18px; color: #E839A2; text-align: left;">Objetivo ${objectiveCount}</h2>
-                                <button type="button" class="remove-objective" style="float: right; color: #c04dcc; background: none; border: none; cursor: pointer; font-size: 14px;">Excluir objetivo ✖</button>
-                                <div style="clear: both;"></div>
-                                <input type="text" name="objective_title_${objectiveCount}" placeholder="Objetivo" 
-                                    style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
-                                <textarea name="objective_description_${objectiveCount}" placeholder="Descrição" 
-                                        style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; resize: none;" rows="3"></textarea>
-                            </div>
-                        `;
+    <div class="objective" data-index="${objectiveCount}">
+        <div class="objetivo-name">
+            <h2>Objetivo ${objectiveCount}</h2>
+            <button type="button" class="remove-objective">
+                <span>Excluir objetivo</span>
+                <img src="https://i.ibb.co/fH7ngPx/delete.png" alt="delete">
+            </button>
+        </div>
+        <div style="clear: both"></div>
+        <div class="form-group-objetivo">
+            <input type="text" name="objective_title_${objectiveCount}" placeholder="Objetivo" />
+            <textarea name="objective_description_${objectiveCount}" placeholder="Descrição" rows="4"></textarea>
+        </div>
+    </div>
+`;
+
 
                 objectiveList.insertAdjacentHTML(
                   "beforeend",
@@ -1411,175 +1871,106 @@
 
           <!-- PÁGINA DESCRIÇÃO DE PERSONAS -->
           <div id="descricao" class="content-section">
-            <h1 style="font-size: 28px; color: #e839a2">
-              Descrição de Personas
+            <section class="descricao">
+              <div class="navbar">
+                <a class="sair-button" href="#">
+                  <p>Sair</p>
+                  <img src="https://i.ibb.co/dMBfkB8/arrow-right-alt.png" />
+                </a>
+              </div>
+
+              <div class="content-planejamento">
+                <div class="forms">
+            <h1>
+              Descrição de personas
             </h1>
             <div id="persona-list">
-              <!-- Primeira persona como modelo -->
-              <div class="persona" data-index="1" style="margin-bottom: 30px">
-                <h2 style="font-size: 18px; color: #e839a2; text-align: left">
-                  Persona 1
-                </h2>
-                <button
-                  type="button"
-                  class="remove-persona"
-                  style="
-                    float: right;
-                    color: #c04dcc;
-                    background: none;
-                    border: none;
-                    cursor: pointer;
-                    font-size: 14px;
-                  "
-                >
-                  Excluir persona ✖
-                </button>
-                <div style="clear: both"></div>
+              <!-- Modelo inicial de concorrente -->
+              <div
+                class="persona"
+                data-index="1">
+                <div class="persona-name">
+                  <h2>
+                    Persona 1
+                  </h2>
+                  <button
+                    type="button"
+                    class="remove-persona">
+                    <span>Excluir persona</span>
+                    <img src="https://i.ibb.co/fH7ngPx/delete.png" alt="delete">
+                  </button>
 
+                </div>
+                <div style="clear: both"></div>
+                <div class="form-group-persona">
                 <input
                   type="text"
                   name="persona_name_1"
-                  placeholder="Nome da Persona"
-                  style="
-                    width: 100%;
-                    padding: 10px;
-                    margin: 10px 0;
-                    border: 1px solid #ccc;
-                    border-radius: 5px;
-                  "
-                />
+                  placeholder="Nome da persona"/>
                 <input
-                  type="number"
-                  name="persona_age_1"
-                  placeholder="Idade"
-                  style="
-                    width: 100%;
-                    padding: 10px;
-                    margin: 10px 0;
-                    border: 1px solid #ccc;
-                    border-radius: 5px;
-                  "
-                />
+                type="number"
+                name="persona_age_1"
+                placeholder="Idade"/>
                 <input
-                  type="text"
-                  name="persona_job_1"
-                  placeholder="Ocupação/Profissão"
-                  style="
-                    width: 100%;
-                    padding: 10px;
-                    margin: 10px 0;
-                    border: 1px solid #ccc;
-                    border-radius: 5px;
-                  "
-                />
+                type="text"
+                name="persona_job_1"
+                placeholder="Ocupação/profissão"/>
                 <textarea
                   name="persona_behavior_1"
-                  placeholder="Comportamento e Hábitos"
-                  style="
-                    width: 100%;
-                    padding: 10px;
-                    margin: 10px 0;
-                    border: 1px solid #ccc;
-                    border-radius: 5px;
-                    resize: none;
-                  "
-                  rows="3"
+                  placeholder="Comportamento e hábitos" rows="4"
                 ></textarea>
                 <textarea
                   name="persona_goals_1"
-                  placeholder="Objetivos e Necessidades"
-                  style="
-                    width: 100%;
-                    padding: 10px;
-                    margin: 10px 0;
-                    border: 1px solid #ccc;
-                    border-radius: 5px;
-                    resize: none;
-                  "
-                  rows="3"
+                  placeholder="Objetivos e necessidades" rows="4"
                 ></textarea>
                 <textarea
                   name="persona_challenges_1"
-                  placeholder="Desafios e Problemas"
-                  style="
-                    width: 100%;
-                    padding: 10px;
-                    margin: 10px 0;
-                    border: 1px solid #ccc;
-                    border-radius: 5px;
-                    resize: none;
-                  "
-                  rows="3"
+                  placeholder="Desafios e problemas"
+                  rows="4"
                 ></textarea>
                 <textarea
                   name="persona_solutions_1"
-                  placeholder="Soluções Possíveis"
-                  style="
-                    width: 100%;
-                    padding: 10px;
-                    margin: 10px 0;
-                    border: 1px solid #ccc;
-                    border-radius: 5px;
-                    resize: none;
-                  "
-                  rows="3"
+                  placeholder="Soluções possíveis"
+                  rows="4"
                 ></textarea>
+                </div>
               </div>
             </div>
 
-            <!-- Botão de adicionar persona -->
-            <button
-              type="button"
-              id="add-persona"
-              style="
-                margin: 10px 0;
-                background-color: #c04dcc;
-                color: #fff;
-                padding: 10px 20px;
-                border: none;
-                border-radius: 8px;
-                font-size: 14px;
-                cursor: pointer;
-              "
-            >
-              Adicionar Persona ➕
-            </button>
-
-            <!-- Botões de navegação -->
-            <div class="buttons" style="margin-top: 20px">
+            <!-- Botão de adicionar concorrente -->
+            
+            <div class="button-add-persona">
               <button
                 type="button"
-                class="back-btn"
-                data-previous="objetivos_projeto"
-                style="
-                  background-color: #fff;
-                  color: #e839a2;
-                  border: 2px solid #e839a2;
-                  border-radius: 8px;
-                  padding: 10px 20px;
-                  margin-right: 10px;
-                  cursor: pointer;
-                "
-              >
-                Voltar
-              </button>
-              <button
-                type="button"
-                class="save-btn"
-                data-next="elementos"
-                style="
-                  background-color: #e839a2;
-                  color: #fff;
-                  border: none;
-                  border-radius: 8px;
-                  padding: 10px 20px;
-                  cursor: pointer;
-                "
-              >
-                Próximo
+                id="add-persona">
+                <span>Adicionar persona</span>
+                <img src="https://i.ibb.co/h1jMvSK/add.png" alt="add">
               </button>
             </div>
+
+            <!-- Botões de navegação -->
+            <div class="buttons-form">
+              <button
+              type="button"
+              class="back-btn"
+              data-previous="objetivos_projeto"
+        >
+          Voltar
+        </button>
+
+        <button
+        type="button"
+        class="save-btn"
+        data-next="elementos"
+        >
+          Próximo
+        </button>
+            </div>
           </div>
+          </div>
+          </section>
+          </div>
+
 
           <script>
             let personaCount = 1;
@@ -1592,27 +1983,27 @@
                 const personaList = document.getElementById("persona-list");
 
                 const personaTemplate = `
-                            <div class="persona" data-index="${personaCount}" style="margin-bottom: 30px;">
-                                <h2 style="font-size: 18px; color: #E839A2; text-align: left;">Persona ${personaCount}</h2>
-                                <button type="button" class="remove-persona" style="float: right; color: #c04dcc; background: none; border: none; cursor: pointer; font-size: 14px;">Excluir persona ✖</button>
-                                <div style="clear: both;"></div>
-                
-                                <input type="text" name="persona_name_${personaCount}" placeholder="Nome da Persona" 
-                                    style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
-                                <input type="number" name="persona_age_${personaCount}" placeholder="Idade" 
-                                    style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
-                                <input type="text" name="persona_job_${personaCount}" placeholder="Ocupação/Profissão" 
-                                    style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
-                                <textarea name="persona_behavior_${personaCount}" placeholder="Comportamento e Hábitos" 
-                                        style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; resize: none;" rows="3"></textarea>
-                                <textarea name="persona_goals_${personaCount}" placeholder="Objetivos e Necessidades" 
-                                        style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; resize: none;" rows="3"></textarea>
-                                <textarea name="persona_challenges_${personaCount}" placeholder="Desafios e Problemas" 
-                                        style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; resize: none;" rows="3"></textarea>
-                                <textarea name="persona_solutions_${personaCount}" placeholder="Soluções Possíveis" 
-                                        style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; resize: none;" rows="3"></textarea>
-                            </div>
-                        `;
+    <div class="persona" data-index="${personaCount}">
+        <div class="persona-name">
+            <h2>Persona ${personaCount}</h2>
+            <button type="button" class="remove-persona">
+                <span>Excluir persona</span>
+                <img src="https://i.ibb.co/fH7ngPx/delete.png" alt="delete">
+            </button>
+        </div>
+        <div style="clear: both"></div>
+        <div class="form-group-persona">
+            <input type="text" name="persona_name_${personaCount}" placeholder="Nome da persona" />
+            <input type="number" name="persona_age_${personaCount}" placeholder="Idade" />
+            <input type="text" name="persona_job_${personaCount}" placeholder="Ocupação/Profissão" />
+            <textarea name="persona_behavior_${personaCount}" placeholder="Comportamento e Hábitos" rows="4"></textarea>
+            <textarea name="persona_goals_${personaCount}" placeholder="Objetivos e Necessidades" rows="4"></textarea>
+            <textarea name="persona_challenges_${personaCount}" placeholder="Desafios e Problemas" rows="4"></textarea>
+            <textarea name="persona_solutions_${personaCount}" placeholder="Soluções Possíveis" rows="4"></textarea>
+        </div>
+    </div>
+`;
+
 
                 personaList.insertAdjacentHTML("beforeend", personaTemplate);
                 attachRemovePersonaEvent();
@@ -1635,10 +2026,20 @@
 
           <!-- PÁGINA ELEMENTOS DA IDENTIDADE VISUAL -->
           <div id="elementos" class="content-section">
-            <h1 style="font-size: 28px; color: #e839a2">
-              Elementos da Identidade Visual
+            <section class="referencias-concorrentes">
+              <div class="navbar">
+                <a class="sair-button" href="#">
+                  <p>Sair</p>
+                  <img src="https://i.ibb.co/dMBfkB8/arrow-right-alt.png" />
+                </a>
+              </div>
+
+              <div class="content-elementos">
+                <div class="forms">
+            <h1>
+              Elementos da identidade visual
             </h1>
-            <p style="color: #666; font-size: 14px; margin-bottom: 20px">
+            <p>
               Faça o upload de arquivos relacionados à identidade visual, como
               logotipos, fontes, imagens ou outros elementos que representem sua
               marca.
@@ -1646,18 +2047,10 @@
 
             <!-- Área de upload -->
             <div
-              id="upload-area"
-              style="
-                border: 2px dashed #e839a2;
-                padding: 20px;
-                border-radius: 10px;
-                text-align: center;
-                margin-bottom: 20px;
-              "
-            >
-              <p style="font-size: 16px; color: #e839a2; margin-bottom: 10px">
+              id="upload-area" class="upload-area">
+              <span>
                 Arraste e solte arquivos aqui ou clique para selecionar
-              </p>
+              </span>
               <input
                 type="file"
                 id="file-input"
@@ -1667,70 +2060,42 @@
               />
               <button
                 type="button"
-                id="browse-files"
-                style="
-                  background-color: #e839a2;
-                  color: #fff;
-                  padding: 10px 20px;
-                  border: none;
-                  border-radius: 8px;
-                  font-size: 14px;
-                  cursor: pointer;
-                "
-              >
-                Selecionar Arquivos
+                id="browse-files">
+                Selecionar arquivos
               </button>
             </div>
 
             <!-- Galeria de visualização -->
             <div
-              id="file-preview"
-              style="
-                display: flex;
-                flex-wrap: wrap;
-                gap: 15px;
-                justify-content: center;
-              "
-            >
-              <p style="font-size: 14px; color: #666">
+              id="file-preview">
+              <p>
                 Nenhum arquivo anexado.
               </p>
             </div>
 
             <!-- Botões de navegação -->
-            <div class="buttons" style="margin-top: 20px">
+            <div class="buttons-form">
               <button
-                type="button"
-                class="back-btn"
-                data-previous="descricao"
-                style="
-                  background-color: #fff;
-                  color: #e839a2;
-                  border: 2px solid #e839a2;
-                  border-radius: 8px;
-                  padding: 10px 20px;
-                  margin-right: 10px;
-                  cursor: pointer;
-                "
-              >
-                Voltar
-              </button>
-              <button
-                type="button"
-                class="save-btn"
-                data-next="manual_marca"
-                style="
-                  background-color: #e839a2;
-                  color: #fff;
-                  border: none;
-                  border-radius: 8px;
-                  padding: 10px 20px;
-                  cursor: pointer;
-                "
-              >
-                Próximo
-              </button>
+              type="button"
+              class="back-btn"
+              data-previous="descricao"
+        >
+          Voltar
+        </button>
+
+        <button
+        type="button"
+        class="save-btn"
+        data-next="manual_marca"
+        >
+          Próximo
+        </button>
             </div>
+
+
+          </div>
+          </div>
+          </section>
           </div>
 
           <script>
@@ -1786,7 +2151,7 @@
                 removeButton.style.position = "absolute";
                 removeButton.style.top = "5px";
                 removeButton.style.right = "5px";
-                removeButton.style.backgroundColor = "#E839A2";
+                removeButton.style.backgroundColor = "#C352FF";
                 removeButton.style.color = "#fff";
                 removeButton.style.border = "none";
                 removeButton.style.borderRadius = "50%";
@@ -1832,26 +2197,28 @@
 
           <!-- PÁGINA MANUAL DA MARCA -->
           <div id="manual_marca" class="content-section">
-            <h1 style="font-size: 28px; color: #e839a2">Manual da Marca</h1>
-            <p style="color: #666; font-size: 14px; margin-bottom: 20px">
+            <section class="referencias-concorrentes">
+              <div class="navbar">
+                <a class="sair-button" href="#">
+                  <p>Sair</p>
+                  <img src="https://i.ibb.co/dMBfkB8/arrow-right-alt.png" />
+                </a>
+              </div>
+
+              <div class="content-elementos">
+                <div class="forms">
+            <h1>Manual da marca</h1>
+            <p>
               Faça o upload do manual da marca e outros documentos que
               representem as diretrizes da identidade visual.
             </p>
 
             <!-- Área de upload -->
             <div
-              id="upload-area-manual"
-              style="
-                border: 2px dashed #e839a2;
-                padding: 20px;
-                border-radius: 10px;
-                text-align: center;
-                margin-bottom: 20px;
-              "
-            >
-              <p style="font-size: 16px; color: #e839a2; margin-bottom: 10px">
+              id="upload-area-manual" class="upload-area-manual">
+              <span>
                 Arraste e solte arquivos aqui ou clique para selecionar
-              </p>
+              </span>
               <input
                 type="file"
                 id="file-input-manual"
@@ -1861,69 +2228,41 @@
               />
               <button
                 type="button"
-                id="browse-files-manual"
-                style="
-                  background-color: #e839a2;
-                  color: #fff;
-                  padding: 10px 20px;
-                  border: none;
-                  border-radius: 8px;
-                  font-size: 14px;
-                  cursor: pointer;
-                "
-              >
-                Selecionar Arquivos
+                id="browse-files-manual">
+                Selecionar arquivos
               </button>
             </div>
 
             <!-- Galeria de visualização -->
             <div
-              id="file-preview-manual"
-              style="
-                display: flex;
-                flex-wrap: wrap;
-                gap: 15px;
-                justify-content: center;
-              "
-            >
-              <p style="font-size: 14px; color: #666">
+              id="file-preview-manual">
+              <p>
                 Nenhum arquivo anexado.
               </p>
             </div>
 
             <!-- Botões de navegação -->
-            <div class="buttons" style="margin-top: 20px">
+            <div class="buttons-form">
               <button
-                type="button"
-                class="back-btn"
-                data-previous="elementos"
-                style="
-                  background-color: #fff;
-                  color: #e839a2;
-                  border: 2px solid #e839a2;
-                  border-radius: 8px;
-                  padding: 10px 20px;
-                  margin-right: 10px;
-                  cursor: pointer;
-                "
-              >
-                Voltar
-              </button>
-              <button
+              type="button"
+              class="back-btn"
+              data-previous="elementos"
+        >
+          Voltar
+        </button>
+
+        <button
                 type="button"
                 id="generate-manual"
-                style="
-                  background-color: #e839a2;
-                  color: #fff;
-                  border: none;
-                  border-radius: 8px;
-                  padding: 10px 20px;
-                  cursor: pointer;
-                "
-              >
+                class="save-btn">
                 Gerar
               </button>
+
+
             </div>
+          </div>
+          </div>
+          </section>
           </div>
 
           <script>

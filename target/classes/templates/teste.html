@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Planejamento de Projetos</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+  <style>
+    /* CSS Geral */
+    body {
+      margin: 0;
+      font-family: 'Outfit', sans-serif;
+      background-color: #e5e3e5;
+      color: #232123;
+    }
+
+    .content-body {
+      display: flex;
+      height: 100vh;
+    }
+
+    .sidebar {
+      width: 20%;
+      background-color: #1e1e1e;
+      color: #fff;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      height: 100vh;
+      position: fixed;
+      overflow-y: auto;
+    }
+
+    .sidebar a {
+      text-decoration: none;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    .sidebar a:hover, .sidebar a.active {
+      background-color: #e839a2;
+    }
+
+    .content {
+      margin-left: 20%;
+      padding: 30px;
+      width: 80%;
+      overflow-y: auto;
+    }
+
+    .form-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .form-section h1 {
+      color: #e839a2;
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .form-section p {
+      color: #666;
+      font-size: 1rem;
+      margin-bottom: 20px;
+    }
+
+    .form-section input, .form-section textarea {
+      width: 70%;
+      margin-bottom: 15px;
+      padding: 10px;
+      border: 1.5px solid #ccc;
+      border-radius: 7px;
+      font-size: 1rem;
+      background: #ffffff;
+    }
+
+    .form-section button {
+      padding: 10px 20px;
+      border: none;
+      background-color: #e839a2;
+      color: #fff;
+      font-size: 1rem;
+      border-radius: 7px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .form-section button:hover {
+      background-color: #d92a93;
+    }
+
+    .presentation-list {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 10px;
+      gap: 15px;
+    }
+
+    .presentation-item {
+      background-color: #fff;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 7px;
+      width: 100%;
+    }
+
+    .presentation-item button {
+      margin-left: 10px;
+      padding: 5px 10px;
+      border: none;
+      background-color: #e839a2;
+      color: #fff;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .presentation-item button:hover {
+      background-color: #d92a93;
+    }
+
+    /* Botão de Ação */
+    .action-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #e839a2;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .action-button:hover {
+      background-color: #d92a93;
+    }
+
+    .action-button img {
+      width: 20px;
+      height: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="content-body">
+    <div class="sidebar">
+      <a href="#" id="nav-form" class="active">Novo Planejamento</a>
+      <a href="#" id="nav-list">Listagem de Apresentações</a>
+    </div>
+    <div class="content">
+      <div id="form-section" class="form-section">
+        <h1>Novo Planejamento</h1>
+        <p>Adicione um título e descrição para iniciar o planejamento do seu projeto.</p>
+        <form id="planning-form">
+          <input type="text" id="title" name="title" placeholder="Título do Planejamento" required>
+          <textarea id="description" name="description" placeholder="Descrição" rows="4"></textarea>
+          <input type="url" id="image" name="image" placeholder="Link da Imagem de Capa">
+          <button type="button" id="save-button">Salvar Planejamento</button>
+        </form>
+      </div>
+
+      <div id="list-section" class="form-section" style="display: none;">
+        <h1>Listagem de Apresentações</h1>
+        <div id="presentation-list" class="presentation-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="action-button" id="share-button" style="display: none;">
+    <img src="https://img.icons8.com/fluency/48/whatsapp.png" alt="Compartilhar no WhatsApp">
+  </div>
+
+  <script>
+    const navForm = document.getElementById("nav-form");
+    const navList = document.getElementById("nav-list");
+    const formSection = document.getElementById("form-section");
+    const listSection = document.getElementById("list-section");
+
+    navForm.addEventListener("click", () => {
+      formSection.style.display = "block";
+      listSection.style.display = "none";
+      navForm.classList.add("active");
+      navList.classList.remove("active");
+    });
+
+    navList.addEventListener("click", () => {
+      formSection.style.display = "none";
+      listSection.style.display = "block";
+      navList.classList.add("active");
+      navForm.classList.remove("active");
+      loadPresentations();
+    });
+
+    const saveButton = document.getElementById("save-button");
+    const planningForm = document.getElementById("planning-form");
+
+    saveButton.addEventListener("click", () => {
+      const formData = new FormData(planningForm);
+      const data = Object.fromEntries(formData.entries());
+      const presentations = JSON.parse(localStorage.getItem("presentations")) || [];
+      presentations.push(data);
+      localStorage.setItem("presentations", JSON.stringify(presentations));
+      alert("Planejamento salvo com sucesso!");
+      planningForm.reset();
+    });
+
+    function loadPresentations() {
+      const presentationList = document.getElementById("presentation-list");
+      presentationList.innerHTML = "";
+      const presentations = JSON.parse(localStorage.getItem("presentations")) || [];
+      presentations.forEach((presentation, index) => {
+        const item = document.createElement("div");
+        item.classList.add("presentation-item");
+        item.innerHTML = `
+          <p><strong>${presentation.title}</strong><br>${presentation.description}</p>
+          <button onclick="viewPresentation(${index})">Visualizar</button>
+          <button onclick="downloadPDF(${index})">Baixar PDF</button>
+        `;
+        presentationList.appendChild(item);
+      });
+    }
+
+    function viewPresentation(index) {
+      const presentations = JSON.parse(localStorage.getItem("presentations"));
+      const presentation = presentations[index];
+      const newWindow = window.open("", "_blank");
+      newWindow.document.write(`
+        <h1>${presentation.title}</h1>
+        <p>${presentation.description}</p>
+        ${presentation.image ? `<img src="${presentation.image}" alt="Imagem">` : ""}
+      `);
+    }
+
+    function downloadPDF(index) {
+      const { jsPDF } = window.jspdf;
+      const presentations = JSON.parse(localStorage.getItem("presentations"));
+      const presentation = presentations[index];
+      const doc = new jsPDF();
+      doc.text(`Título: ${presentation.title}`, 10, 10);
+      doc.text(`Descrição: ${presentation.description}`, 10, 20);
+      doc.save(`${presentation.title}.pdf`);
+    }
+  </script>
+</body>
+</html>

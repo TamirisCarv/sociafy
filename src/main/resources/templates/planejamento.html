@@ -1706,11 +1706,11 @@
                   </div>
                   <div style="clear: both"></div>
                   <div class="form-group-competitor">
-                  <input type="text" name="competitor_name_${competitorCount}" placeholder="Nome do concorrente" />
-                  <input type="text" name="competitor_strengths_${competitorCount}" placeholder="Pontos positivos" />
-                  <input type="text" name="competitor_opportunities_${competitorCount}" placeholder="Gaps (oportunidades)" />
-                  <input type="text" name="competitor_insights_${competitorCount}" placeholder="Principais insights" />
-                  <input type="text" name="competitor_links_${competitorCount}" placeholder="Links importantes" />
+                  <input type="text" name="Nome do concorrente ${competitorCount}" placeholder="Nome do concorrente" />
+                  <input type="text" name="Nome do concorrente ${competitorCount}" placeholder="Pontos positivos" />
+                  <input type="text" name="Gaps (oportunidades) ${competitorCount}" placeholder="Gaps (oportunidades)" />
+                  <input type="text" name="Principais insights ${competitorCount}" placeholder="Principais insights" />
+                  <input type="text" name="Links importantes ${competitorCount}" placeholder="Links importantes" />
                   </div>
                   </div>
                   `;
@@ -2408,223 +2408,479 @@
 
   // Criar a nova página com os dados capturados
   const newPage = window.open("", "_blank");
-  newPage.document.write(`
-    <!DOCTYPE html>
-    <html lang="pt-br">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Resumo do Planejamento</title>
-        <style>
-    /* Configurações gerais */
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #111;
-        color: #fff;
-    }
+newPage.document.write(`
+  <!DOCTYPE html>
+  <html lang="pt-br">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Resumo do Planejamento</title>
+      <style>
+        /* Configurações gerais */
+        * {
+          margin: 0;
+          border: 0;
+          /* font-family: "Outfit", sans-serif; */
+          /* font-family: "Syne", sans-serif; */
+        }
 
-    h1 {
-        text-align: center;
-        font-size: 32px;
-        color: #fff;
-        margin-bottom: 30px;
-    }
+        body {
+          font-family: "Outfit", sans-serif;
+          margin: 0;
+          background: #1e1e1e;
+        }
 
-    /* Estrutura das seções */
-    .section {
-        margin-bottom: 20px;
-        padding: 20px;
-        border-radius: 10px;
-        background-color: #1e1e1e;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
-    }
+        /* NAVBAR */
+        .navbar {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 25px 50px;
+        }
 
-    .section h2 {
-        font-size: 24px;
-        color: #E839A2;
-        margin-bottom: 15px;
-        border-bottom: 1px solid #333;
-        padding-bottom: 5px;
-    }
+        .navbar .logo-Sociafy {
+          width: 120px;
+        }
 
-    .section p {
-        font-size: 16px;
-        line-height: 1.6;
-        margin-bottom: 10px;
-        color: #bbb;
-    }
+        .navbar .sair-button {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 5px;
+          text-decoration: none;
+          opacity: 70%;
+          transition: 0.3s;
+        }
 
-    .section img {
-        max-width: 200px;
-        border-radius: 5px;
-        margin: 10px 0;
-    }
+        .navbar .sair-button:hover {
+          opacity: 100%;
+        }
 
-    .section a {
-        color: #E839A2;
-        text-decoration: none;
-        font-weight: bold;
-    }
+        .navbar .sair-button p {
+          color: #fff;
+        }
 
-    .section a:hover {
-        text-decoration: underline;
-    }
+        .navbar .sair-button img {
+          width: 20px;
+        }
 
-    /* Estilo das caixas de texto */
-    .section strong {
-        color: #fff;
-    }
+        .section-presentation {
+          width: 100%;
+        }
 
-    .info-box {
-        background-color: #333;
-        border: 1px solid #444;
-        padding: 15px;
-        border-radius: 5px;
-        margin: 10px 0;
-        color: #fff;
-    }
+        .section-presentation .capa {
+          width: 100%;
+          height: 350px;
+          background: url(https://i.ibb.co/qyVqjRf/CAPA.png);
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position: center;
+        }
 
-    /* Botão de Ação */
-    .button {
-        display: inline-block;
-        background-color: #E839A2;
-        color: #fff;
-        padding: 10px 15px;
-        text-align: center;
-        font-size: 14px;
-        font-weight: bold;
-        border-radius: 5px;
-        text-decoration: none;
-        transition: background-color 0.3s ease;
-    }
+        /* SECTION 1 */
+        .section1 {
+          color: #fff;
+          padding: 70px 200px;
+        }
 
-    .button:hover {
-        background-color: #D72890;
-    }
+        .section1 .title-presentation {
+          color: #fff;
+          font-size: 1.6rem;
+          font-weight: 600;
+          margin-bottom: 60px;
+        }
 
-    /* Listas */
-    ul {
-        margin: 10px 0;
-        padding: 0 20px;
-    }
+        .section1 .infos-presentation {
+          /* margin-top: 70px; */
+        }
 
-    ul li {
-        margin-bottom: 10px;
-        color: #bbb;
-    }
-</style>
+        .section1 .infos-presentation h2 {
+          font-family: "Syne", sans-serif;
+          font-size: 1.4rem;
+          font-weight: 700;
+          color: #e839a2;
+        }
 
-    </head>
-    <body>
-        <h1>Resumo do Planejamento</h1>
+        .section1 .section-info {
+          margin-top: 30px;
+          display: flex;
+          flex-direction: column;
+        }
 
-        <!-- Novo Planejamento -->
-        <div class="section">
-            <h2>Novo Planejamento</h2>
-            <p><strong>Título do Planejamento:</strong> ${data.planejamento || "Não informado"}</p>
-            <p><strong>Descrição:</strong> ${data.descricao || "Não informada"}</p>
-            <p><strong>Imagem de Capa:</strong></p>
-            ${
-              data.imagem_link
-                ? `<img src="${data.imagem_link}" alt="Imagem de Capa">`
-                : "Não vinculada"
-            }
+        .section1 .section-info span {
+          font-size: 1.1rem;
+          font-weight: 400;
+        }
+
+        .section1 .section-info p {
+          font-size: 1rem;
+          font-weight: 200;
+          margin-top: 10px;
+          background: #e5e3e510;
+          padding: 10px 20px;
+          border-radius: 5px;
+          display: inline-block;
+        }
+
+        /* SECTION 2 */
+        .section2 {
+          color: #1e1e1e;
+          background: #e5e3e5;
+          padding: 70px 200px;
+        }
+
+        .section2 .infos-presentation {
+          /* margin-top: 70px; */
+        }
+
+        .section2 .infos-presentation h2 {
+          font-family: "Syne", sans-serif;
+          font-size: 1.4rem;
+          font-weight: 700;
+          color: #e839a2;
+        }
+
+        .section2 .section-info {
+          margin-top: 30px;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .section2 .section-info span {
+          font-size: 1.1rem;
+          font-weight: 400;
+        }
+
+        .section2 .section-info p {
+          font-size: 1rem;
+          font-weight: 300;
+          margin-top: 10px;
+          background: #1e1e1e10;
+          padding: 10px 20px;
+          border-radius: 5px;
+          display: inline-block;
+        }
+
+        .button-active {
+          background-color: #e839a2;
+          cursor: pointer;
+        }
+
+        .button-active:hover {
+          background-color: #d92a93;
+          cursor: pointer;
+        }
+
+        .button-desabled {
+          background-color: #ababab;
+          cursor: not-allowed;
+        }
+
+        .section2 .section-info .button-perfil {
+          text-decoration: none;
+          padding: 10px 15px;
+          margin-top: 17px;
+          font-family: "Outfit", sans-serif;
+          font-weight: 500;
+          color: #fff;
+          border: none;
+          border-radius: 7px;
+          transition: 0.3s;
+          width: 15%;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+        }
+
+        .section2 .section-info .button-perfil .button {
+          font-size: 1rem;
+        }
+
+        .section2 .section-info .button-perfil img {
+          width: 25px;
+        }
+
+        .app {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          margin-top: 40px;
+        }
+
+        .app .img-app {
+          display: flex;
+          align-items: center;
+          padding: 13px;
+          background: #1e1e1e10;
+          border-radius: 50px;
+        }
+
+        .app .img-app img {
+          width: 22px;
+        }
+
+        .app h3 {
+          font-weight: 600;
+          font-size: 1.2rem;
+        }
+      </style>
+
+  </head>
+  <body>
+
+    <div class="navbar">
+      <img
+        class="logo-Sociafy"
+        src="https://i.ibb.co/dbkgK7x/logo-Sociafy.png"
+        alt="Logo Sociafy"
+      />
+
+      <a class="sair-button" href="#">
+        <p>Sair</p>
+        <img src="https://i.ibb.co/GQbLzmw/arrow-right-alt.png" />
+      </a>
+    </div>
+
+    <div class="section-presentation">
+      <div class="capa">
+        <!-- <img src="https://i.ibb.co/qyVqjRf/CAPA.png"> -->
+      </div>
+
+      <div class="content-presentation">
+        <div class="section1">
+          <p class="title-presentation">
+            ${data.planejamento || "Não informado"}
+          </p>
+
+          <div class="infos-presentation">
+            <h2>Informações do cliente</h2>
+
+            <div class="section-info">
+              <span>Nome do Cliente:</span>
+              <div class="text-p">
+                <p>${data.cliente_nome || "Não informado"}</p>
+              </div>
+            </div>
+
+            <div class="section-info">
+              <span>Setor de atuação:</span>
+              <div class="text-p">
+                <p>${data.cliente_setor || "Não informado"}</p>
+              </div>
+            </div>
+
+            <div class="section-info">
+              <span>Descrição:</span>
+              <div class="text-p">
+                <p>${data.cliente_descricao || "Não informada"}</p>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <!-- Informações do Cliente -->
-        <div class="section">
-            <h2>Informações do Cliente</h2>
-            <p><strong>Nome do Cliente:</strong> ${data.cliente_nome || "Não informado"}</p>
-            <p><strong>Setor de Atuação:</strong> ${data.cliente_setor || "Não informado"}</p>
-            <p><strong>Descrição:</strong> ${data.cliente_descricao || "Não informada"}</p>
+        <div class="section2">
+          <div class="infos-presentation">
+            <h2>Informações dos canais</h2>
+
+            <div class="app">
+              <div class="img-app">
+                <img src="https://i.ibb.co/xLL1sj6/instagram.png" />
+              </div>
+              <h3>Instagram</h3>
+            </div>
+
+            <div class="section-info">
+              <span>Número de seguidores:</span>
+              <div class="text-p">
+                <p>${data.instagram_seguidores || "Não informado"}</p>
+              </div>
+            </div>
+
+            <div class="section-info">
+              <span>Descrição:</span>
+              <div class="text-p">
+                <p>${data.instagram_descricao || "Não informada"}</p>
+              </div>
+            </div>
+            
+            <div class="section-info">
+            ${data.instagram_link ? `
+              <a class="button-perfil button-active" href="${data.instagram_link}" target="_blank">
+                <span class="button">Acessar perfil</span>
+                <img src="https://i.ibb.co/DVLSLrH/arrow-circle-right.png" alt="arrow-circle-right" />
+              </a>
+            ` : `
+              <a class="button-perfil button-desabled">
+                <span class="button">Acessar perfil</span>
+                <img src="https://i.ibb.co/DVLSLrH/arrow-circle-right.png" alt="arrow-circle-right" />
+              </a>
+            `}
+          </div>
+          </div>
+
+          <div class="infos-presentation">
+            <div class="app">
+              <div class="img-app">
+                <img src="https://i.ibb.co/ccS9nTB/facebook.png" />
+              </div>
+              <h3>Facebook</h3>
+            </div>
+
+            <div class="section-info">
+              <span>Número de seguidores:</span>
+              <div class="text-p">
+                <p>${data.facebook_seguidores || "Não informado"}</p>
+              </div>
+            </div>
+
+            <div class="section-info">
+              <span>Descrição:</span>
+              <div class="text-p">
+                <p>${data.facebook_descricao || "Não informada"}</p>
+              </div>
+            </div>
+
+            <div class="section-info">
+              ${ data.facebook_link ? `<a class="button-perfil button-active">
+                <span
+                  class="button"
+                  href="${data.facebook_link}"
+                  target="_blank"
+                  >Acessar perfil</span
+                >
+                <img
+                  src="https://i.ibb.co/DVLSLrH/arrow-circle-right.png"
+                  alt="arrow-circle-right"
+                /> </a
+              >` : `
+              <a class="button-perfil button-desabled">
+                <span
+                  class="button"
+                  href="${data.facebook_link}"
+                  target="_blank"
+                  >Acessar perfil</span
+                >
+                <img
+                  src="https://i.ibb.co/DVLSLrH/arrow-circle-right.png"
+                  alt="arrow-circle-right"
+                />
+              </a>
+              `}
+            </div>
+          </div>
+
+          <div class="infos-presentation">
+            <div class="app">
+              <div class="img-app">
+                <img src="https://i.ibb.co/LZyTBF6/whats.png" />
+              </div>
+              <h3>WhatsApp</h3>
+            </div>
+
+            <div class="section-info">
+              <span>Descrição:</span>
+              <div class="text-p">
+                <p>${data.whatsapp_descricao || "Não informada"}</p>
+              </div>
+            </div>
+
+            <div class="section-info">
+              ${ data.whatsapp_link ? `<a class="button-perfil button-active">
+                <span
+                  class="button"
+                  href="${data.whatsapp_link}"
+                  target="_blank"
+                  >Acessar perfil</span
+                >
+                <img
+                  src="https://i.ibb.co/DVLSLrH/arrow-circle-right.png"
+                  alt="arrow-circle-right"
+                /> </a
+              >` : `
+              <a class="button-perfil button-desabled">
+                <span
+                  class="button"
+                  href="${data.whatsapp_link}"
+                  target="_blank"
+                  >Acessar perfil</span
+                >
+                <img
+                  src="https://i.ibb.co/DVLSLrH/arrow-circle-right.png"
+                  alt="arrow-circle-right"
+                />
+              </a>
+              ` }
+            </div>
+          </div>
         </div>
 
-      
-
-        <!-- Informações dos Canais -->
-        <div class="section">
-            <h2>Informações dos Canais</h2>
-            <h3>Instagram</h3>
-            <p><strong>Número de Seguidores:</strong> ${data.instagram_seguidores || "Não informado"}</p>
-            <p><strong>Descrição:</strong> ${data.instagram_descricao || "Não informada"}</p>
-            <p><strong>Link:</strong> ${
-              data.instagram_link
-                ? `<a href="${data.instagram_link}" target="_blank">Perfil</a>`
-                : "Não informado"
-            }</p>
-            <h3>Facebook</h3>
-            <p><strong>Número de Seguidores:</strong> ${data.facebook_seguidores || "Não informado"}</p>
-            <p><strong>Descrição:</strong> ${data.facebook_descricao || "Não informada"}</p>
-            <p><strong>Link:</strong> ${
-              data.facebook_link
-                ? `<a href="${data.facebook_link}" target="_blank">Perfil</a>`
-                : "Não informado"
-            }</p>
-            <h3>WhatsApp</h3>
-            <p><strong>Descrição:</strong> ${data.whatsapp_descricao || "Não informada"}</p>
-            <p><strong>Link:</strong> ${
-              data.whatsapp_link
-                ? `<a href="${data.whatsapp_link}" target="_blank">Contato</a>`
-                : "Não informado"
-            }</p>
+        <div class="section1">
+          <div class="infos-presentation">
+            <h2>Referências e concorrentes</h2>
+            ${Object.keys(data) .filter((key) => key.startsWith("competitor"))
+            .map( (key) => `
+            <div class="section-info">
+              <span>${key.replace(/_/g, " ")}:</span>
+              <div class="text-p">
+                <p>${data[key] || "Não informado"}</p>
+              </div>
+            </div>
+            ` ) .join("") || `
+            <div class="section-info">
+              <span>Nenhuma referência ou concorrente informada.</span>
+            </div>
+            `}
+          </div>
         </div>
 
-        <!-- Referências e Concorrentes -->
-        <div class="section">
-            <h2>Referências e Concorrentes</h2>
-            ${
-              Object.keys(data)
-                .filter((key) => key.startsWith("competitor"))
-                .map(
-                  (key) =>
-                    `<p><strong>${key.replace(/_/g, " ")}:</strong> ${
-                      data[key] || "Não informado"
-                    }</p>`
-                )
-                .join("") || "Nenhuma referência ou concorrente informada."
-            }
+        <div class="section2">
+          <div class="infos-presentation">
+            <h2>Objetivos do projeto</h2>
+
+            ${Object.keys(data) .filter((key) => key.startsWith("objective"))
+            .map( (key) => `
+            <div class="section-info">
+              <span>${key.replace(/_/g, " ")}:</span>
+              <div class="text-p">
+                <p>${data[key] || "Não informado"}</p>
+              </div>
+            </div>
+            ` ) .join("") || `
+            <div class="section-info">
+              <span>Nenhum objetivo informado.</span>
+            </div>
+            `}
+          </div>
         </div>
 
-        <!-- Objetivos do Projeto -->
-        <div class="section">
-            <h2>Objetivos do Projeto</h2>
-            ${
-              Object.keys(data)
-                .filter((key) => key.startsWith("objective"))
-                .map(
-                  (key) =>
-                    `<p><strong>${key.replace(/_/g, " ")}:</strong> ${
-                      data[key] || "Não informado"
-                    }</p>`
-                )
-                .join("") || "Nenhum objetivo informado."
-            }
-        </div>
-
-        <!-- Personas -->
-        <div class="section">
+        <div class="section1">
+          <div class="infos-presentation">
             <h2>Personas</h2>
-            ${
-              Object.keys(data)
-                .filter((key) => key.startsWith("persona"))
-                .map(
-                  (key) =>
-                    `<p><strong>${key.replace(/_/g, " ")}:</strong> ${
-                      data[key] || "Não informado"
-                    }</p>`
-                )
-                .join("") || "Nenhuma persona cadastrada."
-            }
+
+            ${Object.keys(data) .filter((key) => key.startsWith("persona"))
+            .map( (key) => `
+            <div class="section-info">
+              <span>${key.replace(/_/g, " ")}:</span>
+              <div class="text-p">
+                <p>${data[key] || "Não informado"}</p>
+              </div>
+            </div>
+            ` ) .join("") || `
+            <div class="section-info">
+              <span>Nenhuma persona cadastrada.</span>
+            </div>
+            `}
+          </div>
         </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  </html>
+`);
 
-      
-
-
-    </body>
-    </html>
-  `);
 });
 
       </script>

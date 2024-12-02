@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resumo do Planejamento</title>
+    <style>
+      /* Configurações gerais */
+      * {
+        margin: 0;
+        border: 0;
+        /* font-family: "Outfit", sans-serif; */
+        /* font-family: "Syne", sans-serif; */
+      }
+
+      body {
+        font-family: "Outfit", sans-serif;
+        margin: 0;
+        background: #1e1e1e;
+      }
+
+      /* NAVBAR */
+
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 25px 50px;
+      }
+
+      .navbar .logo-Sociafy {
+        width: 120px;
+      }
+
+      .navbar .sair-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        text-decoration: none;
+        opacity: 70%;
+        transition: 0.3s;
+      }
+
+      .navbar .sair-button:hover {
+        opacity: 100%;
+      }
+
+      .navbar .sair-button p {
+        color: #fff;
+      }
+
+      .navbar .sair-button img {
+        width: 20px;
+      }
+
+      .section-presentation {
+        width: 100%;
+      }
+
+      .section-presentation .capa {
+        width: 100%;
+        height: 350px;
+        background: url(https://i.ibb.co/qyVqjRf/CAPA.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+      }
+
+      /* .content-presentation {
+            padding: 30px 50px;
+        } */
+
+      /* SECTION 1 */
+
+      .section1 {
+        color: #fff;
+        padding: 50px;
+      }
+
+      .section1 .title-presentation {
+        color: #fff;
+        font-size: 1.6rem;
+        font-weight: 600;
+        margin-bottom: 60px;
+      }
+
+      .section1 .infos-presentation {
+        /* margin-top: 70px; */
+      }
+
+      .section1 .infos-presentation h2 {
+        font-family: "Syne", sans-serif;
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: #e839a2;
+      }
+
+      .section1 .section-info {
+        margin-top: 30px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .section1 .section-info span {
+        font-size: 1.1rem;
+        font-weight: 400;
+      }
+
+      .section1 .section-info p {
+        font-size: 1rem;
+        font-weight: 200;
+        margin-top: 10px;
+        background: #e5e3e510;
+        padding: 10px 20px;
+        border-radius: 5px;
+        display: inline-block;
+      }
+
+      /* SECTION 2 */
+
+      .section2 {
+        color: #1e1e1e;
+        background: #e5e3e5;
+        padding: 50px;
+      }
+
+      .section2 .infos-presentation {
+        /* margin-top: 70px; */
+      }
+
+      .section2 .infos-presentation h2 {
+        font-family: "Syne", sans-serif;
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: #e839a2;
+      }
+
+      .section2 .section-info {
+        margin-top: 30px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .section2 .section-info span {
+        font-size: 1.1rem;
+        font-weight: 400;
+      }
+
+      .section2 .section-info p {
+        font-size: 1rem;
+        font-weight: 300;
+        margin-top: 10px;
+        background: #1e1e1e10;
+        padding: 10px 20px;
+        border-radius: 5px;
+        display: inline-block;
+      }
+
+      .button-active {
+        background-color: #e839a2;
+        cursor: pointer;
+      }
+
+      .button-active:hover {
+        background-color: #d92a93;
+        cursor: pointer;
+      }
+
+      .button-desabled {
+        background-color: #ababab;
+        cursor: not-allowed;
+      }
+
+      .section2 .section-info .button-perfil {
+        padding: 10px 15px;
+        margin-top: 17px;
+        font-family: "Outfit", sans-serif;
+        font-weight: 500;
+        color: #fff;
+        border: none;
+        border-radius: 7px;
+        transition: 0.3s;
+        width: 10%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      .section2 .section-info .button-perfil .button {
+        font-size: 1rem;
+      }
+
+      .section2 .section-info .button-perfil img {
+        width: 25px;
+      }
+
+      .app {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 40px;
+      }
+
+      .app .img-app {
+        display: flex;
+        align-items: center;
+        padding: 13px;
+        background: #1e1e1e10;
+        border-radius: 50px;
+      }
+
+      .app .img-app img {
+        width: 22px;
+      }
+
+      .app h3 {
+        font-weight: 600;
+        font-size: 1.2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <img
+        class="logo-Sociafy"
+        src="https://i.ibb.co/dbkgK7x/logo-Sociafy.png"
+        alt="Logo Sociafy"
+      />
+
+      <a class="sair-button" href="#">
+        <p>Sair</p>
+        <img src="https://i.ibb.co/GQbLzmw/arrow-right-alt.png" />
+      </a>
+    </div>
+
+    <div class="section-presentation">
+      <div class="capa">
+        <!-- <img src="https://i.ibb.co/qyVqjRf/CAPA.png"> -->
+      </div>
+
+      <div class="content-presentation">
+        <div class="section1">
+          <p class="title-presentation">
+            ${data.planejamento || "Não informado"}
+          </p>
+
+          <div class="infos-presentation">
+            <h2>Informações do cliente</h2>
+
+            <div class="section-info">
+              <span>Nome do Cliente:</span>
+              <div class="text-p">
+                <p>${data.cliente_nome || "Não informado"}</p>
+              </div>
+            </div>
+
+            <div class="section-info">
+              <span>Setor de atuação:</span>
+              <div class="text-p">
+                <p>$${data.cliente_setor || "Não informado"}</p>
+              </div>
+            </div>
+
+            <div class="section-info">
+              <span>Descrição:</span>
+              <div class="text-p">
+                <p>${data.cliente_descricao || "Não informada"}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section2">
+          <div class="infos-presentation">
+            <h2>Informações dos canais</h2>
+
+            <div class="app">
+              <div class="img-app">
+                <img src="https://i.ibb.co/xLL1sj6/instagram.png" />
+              </div>
+              <h3>Instagram</h3>
+            </div>
+
+            <div class="section-info">
+              <span>Número de seguidores:</span>
+              <div class="text-p">
+                <p>${data.instagram_seguidores || "Não informado"}</p>
+              </div>
+            </div>
+
+            <div class="section-info">
+              <span>Descrição:</span>
+              <div class="text-p">
+                <p>${data.instagram_descricao || "Não informada"}</p>
+              </div>
+            </div>
+
+            <div class="section-info">
+              ${ data.instagram_link ? `<a class="button-perfil button-active">
+                <span
+                  class="button"
+                  href="${data.instagram_link}"
+                  target="_blank"
+                  >Acessar perfil</span
+                >
+                <img
+                  src="https://i.ibb.co/DVLSLrH/arrow-circle-right.png"
+                  alt="arrow-circle-right"
+                /> </a
+              >` :
+              <a class="button-perfil button-desabled">
+                <span
+                  class="button"
+                  href="${data.instagram_link}"
+                  target="_blank"
+                  >Acessar perfil</span
+                >
+                <img
+                  src="https://i.ibb.co/DVLSLrH/arrow-circle-right.png"
+                  alt="arrow-circle-right"
+                />
+              </a>
+              }
+            </div>
+          </div>
+
+          <div class="infos-presentation">
+            <div class="app">
+              <div class="img-app">
+                <img src="https://i.ibb.co/ccS9nTB/facebook.png" />
+              </div>
+              <h3>Facebook</h3>
+            </div>
+
+            <div class="section-info">
+              <span>Número de seguidores:</span>
+              <div class="text-p">
+                <p>${data.facebook_seguidores || "Não informado"}</p>
+              </div>
+            </div>
+
+            <div class="section-info">
+              <span>Descrição:</span>
+              <div class="text-p">
+                <p>${data.facebook_descricao || "Não informada"}</p>
+              </div>
+            </div>
+
+            <div class="section-info">
+              ${ data.facebook_link ? `<a class="button-perfil button-active">
+                <span
+                  class="button"
+                  href="${data.facebook_link}"
+                  target="_blank"
+                  >Acessar perfil</span
+                >
+                <img
+                  src="https://i.ibb.co/DVLSLrH/arrow-circle-right.png"
+                  alt="arrow-circle-right"
+                /> </a
+              >` :
+              <a class="button-perfil button-desabled">
+                <span
+                  class="button"
+                  href="${data.facebook_link}"
+                  target="_blank"
+                  >Acessar perfil</span
+                >
+                <img
+                  src="https://i.ibb.co/DVLSLrH/arrow-circle-right.png"
+                  alt="arrow-circle-right"
+                />
+              </a>
+              }
+            </div>
+          </div>
+
+          <div class="infos-presentation">
+            <div class="app">
+              <div class="img-app">
+                <img src="https://i.ibb.co/LZyTBF6/whats.png" />
+              </div>
+              <h3>WhatsApp</h3>
+            </div>
+
+            <div class="section-info">
+              <span>Descrição:</span>
+              <div class="text-p">
+                <p>${data.whatsapp_descricao || "Não informada"}</p>
+              </div>
+            </div>
+
+            <div class="section-info">
+              ${ data.whatsapp_link ? `<a class="button-perfil button-active">
+                <span
+                  class="button"
+                  href="${data.whatsapp_link}"
+                  target="_blank"
+                  >Acessar perfil</span
+                >
+                <img
+                  src="https://i.ibb.co/DVLSLrH/arrow-circle-right.png"
+                  alt="arrow-circle-right"
+                /> </a
+              >` :
+              <a class="button-perfil button-desabled">
+                <span
+                  class="button"
+                  href="${data.whatsapp_link}"
+                  target="_blank"
+                  >Acessar perfil</span
+                >
+                <img
+                  src="https://i.ibb.co/DVLSLrH/arrow-circle-right.png"
+                  alt="arrow-circle-right"
+                />
+              </a>
+              }
+            </div>
+          </div>
+        </div>
+
+        <div class="section1">
+          <div class="infos-presentation">
+            <h2>Referências e concorrentes</h2>
+
+            <div class="section-info">
+              ${ Object.keys(data) .filter((key) =>
+              key.startsWith("competitor")) .map( (key) => `
+              <h4>
+                <strong>${key.replace(/_/g, " ")}:</strong> ${ data[key] || "Não
+                informado" }
+              </h4>
+              ` ) .join("") || "Nenhuma referência ou concorrente informada." }
+            </div>
+
+            ${Object.keys(data) .filter((key) => key.startsWith("competitor"))
+            .map( (key) => `
+            <div class="section-info">
+              <span>${key.replace(/_/g, " ")}:</span>
+              <div class="text-p">
+                <p>${data[key] || "Não informado"}</p>
+              </div>
+            </div>
+            ` ) .join("") || `
+            <div class="section-info">
+              <span>Nenhuma referência ou concorrente informada.</span>
+            </div>
+            `}
+          </div>
+        </div>
+
+        <div class="section2">
+          <div class="infos-presentation">
+            <h2>Objetivos do projeto</h2>
+
+            ${Object.keys(data) .filter((key) => key.startsWith("objective"))
+            .map( (key) => `
+            <div class="section-info">
+              <span>${key.replace(/_/g, " ")}:</span>
+              <div class="text-p">
+                <p>${data[key] || "Não informado"}</p>
+              </div>
+            </div>
+            ` ) .join("") || `
+            <div class="section-info">
+              <span>Nenhum objetivo informado.</span>
+            </div>
+            `}
+          </div>
+        </div>
+
+        <div class="section1">
+          <div class="infos-presentation">
+            <h2>Personas</h2>
+
+            ${Object.keys(data) .filter((key) => key.startsWith("persona"))
+            .map( (key) => `
+            <div class="section-info">
+              <span>${key.replace(/_/g, " ")}:</span>
+              <div class="text-p">
+                <p>${data[key] || "Não informado"}</p>
+              </div>
+            </div>
+            ` ) .join("") || `
+            <div class="section-info">
+              <span>Nenhuma persona cadastrada.</span>
+            </div>
+            `}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+  </body>
+</html>

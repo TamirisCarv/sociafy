@@ -102,12 +102,19 @@
         justify-content: space-between;
       }
 
-      .cadastro-info .logo-Sociafy {
+      .cadastro-info .logo-Sociafy img {
         width: 140px;
       }
 
       .cadastro-info .mockup-cadastro {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         width: 100%;
+      }
+
+      .cadastro-info .mockup-cadastro img {
+        width: 85%;
       }
 
       .cadastro-info h2 {
@@ -145,16 +152,19 @@
   <body>
     <div class="cadastro-container">
       <div class="cadastro-info">
-        
-        <img class="logo-Sociafy"
-          src="https://i.ibb.co/dbkgK7x/logo-Sociafy.png"
-          alt="Logo Sociafy"
-        />
-        
-        <img class="mockup-cadastro"
-          src="https://i.ibb.co/YDxTjHm/mockup-Cadastro.png"
-          alt="Imagem de Cadastro"
-        />
+        <div class="logo-Sociafy">
+          <img
+            src="https://i.ibb.co/dbkgK7x/logo-Sociafy.png"
+            alt="Logo Sociafy"
+          />
+
+        </div>
+        <div class="mockup-cadastro">
+          <img
+            src="https://raw.githubusercontent.com/TamirisCarv/sociafy/2424724a234f6fb8964519d4b7ff04812916b5ba/src/main/resources/static/assets/mockupCadastro.png"
+            alt="Imagem de Cadastro"
+          />
+        </div>
         <div class="infos">
           <h2>Você já tem um cadastro?</h2>
           <p>Clique no botão abaixo para fazer seu login:</p>
@@ -173,7 +183,7 @@
         >
           <input
             type="text"
-            placeholder="Nome de Usuário"
+            placeholder="Usuário"
             th:field="*{username}"
             required
           />

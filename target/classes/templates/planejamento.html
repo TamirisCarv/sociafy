@@ -2392,19 +2392,51 @@
       </div>
 
       <script>
-        // Botão "Gerar" exibe os dados em uma nova página estilizada
-        generateButtonManual.addEventListener("click", () => {
-  const formData = new FormData(document.getElementById("formData"));
-  const data = {};
+         // Mapeamento de traduções para os campos
+  const fieldTranslations = {
+    competitor_name_1: "Nome do Concorrente",
+    competitor_strengths_1: "Pontos Fortes",
+    competitor_opportunities_1: "Oportunidades",
+    competitor_insights_1: "Principais Insights",
+    competitor_links_1: "Links Importantes",
+    objective_title_1: "Título do Objetivo",
+    objective_description_1: "Descrição do Objetivo",
+    persona_name_1: "Nome da Persona",
+    persona_age_1: "Idade",
+    persona_job_1: "Profissão",
+    persona_behavior_1: "Comportamento",
+    persona_goals_1: "Objetivos",
+    persona_challenges_1: "Desafios",
+    persona_solutions_1: "Soluções",
+    cliente_nome: "Nome do Cliente",
+    cliente_setor: "Setor de Atuação",
+    cliente_descricao: "Descrição do Cliente",
+    planejamento: "Título do Planejamento",
+    descricao: "Descrição",
+    imagem_link: "Link da Imagem",
+    instagram_seguidores: "Número de Seguidores no Instagram",
+    instagram_descricao: "Descrição do Instagram",
+    instagram_link: "Link do Instagram",
+    facebook_seguidores: "Número de Seguidores no Facebook",
+    facebook_descricao: "Descrição do Facebook",
+    facebook_link: "Link do Facebook",
+    whatsapp_descricao: "Descrição do WhatsApp",
+    whatsapp_link: "Link do WhatsApp",
+  };
 
-  // Captura os valores dos campos do formulário
-  formData.forEach((value, key) => {
-    if (!data[key]) {
-      data[key] = value;
-    } else {
-      data[key] = [].concat(data[key], value); // Para lidar com múltiplos valores (como checkboxes)
-    }
-  });
+  // Botão "Gerar" exibe os dados em uma nova página estilizada
+  generateButtonManual.addEventListener("click", () => {
+    const formData = new FormData(document.getElementById("formData"));
+    const data = {};
+
+    // Captura os valores dos campos do formulário
+    formData.forEach((value, key) => {
+      if (!data[key]) {
+        data[key] = value;
+      } else {
+        data[key] = [].concat(data[key], value); // Para lidar com múltiplos valores (como checkboxes)
+      }
+    });
 
   // Criar a nova página com os dados capturados
   const newPage = window.open("", "_blank");
@@ -2471,7 +2503,7 @@ newPage.document.write(`
         .section-presentation .capa {
           width: 100%;
           height: 350px;
-          background: url(https://i.ibb.co/qyVqjRf/CAPA.png);
+          background: url(https://raw.githubusercontent.com/TamirisCarv/sociafy/89d006e03e83844716c92a43d2fbe5dc4eb828e7/src/main/resources/static/assets/capaMyta2.png);
           background-repeat: no-repeat;
           background-size: cover;
           background-position: center;
@@ -2625,6 +2657,35 @@ newPage.document.write(`
           font-weight: 600;
           font-size: 1.2rem;
         }
+
+        footer {
+          width: 100%;
+          background: #E839A2;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          padding: 50px 0px;
+          gap: 20px;
+        }
+
+        footer h3 {
+          font-weight: 500;
+          font-size: 1.1rem;
+          color: #fff;
+        }
+
+        button.button-whats {
+          padding: 10px 25px;
+          color: #fff;
+          font-size: 0.9rem;
+          font-weight: 600;
+          border-radius: 5px;
+          background: #ffffff30;
+          cursor: pointer;
+          transition: 0.3s;
+          font-family: "Outfit", sans-serif;
+        } 
       </style>
 
   </head>
@@ -2822,9 +2883,11 @@ newPage.document.write(`
             ${Object.keys(data) .filter((key) => key.startsWith("competitor"))
             .map( (key) => `
             <div class="section-info">
-              <span>${key.replace(/_/g, " ")}:</span>
+              <span>${fieldTranslations[key] || key}:</span>
               <div class="text-p">
-                <p>${data[key] || "Não informado"}</p>
+                <p>${
+                      data[key] || "Não informado"
+                    }</p>
               </div>
             </div>
             ` ) .join("") || `
@@ -2842,9 +2905,11 @@ newPage.document.write(`
             ${Object.keys(data) .filter((key) => key.startsWith("objective"))
             .map( (key) => `
             <div class="section-info">
-              <span>${key.replace(/_/g, " ")}:</span>
+              <span>${fieldTranslations[key] || key}:</span>
               <div class="text-p">
-                <p>${data[key] || "Não informado"}</p>
+                <p>${
+                      data[key] || "Não informado"
+                    }</p>
               </div>
             </div>
             ` ) .join("") || `
@@ -2862,9 +2927,11 @@ newPage.document.write(`
             ${Object.keys(data) .filter((key) => key.startsWith("persona"))
             .map( (key) => `
             <div class="section-info">
-              <span>${key.replace(/_/g, " ")}:</span>
+              <span>${fieldTranslations[key] || key}:</span>
               <div class="text-p">
-                <p>${data[key] || "Não informado"}</p>
+                <p>${
+                      data[key] || "Não informado"
+                    }</p>
               </div>
             </div>
             ` ) .join("") || `
@@ -2877,6 +2944,12 @@ newPage.document.write(`
         </div>
       </div>
     </div>
+
+    <footer>
+      <h3>Você pode compartilhar o planejamento no WhatsApp!</h3>
+      <button class="button-whats" onclick="window.open('https://wa.me/?text=' + encodeURIComponent(document.title))">Compartilhar</button>
+    </footer>
+</body>
   </body>
   </html>
 `);
